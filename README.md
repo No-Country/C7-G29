@@ -2,8 +2,9 @@
 
 
 ## Tecnologias
-  - Front End: React-Native, React, Redux-Toolkit
-  - Back End: Node, Mongodb, Express 
+  - Front End: [React-Native](https://reactnative.dev/), [React](https://reactjs.org/), [Redux-Toolkit](https://redux-toolkit.js.org
+)
+  - Back End: [Node.js](https://nodejs.org), [Mongodb](https://www.mongodb.com/), [Express.js](https://expressjs.com/) 
 
 ## Como usar
 
