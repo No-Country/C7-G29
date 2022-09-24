@@ -31,17 +31,17 @@ $ npm start
 ```
 
 ## Equipo
-- Christian Sotelo : Diseño ux/ui
-- Melvin Taveras : Diseño ux/ui
+- [Christian Sotelo]() : Diseño ux/ui
+- [Melvin Taveras]() : Diseño ux/ui
 
-- Franco Rodriguez : Front End
-- Isaac Urdaneta : Front End
-- rodrigo zucchini : Front End
-- Mateo Marquez : Front End
+- [Franco Rodriguez]() : Front End
+- [Isaac Urdaneta]() : Front End
+- [rodrigo zucchini]() : Front End
+- [Mateo Marquez]() : Front End
 
-- Emanuel Juri : Back End 
-- Joe : Back End 
-- Angel Villalba : Back End 
+- [Emanuel Juri](https://www.linkedin.com/in/emanuel-juri/) : Back End 
+- [Joe Vega]() : Back End 
+- [Angel Villalba](https://www.linkedin.com/in/angelvillalba/) : Back End 
 
 
 
