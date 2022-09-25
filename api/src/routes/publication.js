@@ -62,4 +62,18 @@ router.post('/', async(req, res) => {
   }
 })
 
+router.put('/:id', async(req, res) => {
+  await publication.updateOne(
+    {_id: req.params.id},
+    req.body
+  )
+  
+  res.send('datos actualizados correctamente')
+})
+
+router.delete('/:id', async(req, res) => {
+  await publication.findByIdAndDelete(req.params.id)
+  res.send('Pulicacion eliminada correctamente')
+})
+
 module.exports = router
