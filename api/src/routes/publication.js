@@ -28,7 +28,9 @@ router.get('/', async(req, res) => {
 
 router.post('/', async(req, res) => {
   try {
-    const {title, description, url, photographer} = req.body
+    const {title, description, url, likes, downloads, price, pay, photographer, challenge} = req.body
+
+    console.log(req.body)
 
     const userPhoto = await userPhotographer.findById(photographer)
 
@@ -36,6 +38,12 @@ router.post('/', async(req, res) => {
       title,
       description,
       url,
+      likes,
+      downloads,
+      price,
+      pay,
+      photographer,
+      challenge,
       photographer: userPhoto._id
     })
     await photo.save()
