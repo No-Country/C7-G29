@@ -34,6 +34,6 @@ const userDefaultSchema = mongoose.Schema({
   favorites: {
     type: Number
   }
-})
+}, {timestamps: true, versionKey: false})
 
 module.exports = mongoose.model('userDefault', userDefaultSchema)
