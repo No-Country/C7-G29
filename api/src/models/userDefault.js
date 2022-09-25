@@ -17,6 +17,18 @@ const userDefaultSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  followers: {
+    type: mongoose.Types.ObjectId()
+  },
+  followed: {
+    type: mongoose.Types.ObjectId()
+  },
+  favorites: {
+    type: mongoose.Types.ObjectId()
+  },
+  liked: {
+    type: mongoose.Types.ObjectId()
+  },
   admin: {
     type: Boolean,
     default: false
@@ -25,15 +37,6 @@ const userDefaultSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
-  followers: {
-    type: Number
-  },
-  followed: {
-    type: Number
-  },
-  favorites: {
-    type: Number
-  }
 }, {timestamps: true, versionKey: false})
 
 module.exports = mongoose.model('userDefault', userDefaultSchema)
