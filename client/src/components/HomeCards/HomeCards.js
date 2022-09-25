@@ -2,7 +2,7 @@ export default function Home({ x }) {
   return (
     <div>
       <img
-        id={x.id}
+        id={x._id}
         src={x.url}
         style={{ width: "250px", height: "250px" }}
         alt="one of the photos"

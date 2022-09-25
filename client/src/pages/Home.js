@@ -6,17 +6,15 @@ import FilterCards from "../components/FilterCards/FilterCards";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const photos = useSelector((state) => state.photos.allPhotosData);
-
+  const photos = useSelector((state) => state.photos.filterPhotosData);
   useEffect(() => {
     dispatch(getAllPhotosData());
   }, [dispatch]);
-
   return (
     <div>
       <FilterCards />
       {photos.map((x) => (
-        <HomeCards x={x} key={x.id} />
+        <HomeCards x={x} key={x._id} />
       ))}
     </div>
   );
