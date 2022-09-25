@@ -44,3 +44,18 @@ export const uploadPhotoToCloudinary = (e) => async () => {
     .then((response) => response.json())
     .then((data) => data.secure_url);
 };
+
+export const deletePhoto = (id) => async (dispatch) => {
+  return await fetch(`http://localhost:9000/api/publication/${id}`, {
+    method: "DELETE",
+  })
+    .then(async (d) => {
+      return await fetch(`http://localhost:9000/api/publication`, {
+        method: "GET",
+      })
+        .then((responsea) => responsea.json())
+        .then((f) => dispatch(insertDataAllPhotos(f)))
+        .catch((e) => console.log(e));
+    })
+    .catch((e) => console.log(e));
+};

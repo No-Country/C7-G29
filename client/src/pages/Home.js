@@ -13,9 +13,9 @@ export default function Home() {
   return (
     <div>
       <FilterCards />
-      {photos.map((x) => (
-        <HomeCards x={x} key={x._id} />
-      ))}
+      {photos.length > 0
+        ? photos.map((x) => <HomeCards x={x} key={x._id} />)
+        : null}
     </div>
   );
 }
