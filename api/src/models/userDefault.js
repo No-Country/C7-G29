@@ -18,16 +18,16 @@ const userDefaultSchema = mongoose.Schema({
     required: true
   },
   followers: {
-    type: mongoose.Types.ObjectId()
+    type: mongoose.Types.ObjectId
   },
   followed: {
-    type: mongoose.Types.ObjectId()
+    type: mongoose.Types.ObjectId
   },
   favorites: {
-    type: mongoose.Types.ObjectId()
+    type: mongoose.Types.ObjectId
   },
   liked: {
-    type: mongoose.Types.ObjectId()
+    type: mongoose.Types.ObjectId
   },
   admin: {
     type: Boolean,
