@@ -35,7 +35,7 @@ $ npm start
 - [Christian Sotelo]() : Diseño ux/ui
 - [Melvin Taveras]() : Diseño ux/ui
 
-- [Franco Rodriguez]() : Front End
+- [Franco Rodriguez](https://www.linkedin.com/in/juan-franco-rodriguez/) : Front End
 - [Isaac Urdaneta]() : Front End
 - [rodrigo zucchini]() : Front End
 - [Mateo Marquez]() : Front End
