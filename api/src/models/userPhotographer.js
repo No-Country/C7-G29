@@ -1,31 +1,48 @@
-import { Schema, model } from "mongoose";
+const mongoose = require('mongoose');
 
-const userPhotographerSchema = new Schema({
+const userPhotographerSchema = mongoose.Schema({
   name: {
     type: String,
-    // required: true
+    required: true
   },
   lastName: {
     type: String,
-    // required: true
+    required: true
   },
   email: {
     type: String,
-    // required: true
+    required: true
   },
   password: {
     type: String,
-    // required: true
+    required: true
+  },
+  followers: {
+    type: mongoose.Types.ObjectId
+  },
+  followed: {
+    type: mongoose.Types.ObjectId
+  },
+  favorites: {
+    type: mongoose.Types.ObjectId
+  },
+  liked: {
+    type: mongoose.Types.ObjectId
+  },
+  publications: {
+    type: mongoose.Types.ObjectId
+  },
+  verified: {
+    type: Boolean
   },
   admin: {
-    type: Boolean
-  },
-  photographer: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   banned: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
-})
+}, {timestamps: true, versionKey: false})
 
-export default userPhotographerSchema
+module.exports = mongoose.model('userPhotographer', userPhotographerSchema)
