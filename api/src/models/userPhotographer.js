@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const userPhotographerSchema = mongoose.Schema({
+  image: {
+    type: String
+  },
   name: {
     type: String,
     required: true
@@ -17,21 +20,22 @@ const userPhotographerSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  followers: {
+  followers: [{
     type: mongoose.Types.ObjectId
-  },
-  followed: {
+  }],
+  followed: [{
     type: mongoose.Types.ObjectId
-  },
-  favorites: {
+  }],
+  favorites: [{
     type: mongoose.Types.ObjectId
-  },
-  liked: {
+  }],
+  liked: [{
     type: mongoose.Types.ObjectId
-  },
-  publications: {
-    type: mongoose.Types.ObjectId
-  },
+  }],
+  publications: [{
+    type: mongoose.Types.ObjectId,
+    ref: 'publication'
+  }],
   verified: {
     type: Boolean
   },
