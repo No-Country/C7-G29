@@ -5,7 +5,11 @@ const router = express.Router()
 
 router.get('/', async(req, res) => {
   try {
-    const users = await userPhotographerSchema.find()
+    const users = await userPhotographerSchema.find().populate('publications', {
+      _id: 1,
+      title: 1,
+      url: 1,
+    })
 
     if(users.length === 0) {
       return res
