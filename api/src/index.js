@@ -10,6 +10,11 @@ const port = process.env.PORT || 9000;
 
 app.use(express.json())
 app.use(morgan('dev'))
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+});
+
 app.use('/api', routes)
 
 
