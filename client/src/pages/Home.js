@@ -15,6 +15,7 @@ export default function Home() {
   return (
     <div>
       {/*<FilterCards />*/}
+      <GoogleButton />
       <Header />
       {photos.length > 0
         ? photos.map((x) => <HomeCards x={x} key={x._id} />)
