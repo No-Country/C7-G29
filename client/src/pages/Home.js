@@ -3,6 +3,7 @@ import { getAllPhotosData } from "../redux/actions/photosActions";
 import { useDispatch, useSelector } from "react-redux";
 import HomeCards from "../components/HomeCards/HomeCards";
 import Header from "../components/Header/Header";
+import GoogleButton from "../components/GoogleButton/GoogleButton";
 // import FilterCards from "../components/FilterCards/FilterCards";
 
 export default function Home() {
@@ -13,8 +14,9 @@ export default function Home() {
   }, [dispatch]);
   return (
     <div>
-    {/*<FilterCards />*/}
-    <Header />
+      {/*<FilterCards />*/}
+      <GoogleButton />
+      <Header />
       {photos.length > 0
         ? photos.map((x) => <HomeCards x={x} key={x._id} />)
         : null}
