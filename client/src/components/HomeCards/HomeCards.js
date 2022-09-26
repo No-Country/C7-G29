@@ -1,5 +1,7 @@
 import { deletePhoto } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
+import React, {useState} from 'react'
+import './HomeCards.css';
 
 export default function Home({ x }) {
   const dispatch = useDispatch();
@@ -23,21 +25,55 @@ export default function Home({ x }) {
         console.log(err);
       });
   };
+
+
+  const [visible, setVisible] = useState(false)
+
+  const visibleEvent = () => {
+    setVisible(true)
+    console.log("soy un objeto visible")
+  }
+
   return (
-    <div>
-      <img
-        id={x._id}
-        src={x.url}
-        style={{ width: "250px", height: "250px" }}
-        alt="one of the photos"
-      ></img>
-      <button onClick={() => dispatch(deletePhoto(x._id))}>Delete</button>
-      <div>
-        <h3>{x.title}</h3> {x.pay ? <p>{x.price} $</p> : null}
+    <div className="cards">
+      <div className="cards-container">
+        <img
+          id={x._id}
+          src={x.url}
+          className="card-image"
+          alt="one of the photos"
+          onMouseOver={visibleEvent}
+          onMouseOut={()=>setVisible(false)}
+        />
+
+        {visible === !false ? 
+        (
+          <div>
+          <button className="card-delete" onClick={() => dispatch(deletePhoto(x._id))}>🗑️</button>
+          <button className="card-favorite">🧡</button>
+          <h3 className="card-title">{x.title}</h3> 
+          {x.pay ? 
+            <p className="card-price">
+            {x.price} $
+            </p> 
+          : 
+          null
+          }
+          { x.pay 
+          ? 
+          null 
+          : 
+        (
+          <button 
+            className="card-download"
+            onClick={() => download()}>💾</button>
+        )}
+        </div>
+        )
+      :
+      null
+        }
       </div>
-      {x.pay ? null : (
-        <button onClick={() => download()}>Click to download</button>
-      )}
     </div>
   );
 }
