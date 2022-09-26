@@ -1,38 +1,40 @@
-const express = require('express')
-const publication = require('../models/publication')
-const userPhotographer = require('../models/userPhotographer')
+const express = require("express");
+const publication = require("../models/publication");
+const userPhotographer = require("../models/userPhotographer");
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', async(req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const photo = await publication.find().populate('photographer', {
+    const photo = await publication.find().populate("photographer", {
       _id: 1,
       name: 1,
       lastName: 1,
-    })
-    if(photo.length === 0) {
-      return res
-        .status(201)
-        .send({message: "No hay publicaciones creadas"})
+    });
+    if (photo.length === 0) {
+      return res.status(201).send({ message: "No hay publicaciones creadas" });
     }
-    return res
-      .status(201)
-      .json(photo)
-  } catch(error) {
-    return res
-      .status(400)
-      .send({message: error})
+    return res.status(201).json(photo);
+  } catch (error) {
+    return res.status(400).send({ message: error });
   }
-})
+});
 
-router.post('/', async(req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const {title, description, url, likes, downloads, price, pay, photographer, challenge} = req.body
+    const {
+      title,
+      description,
+      url,
+      likes,
+      downloads,
+      price,
+      pay,
+      photographer,
+      challenge,
+    } = req.body;
 
-    console.log(req.body)
-
-    const userPhoto = await userPhotographer.findById(photographer)
+    const userPhoto = await userPhotographer.findById(photographer);
 
     const photo = await publication({
       title,
@@ -44,36 +46,30 @@ router.post('/', async(req, res) => {
       pay,
       photographer,
       challenge,
-      photographer: userPhoto._id
-    })
-    await photo.save()
+      photographer: userPhoto._id,
+    });
+    await photo.save();
 
-    userPhoto.publications = userPhoto.publications.concat(photo._id)
-    await userPhoto.save()
+    userPhoto.publications = userPhoto.publications.concat(photo._id);
+    await userPhoto.save();
 
     return res
       .status(201)
-      .send({message: 'Publicacion creada correctamente'})
-
+      .send({ message: "Publicacion creada correctamente" });
   } catch (error) {
-    return res
-      .status(400)
-      .send({message: error})
+    return res.status(400).send({ message: error });
   }
-})
+});
 
-router.put('/:id', async(req, res) => {
-  await publication.updateOne(
-    {_id: req.params.id},
-    req.body
-  )
-  
-  res.send('datos actualizados correctamente')
-})
+router.put("/:id", async (req, res) => {
+  await publication.updateOne({ _id: req.params.id }, req.body);
 
-router.delete('/:id', async(req, res) => {
-  await publication.findByIdAndDelete(req.params.id)
-  res.send('Pulicacion eliminada correctamente')
-})
+  res.send("datos actualizados correctamente");
+});
 
-module.exports = router
+router.delete("/:id", async (req, res) => {
+  await publication.findByIdAndDelete(req.params.id);
+  res.send("Pulicacion eliminada correctamente");
+});
+
+module.exports = router;
