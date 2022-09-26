@@ -33,7 +33,6 @@ export const uploadPhotoForm = (data) => async () => {
 
 export const uploadPhotoToCloudinary = (e) => async () => {
   const imageData = new FormData();
-
   imageData.append("file", e.target.files[0]);
   imageData.append("upload_preset", "skaneetk");
 
