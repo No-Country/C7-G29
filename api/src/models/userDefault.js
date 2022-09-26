@@ -20,18 +20,18 @@ const userDefaultSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  followers: {
+  followers: [{
     type: mongoose.Types.ObjectId
-  },
-  followed: {
+  }],
+  followed: [{
     type: mongoose.Types.ObjectId
-  },
-  favorites: {
+  }],
+  favorites: [{
     type: mongoose.Types.ObjectId
-  },
-  liked: {
+  }],
+  liked: [{
     type: mongoose.Types.ObjectId
-  },
+  }],
   admin: {
     type: Boolean,
     default: false
@@ -41,5 +41,11 @@ const userDefaultSchema = mongoose.Schema({
     default: false
   },
 }, {timestamps: true, versionKey: false})
+
+userDefaultSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    delete returnedObject.password
+  }
+})
 
 module.exports = mongoose.model('userDefault', userDefaultSchema)
