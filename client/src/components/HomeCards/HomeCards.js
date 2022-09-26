@@ -1,7 +1,11 @@
 import { deletePhoto } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
+
 import React, {useState} from 'react'
 import './HomeCards.css';
+
+import { addItemToCart } from "../../redux/slices/cartSlice";
+
 
 export default function Home({ x }) {
   const dispatch = useDispatch();
@@ -74,6 +78,13 @@ export default function Home({ x }) {
       null
         }
       </div>
+
+      {x.pay ? (
+        <button onClick={() => dispatch(addItemToCart(x))}>Add to Cart</button>
+      ) : (
+        <button onClick={() => download()}>Click to download</button>
+      )}
+
     </div>
   );
 }
