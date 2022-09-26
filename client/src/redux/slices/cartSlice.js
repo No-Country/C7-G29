@@ -15,10 +15,9 @@ const cartSlice = createSlice({
       }
     },
     localStorageCart: (state, { payload }) => {
-      state.cartItems = payload;
+      state.cartItems = payload || [];
     },
     cleanCart: (state) => {
-      console.log("asd");
       state = initialState;
       window.localStorage.setItem("cart", JSON.stringify([]));
     },
