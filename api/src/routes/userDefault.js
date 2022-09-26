@@ -1,6 +1,7 @@
 const express = require('express')
 const { default: mongoose } = require('mongoose')
 const userDefaultSchema = require('../models/userDefault')
+const bcrypt = require('bcrypt')
 
 const router = express.Router()
 
@@ -11,11 +12,24 @@ router.get('/', (req, res) => {
     .catch((error) => res.json({message: error}))
 })
 
-router.post('/', (req, res) => {
-  const user = userDefaultSchema(req.body)
-  user.save()
-    .then((data) => res.json(data))
-    .catch((error) => res.json({message: error}))
+router.post('/', async(req, res) => {
+  const {_id, name, lastName, email, password, admin, banned} = req.body
+
+  const passwordHash = await bcrypt.hash(password, 10)
+
+  const user = await userDefaultSchema({
+    _id,
+    name,
+    lastName,
+    email,
+    password: passwordHash,
+    admin,
+    banned
+  })
+
+  await user.save()
+
+  res.json(user)
 })
 
 router.put('/:id', (req, res) => {

@@ -49,4 +49,10 @@ const userPhotographerSchema = mongoose.Schema({
   },
 }, {timestamps: true, versionKey: false})
 
+userPhotographerSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    delete returnedObject.password
+  }
+})
+
 module.exports = mongoose.model('userPhotographer', userPhotographerSchema)
