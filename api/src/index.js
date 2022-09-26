@@ -25,6 +25,8 @@ app.use((req, res, next) => {
 
 app.use('/api', routes)
 
+console.log(process.env.MONGODB_URI)
+
 // Conexion a la base de datos (atlas)
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('successful connection to mongodb atlas'))
