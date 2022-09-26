@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { getAllPhotosData } from "../redux/actions/photosActions";
 import { useDispatch, useSelector } from "react-redux";
 import HomeCards from "../components/HomeCards/HomeCards";
-import FilterCards from "../components/FilterCards/FilterCards";
+import Header from "../components/Header/Header";
+// import FilterCards from "../components/FilterCards/FilterCards";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -12,7 +13,8 @@ export default function Home() {
   }, [dispatch]);
   return (
     <div>
-      <FilterCards />
+    {/*<FilterCards />*/}
+    <Header />
       {photos.length > 0
         ? photos.map((x) => <HomeCards x={x} key={x._id} />)
         : null}
