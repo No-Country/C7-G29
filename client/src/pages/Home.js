@@ -3,10 +3,10 @@ import { getAllPhotosData } from "../redux/actions/photosActions";
 import { useDispatch, useSelector } from "react-redux";
 import HomeCards from "../components/HomeCards/HomeCards";
 import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-
 
 export default function Home() {
   const dispatch = useDispatch();
