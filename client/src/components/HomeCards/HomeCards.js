@@ -40,14 +40,13 @@ export default function Home({ x }) {
 
   return (
     <div className="cards">
-      <div className="cards-container">
+      <div className="cards-container"           onMouseOver={visibleEvent}
+          onMouseOut={()=>setVisible(false)}>
         <img
           id={x._id}
           src={x.url}
           className="card-image"
           alt="one of the photos"
-          onMouseOver={visibleEvent}
-          onMouseOut={()=>setVisible(false)}
         />
 
         {visible === !false ? 
