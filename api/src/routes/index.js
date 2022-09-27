@@ -1,3 +1,4 @@
+
 const express = require("express");
 const userDefault = require("./userDefault");
 const userPhotographer = require("./userPhotographer");
@@ -6,9 +7,11 @@ const auth0 = require("./auth0Routes");
 
 const router = express.Router();
 
+
 router.use("/usersDefault", userDefault);
 router.use("/usersPhotographer", userPhotographer);
 router.use("/publication", publication);
 router.use("/Auth0", auth0);
 
 module.exports = router;
+
