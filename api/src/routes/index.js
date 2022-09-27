@@ -1,14 +1,17 @@
-const express = require('express')
-const userDefault = require('./userDefault')
-const userPhotographer = require('./userPhotographer')
-const publication = require('./publication')
-const challenge = require("./challenges")
 
-const router = express.Router()
+const express = require("express");
+const userDefault = require("./userDefault");
+const userPhotographer = require("./userPhotographer");
+const publication = require("./publication");
+const auth0 = require("./auth0Routes");
 
-router.use('/usersDefault', userDefault)
-router.use('/usersPhotographer', userPhotographer)
-router.use('/publication', publication)
-router.use("/challenge", challenge);
+const router = express.Router();
+
+
+router.use("/usersDefault", userDefault);
+router.use("/usersPhotographer", userPhotographer);
+router.use("/publication", publication);
+router.use("/Auth0", auth0);
 
 module.exports = router;
+
