@@ -4,6 +4,9 @@ const userPhotographerSchema = mongoose.Schema({
   image: {
     type: String
   },
+  avatar: {
+    type: String
+  },
   name: {
     type: String,
     required: true
