@@ -28,7 +28,8 @@ const publicationSchema = mongoose.Schema({
       ref: 'userPhotographer'
     },
     challenge: [{
-      type: mongoose.Types.ObjectId
+      type: mongoose.Types.ObjectId,
+      ref:'challenges'
     }],
 }, {timestamps: true, versionKey: false})
 
