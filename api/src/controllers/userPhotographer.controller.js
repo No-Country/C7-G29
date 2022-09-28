@@ -1,21 +1,25 @@
-const userDefaultSchema = require('../models/userDefault')
+const userPhotographerSchema = require('../models/userPhotographer')
 const bcrypt = require('bcrypt')
 
-const allUsers = async(req, res)=>{
-    try {
-        const users = await userDefaultSchema.find()
+const allPhotographers = async(req, res)=>{
+    try {        
+        const users = await userPhotographerSchema.find().populate('publications', {
+            _id: 1,
+            title: 1,
+            url: 1,
+        })
         if(users.length === 0) {
             return res
               .status(201)
               .json({message: 'aún no hay usuarios'})
         }
-        res.json(users)        
+        res.json(users)
     } catch (error) {
         console.error(error)
     }
 };
 
-const registerUser = async(req, res)=>{
+const registerPhotographer = async(req, res)=>{
     try {
         const {avatar, name, lastName, email, password} = req.body    
 
@@ -40,8 +44,8 @@ const registerUser = async(req, res)=>{
         }
 
         //Validation if there is an email associate a user existent
-        if(!(await userDefaultSchema.findOne({email: email}))){
-            const user = await userDefaultSchema({      
+        if(!(await userPhotographerSchema.findOne({email: email}))){
+            const user = await userPhotographerSchema({      
               avatar: avatar || 'https://www.seekpng.com/png/full/847-8474751_download-empty-profile.png',
               name,
               lastName,
@@ -61,11 +65,11 @@ const registerUser = async(req, res)=>{
     }
 };
 
-const updateUser = async(req, res)=>{
+const updatePhotographer = async(req, res)=>{
     try {
         //Validation if there is an _id associate a user existent
-        if(await userDefaultSchema.findOne({_id: req.params.id})){
-            await userDefaultSchema.updateOne(
+        if(await userPhotographerSchema.findOne({_id: req.params.id})){
+            await userPhotographerSchema.updateOne(
                 {_id: req.params.id},
                 req.body
             )
@@ -78,18 +82,18 @@ const updateUser = async(req, res)=>{
     }
 };
 
-const deleteUser = async(req, res)=>{    
+const deletePhotographer = async(req, res)=>{
     try {
         //Validation if there is an _id associate a user existent
-        if(await userDefaultSchema.findOne({_id: req.params.id})){
-            await userDefaultSchema.findByIdAndDelete(req.params.id)
+        if(await userPhotographerSchema.findOne({_id: req.params.id})){
+            await userPhotographerSchema.findByIdAndDelete(req.params.id)
             res.send('usuario eliminado correctamente')
         }else{
             res.send({ msg: 'El Usuario no existente' });
         }
     } catch (error) {
         console.error(error)
-    }    
+    }        
 };
 
-module.exports = {allUsers, registerUser, updateUser, deleteUser}
+module.exports = {allPhotographers, registerPhotographer, updatePhotographer, deletePhotographer}

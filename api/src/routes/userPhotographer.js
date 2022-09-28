@@ -1,44 +1,15 @@
 const express = require('express')
-const userPhotographerSchema = require('../models/userPhotographer')
-
 const router = express.Router()
 
-router.get('/', async(req, res) => {
-  try {
-    const users = await userPhotographerSchema.find().populate('publications', {
-      _id: 1,
-      title: 1,
-      url: 1,
-    })
+const {allPhotographers, registerPhotographer, updatePhotographer, deletePhotographer} = require('../controllers/userPhotographer.controller')
 
-    if(users.length === 0) {
-      return res
-        .status(201)
-        .json({message: 'no se encontro ningun usuario'})
-    }
-    res.json(users)
 
-  } catch(error) {
-      return res
-        .status(400)
-        .json({message: error})
-  }
-})
+router.get('/', allPhotographers);
 
-router.post('/', async(req, res) => {
-  const body = req.body
-  try {
-    const user = await userPhotographerSchema(body)
-    await user.save()
+router.post('/', registerPhotographer);
 
-    return res
-      .status(201)
-      .send({message: "userPhotographer creado correctamente"})
+router.put('/:id', updatePhotographer);
 
-  } catch(error){
-
-  }
-})
-
+router.delete('/:id', deletePhotographer);
 
 module.exports = router

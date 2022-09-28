@@ -4,7 +4,7 @@ const router = express.Router()
 const{registerUser, updateUser, deleteUser, allUsers} = require('../controllers/userDefault.controller')
 
 
-router.get('/', allUsers)
+router.get('/', allUsers);
 
 router.post('/', registerUser);
 
