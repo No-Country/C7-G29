@@ -1,44 +1,92 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer() {
-  return (
-    <div class="footer">
-      <div className="principal-footer">
-        <h1 className="principal-footer-h1">MockupPhotos</h1>
-        <p className="principal-footer-p">
-          MockupPhotos.com is a online mockup platform for <br />
-          high quality mockup photos, made by independent <br />
-          creatives from all around the world.
-        </p>
-      </div>
-      <div className="thing-footer">
-        <h1 className="thing-footer-h1">Company</h1>
-        <a className="thing-footer-a" href="/">
-          Terms
-        </a>
-        <a className="thing-footer-a" href="/">
-          Pricing
-        </a>
-      </div>
-      <div className="all-footer">
-        <h1 className="all-footer-h1">Freebies</h1>
-        <a className="all-footer-a" href="/">
-          All free mockups
-        </a>
-        <a className="all-footer-a" href="/">
-          Free print mockups
-        </a>
-        <a className="all-footer-a" href="/">
-          Free iPhone X mockups
-        </a>
-        <a className="all-footer-a" href="/">
-          Free iPad mockups
-        </a>
-        <a className="all-footer-a" href="/">
-          Wall Mockups
-        </a>
-      </div>
-    </div>
-  );
+	return (
+		<div className="footer">
+			<div className="footer-links">
+				<div className="nuestra-app">
+					<h1 className="title-section title-app">Descarga nuestra app para móvil </h1>
+					<div className="app-links">
+						<Link className="link btn-store" href="/">
+							<i class="fab fa-apple icon"></i>
+							IOS
+						</Link>
+						<Link className="link btn-store" href="/">
+							<i class="fab fa-android icon-store icon"></i>
+							Android
+						</Link>
+					</div>
+				</div>
+				<div className="seguinos">
+					<h1 className="title-section">Seguinos</h1>
+					<div className="links-section">
+						<Link className="link" href="/">
+							<i class="fab fa-twitter icon"></i>
+							Twiiter
+						</Link>
+						<Link className="link" href="/">
+							<i class="fab fa-facebook-square icon"></i>
+							Facebook
+						</Link>
+						<Link className="link" href="/">
+							<i class="fab fa-instagram-square icon"></i>
+							Instagram
+						</Link>
+					</div>
+				</div>
+				<div className="Darkroom">
+					<h1 className="title-section">Darkroom</h1>
+					<div className="links-section">
+						<Link className="link" href="/">
+							Nuestras galerias
+						</Link>
+						<Link className="link" href="/">
+							Retos
+						</Link>
+						<Link className="link" href="/">
+							Colección
+						</Link>
+						<Link className="link" href="/">
+							Lo más descargado
+						</Link>
+						<Link className="link" href="/">
+							Nuestra app
+						</Link>
+					</div>
+				</div>
+				<div className="Compañia">
+					<h1 className="title-section">Compañía</h1>
+					<div className="links-section">
+						<Link className="link" href="/">
+							¿Quienes Somos?
+						</Link>
+						<Link className="link" href="/">
+							Preguntas Frecuentes
+						</Link>
+						<Link className="link" href="/">
+							Emprende con nosotros
+						</Link>
+						<Link className="link" href="/">
+							Politicas y privacidad
+						</Link>
+						<Link className="link" href="/">
+							Blog
+						</Link>
+					</div>
+				</div>
+			</div>
+			<div className="copyright">
+				<Link className="link"> © 2022 Darkroom</Link>
+				<Link className="link">Licencia</Link>
+				<Link className="link">Términos y condiciones</Link>
+				<div>
+					<Link className=" link  language-link">
+						<i class="fas fa-globe"></i> Español
+					</Link>
+				</div>
+			</div>
+		</div>
+	);
 }
