@@ -29,12 +29,12 @@ export default function Header() {
           {headerUp ? (
             <div>
               <button className="header-login">
-                <i onClick={() => loginWithRedirect()}>Log In</i>
+                <i onClick={() => loginWithRedirect()} >Log In</i>
               </button>
               <button className="header-signup">
                 <i>
                   <Link
-                    to="/login"
+                    to="/register"
                     style={{ color: "white", textDecoration: "none" }}
                   >
                     Sign Up

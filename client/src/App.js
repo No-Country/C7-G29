@@ -3,12 +3,14 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Publish from "./pages/Publish";
 import Cart from "./pages/Cart";
+import Register from "./pages/Register/Register";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { localStorageCart } from "./redux/slices/cartSlice";
 import { fillUserData } from "./redux/slices/userSlice";
-import LogIn from "./components/LogIn/LogIn";
+import LogIn from "./pages/LogIn/LogIn";
 import { useAuth0 } from "@auth0/auth0-react";
+import Users from "./pages/Users/Users";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -34,6 +36,8 @@ function App() {
         <Route path="/publish" element={<Publish />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/login" element={<LogIn />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route path="/users" element={<Users />}></Route>
       </Routes>
     </div>
   );
