@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './Login.css';
 import LogoLogIn from "./../../assets/logo-login.png";
+import Footer from '../../components/Footer/Footer';
+import Navbar from '../../components/Navbar/Navbar';
 
 export default function LogIn() {
 
@@ -11,7 +13,9 @@ export default function LogIn() {
   }
 
   return (
-    <div>
+    <div className="login-total">
+      <Navbar />
+    <div className='login-background'>
       <div className="login-general-text">
         <h1 className="login-h1">Inicia Sessión con <br />Darkroom</h1>
       </div>
@@ -49,10 +53,7 @@ export default function LogIn() {
       :
       (
       <div className="login-background-functional">
-        <div>
-          <img className="login-img" src={LogoLogIn} />
-        </div>
-        <button className='login-register'>Registrarme</button>
+        <button className='login-register-after'>Registrarme</button>
         <button 
           className='login-login' 
           onClick={loginFunctional}>
@@ -65,6 +66,8 @@ export default function LogIn() {
       </div>
       )
       }
+    </div>
+    <Footer />
     </div>
   )
 }

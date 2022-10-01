@@ -17,10 +17,11 @@ export default function Home() {
   const { logout } = useAuth0();
   return (
     <div>
-      <button onClick={() => logout({ returnTo: window.location.origin })}>
+  {/*    <button onClick={() => logout({ returnTo: window.location.origin })}>
         Log Out
       </button>
       <Link to="/publish">Publicar</Link>
+      */}
       <Header />
       {photos.length > 0
         ? photos.map((x) => <HomeCards x={x} key={x._id} />)

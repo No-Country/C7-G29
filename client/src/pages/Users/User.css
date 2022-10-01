@@ -4,9 +4,11 @@
     justify-content: center;
     text-align: center;
     background-color: #1f1f1f;
-    margin-bottom: 20px;
 }
 
+.users-general {
+    background-color: black;
+}
 .users-h1 {
     color: white;
     font-size: 32px;
@@ -70,25 +72,30 @@
 
 .users-div-button {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-content: center;
 }
 
 .users-button {
+    margin: 0;
+    padding: 0;
     background-color: #6C4494;
+    display: flex;
     color: white;
     border: none;
     width: 180px;
     height: 39px;
     cursor: pointer;
-    justify-content: center;
-    align-items: center;
     text-align: center;
     font-size: 16px;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
 }
 
 .users-description-p {
     margin-top: 50px;
+    margin-bottom: 0;
     color: white;
     text-align: center;
     font-size: 20px;

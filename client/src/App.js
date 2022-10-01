@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div>
-      {isLoading ? "Cargando" : isAuthenticated ? "Logeado" : "Guest"}
+    {/*{isLoading ? "Cargando" : isAuthenticated ? "Logeado" : "Guest"}*/}
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/publish" element={<Publish />}></Route>

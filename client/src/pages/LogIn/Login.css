@@ -1,3 +1,12 @@
+.login-background {
+    padding-bottom: 340px;
+    background-color: white;
+}
+
+.login-total {
+    background-color: black;
+}
+
 .login-general-text {
     display: flex;
     align-items: center;
@@ -205,4 +214,19 @@
     color: black;
     text-align: left;
     margin-left: 4px;
+}
+
+.login-register-after {
+    align-self: center;
+    width: 314px;
+    height: 43px;
+    color: #6C4494;
+    background-color: white;
+    border: 2px solid #6C4494;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 110px;
 }
