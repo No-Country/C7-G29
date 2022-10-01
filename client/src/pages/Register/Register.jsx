@@ -1,11 +1,15 @@
 import React from 'react';
 import './Register.css';
 import LogoLogIn from "./../../assets/logo-login.png";
+import Footer from '../../components/Footer/Footer';
+import Navbar from '../../components/Navbar/Navbar';
 
 export default function Register() {
 
   return (
-    <div>
+    <div className="register-total">
+    <Navbar />
+    <div className='register-background'>
       <div className="register-general-text">
         <h1 className="register-h1">Registrate con <br />Darkroom</h1>
       </div>
@@ -39,6 +43,8 @@ export default function Register() {
         <p className='register-help-password'>¿Te olvidaste la contraseña?</p>
         <p className='register-help'>¿Necesitas ayuda?</p>
       </div>
+    </div>
+    <Footer />
     </div>
   )
 }
