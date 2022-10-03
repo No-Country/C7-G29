@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 const user = mongoose.Schema({
   image: {
@@ -62,5 +63,14 @@ user.set('toJSON', {
     delete returnedObject.password
   }
 })
+
+user.statics.encryptPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10)
+  return await bcrypt.hash(password, salt)
+}
+
+user.statics.comparePassword = async (password, recivePassword) => {
+  return await bcrypt.compare(password, recivePassword)
+}
 
 module.exports = mongoose.model('user', user)

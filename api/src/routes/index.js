@@ -10,6 +10,6 @@ router.use("/users", users);
 router.use("/publication", publication);
 router.use("/challenge", challenge);
 router.use("/auth", authUser);
-router.use("/auth", authUser);
+// router.use("/auth", authUser);
 
 module.exports = router;
