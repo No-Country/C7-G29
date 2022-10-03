@@ -25,7 +25,7 @@ const publicationSchema = mongoose.Schema({
     },
     photographer: {
       type: mongoose.Types.ObjectId,
-      ref: 'userPhotographer'
+      ref: 'user'
     },
     challenge: [{
       type: mongoose.Types.ObjectId,
