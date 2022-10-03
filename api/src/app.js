@@ -26,8 +26,8 @@ app.use("/api", routes);
 
 app.get('/', (req, res) => {
   res.json({
-    "userDefault" : "http://localhost:9000/api/usersDefault",
-    "userPhotographer" : "http://localhost:9000/api/usersPhotographer",
+    "users" : "http://localhost:9000/api/users/allUserDefault",
+    "photographers" : "http://localhost:9000/api/users/allUserPhotographer",
     "publications" : "http://localhost:9000/api/publication",
   })
 })

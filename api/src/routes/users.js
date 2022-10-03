@@ -6,7 +6,7 @@ const{registerUser, updateUser, deleteUser, allUsers, allUsersDefult, allUserPho
 
 router.get('/', allUsers);
 
-router.get('/allUsersDefault', allUsersDefult);
+router.get('/allUserDefault', allUsersDefult);
 
 router.get('/allUserPhotographer', allUserPhotographer);
 
