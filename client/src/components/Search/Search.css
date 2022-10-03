@@ -1,0 +1,135 @@
+
+.search-total {
+    padding-bottom: 100px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.search-general-back {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.search-container-input {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: none;
+}
+
+.search-input {
+    border-radius: 10px 0 0 10px;
+    color: #D1D1D1;
+    width: 632px;
+    height: 40px;
+    border: 0;
+}
+
+.search-button {
+    height: 39px;
+    border: none;
+    color: white;
+    background-color: rgba(53, 53, 53, 0.4);
+    border: 1px solid white;
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    cursor: pointer;
+}
+
+.search-container-p {
+    display: flex;
+}
+
+.search-p {
+    font-size: 16px;
+    font-weight: bolder;
+    color: #D1D1D1;
+    text-align: left;
+    letter-spacing: 0.1em;
+}
+
+.search-icon {
+    position: relative;
+    top: 5px;
+    right: 35px;
+}
+
+.search-div {
+    background-color: #ffffff;
+    position: absolute;
+    top: 320px;
+    width: 630px;
+    height: 280px;
+    border-radius: 0 0 10px  10px;
+    border: none;
+    z-index: 2;
+}
+
+.search-div-button {
+    background-color: transparent;
+    border: none;
+    margin: 5px;
+    font-size: 16px;
+    color: #6C4494;
+    font-weight:  600;
+    cursor:pointer;
+}
+
+.search-div-button-img {
+    width: 17px;
+    height: 17px;
+}
+
+.search-div-category-p {
+    font-size: 16px;
+    color: #6C4494;
+    font-weight:  600;
+    cursor:pointer;
+}
+
+.search-hr {
+    width: 90%;
+    margin-top: 0;
+}
+
+.search-div-category {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 5px;
+}
+
+.search-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.search-card-total {
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    align-items: center;
+    margin: 10px;
+    cursor:pointer;
+}
+
+.search-card-total-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.search-card-total-p {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
