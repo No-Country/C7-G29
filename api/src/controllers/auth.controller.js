@@ -33,10 +33,11 @@ const singIn = async (req, res) => {
 			.status(404)
 			.send({ msg: 'El mail ya esta asociado a un Usuario existente' });
 		
-} catch (error) {
-		console.error(error)
-}
+	} catch (error) {
+			console.error(error)
+	}
 };
+
 
 // ------ login ------
 const singUp = async (req, res) => {
@@ -44,7 +45,7 @@ const singUp = async (req, res) => {
 
 	if(!email || !password){
 			return res
-				.status(200)
+				.status(404)
 				.send('falta mail o password')
 	} 
 	
@@ -52,24 +53,17 @@ const singUp = async (req, res) => {
 		const user = await userSchema.findOne({email: email})
 		if(user) {
 			const matchPassword = await userSchema.comparePassword(password, user.password)
-			if(!matchPassword) {
-				return res
-					.status(404)
-					.send('no funciono la contra')
-			} 
+			if(!matchPassword) return res .status(404).send('no funciono la contra')
 			return res
 					.status(200)
 					.send('funciono la contra')
 		}
 		return res
 			.status(404)
-			.send('Usuario no encontrado, revisar mail escrito')
+			.send('Usuario no encontrado, revisar email escrito o registrate')
 	}
 
-	return res
-		.status(404)
-		.send('no funciono')
-
+	return res .status(404).send('no funciono')
 }
 
 module.exports = { singIn, singUp };
