@@ -18,7 +18,7 @@ export default function Navbar() {
             </div>
             <div className="navbar-container-link">
                 <Link className="navbar-link">Categorias</Link>
-                <Link className="navbar-link"><img className="navbar-icon" src={Subir}/>&nbsp; Subir</Link>
+                <Link className="navbar-link" to="/publish"><img className="navbar-icon" src={Subir}/>&nbsp; Subir</Link>
                 <Link className="navbar-link"><img className="navbar-icon" src={Carrito}/>&nbsp; Carrito</Link>
                 <Link className="navbar-link"><img src={Notificaciones}/></Link>
                 <Link className="navbar-link" to="/users">Iniciar sesión</Link>
