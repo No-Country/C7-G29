@@ -10,7 +10,6 @@ const cartSlice = createSlice({
   reducers: {
     fillUserData: (state, { payload }) => {
       //Creo que no va a ser necesario esto
-      console.log(payload);
     },
     cleanData: (state) => {
       state = initialState;

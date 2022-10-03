@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Header() {
-  const { loginWithRedirect } = useAuth0();
-
   const [headerUp, setheaderUp] = useState(
     window.innerWidth < 800 ? false : true
   );
@@ -29,7 +26,14 @@ export default function Header() {
           {headerUp ? (
             <div>
               <button className="header-login">
-                <i onClick={() => loginWithRedirect()} >Log In</i>
+                <i>
+                  <Link
+                    to="/login"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    Log In
+                  </Link>
+                </i>
               </button>
               <button className="header-signup">
                 <i>

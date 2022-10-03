@@ -1,7 +1,7 @@
-const publication = require('../models/publication')
+const publication = require("../models/publication");
 const userPhotographer = require("../models/userPhotographer");
 
-const allPublications = async(req, res) => {
+const allPublications = async (req, res) => {
   try {
     const photo = await publication.find().populate("photographer", {
       _id: 1,
@@ -15,9 +15,9 @@ const allPublications = async(req, res) => {
   } catch (error) {
     return res.status(400).send({ message: error });
   }
-}
+};
 
-const newPublication = async(req, res) => {
+const newPublication = async (req, res) => {
   try {
     const {
       title,
@@ -56,25 +56,26 @@ const newPublication = async(req, res) => {
   } catch (error) {
     return res.status(400).send({ message: error });
   }
-}
+};
 
-const updatePublicaiton = async(req, res) => {
+const updatePublicaiton = async (req, res) => {
   await publication.updateOne({ _id: req.params.id }, req.body);
   res.send("datos actualizados correctamente");
-}
+};
 
-const deletePublication = async(req, res) => {
+const deletePublication = async (req, res) => {
   try {
-    if(await publication.findOne({_id: req.params.id})) {
+    if (await publication.findOne({ _id: req.params.id })) {
       await publication.findByIdAndDelete(req.params.id);
       res.send("Pulicacion eliminada correctamente");
-    } res.send("La publicacion que desea eliminar no existe")
-  } catch (error) {
-    res
-      .status(404)
-      .json({message: error})
-  }
-}
+    }
+    res.send("La publicacion que desea eliminar no existe");
+  } catch (error) {}
+};
 
-
-module.exports = {allPublications, newPublication, updatePublicaiton, deletePublication}
+module.exports = {
+  allPublications,
+  newPublication,
+  updatePublicaiton,
+  deletePublication,
+};
