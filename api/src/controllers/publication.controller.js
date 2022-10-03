@@ -67,8 +67,13 @@ const deletePublication = async(req, res) => {
   try {
     if(await publication.findOne({_id: req.params.id})) {
       await publication.findByIdAndDelete(req.params.id);
-      res.send("Pulicacion eliminada correctamente");
-    } res.send("La publicacion que desea eliminar no existe")
+      return res
+        .status(201)
+        .json({message: "Pulicacion eliminada correctamente"});
+    } 
+    return res
+      .status(404)
+      .json({message: "La publicacion que desea eliminar no existe"})
   } catch (error) {
     res
       .status(404)
