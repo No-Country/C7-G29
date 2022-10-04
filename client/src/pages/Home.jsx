@@ -1,22 +1,13 @@
-import { useEffect } from "react";
-import { getAllPhotosData } from "../redux/actions/photosActions";
-import { useDispatch, useSelector } from "react-redux";
-import HomeCards from "../components/HomeCards/HomeCards";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import TotalCards from "../components/TotalCards/TotalCards";
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const photos = useSelector((state) => state.photos.filterPhotosData);
-  useEffect(() => {
-    dispatch(getAllPhotosData());
-  }, [dispatch]);
+
   return (
     <div>
       <Header />
-      {photos.length > 0
-        ? photos.map((x) => <HomeCards x={x} key={x._id} />)
-        : null}
+      <TotalCards />
       <Footer />
     </div>
   );
