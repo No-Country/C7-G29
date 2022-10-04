@@ -55,12 +55,13 @@ const singUp = async (req, res) => {
 					expiresIn: 86400
 				})
 
-				const cookies = {
-					expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-					httpOnly: true
-				}
+				// const cookies = {
+				// 	expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+				// 	httpOnly: true
+				// }
 
-				res.cookie('jwt', token, cookies)
+				res.cookie('jwt', token)
+				console.log("llegaaaaaaaa")
 
 				return res
 				.status(200)
@@ -72,8 +73,7 @@ const singUp = async (req, res) => {
 			.status(404)
 			.send('Usuario no encontrado, revisar email escrito o registrate')
 	}
-
-	return res .status(404).send('no funciono')
+	return res.status(404).send('no funciono')
 }
 
 
