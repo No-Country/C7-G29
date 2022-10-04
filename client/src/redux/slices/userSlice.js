@@ -4,7 +4,7 @@ const initialState = {
   userData: {},
 };
 
-const cartSlice = createSlice({
+const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -17,5 +17,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { fillUserData, cleanData } = cartSlice.actions;
-export default cartSlice.reducer;
+export const { fillUserData, cleanData } = userSlice.actions;
+export default userSlice.reducer;
