@@ -58,3 +58,18 @@ export const deletePhoto = (id) => async (dispatch) => {
     })
     .catch((e) => console.log(e));
 };
+
+export const loginAction = (data) => async () => {
+  console.log({data})
+  return fetch(`http://localhost:9000/api/auth/singUp`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: data.email,
+      password: data.password
+    })
+  })
+  .then(response => response.json())
+  .then(d => d)
+  .catch(e => e)
+}
