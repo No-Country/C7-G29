@@ -1,6 +1,14 @@
-# c7-29-m-node-react
+<h1 align="center">DarkRoom</h1>
 
-<img src="https://github.com/No-Country/C7-G29/blob/dev/images/Front%20view%20MacBook%20mockup.jpg">
+## Contenido
+ - [Features](#features)
+ - [Tecnologias](#tecnologias)
+ - [Como usar](#como-usar)
+ - [Equipo](#equipo)
+
+<img src="https://github.com/No-Country/C7-G29/blob/dev/images/banner.png">
+
+## Features
 
 ## Tecnologias
   - Front End: [React-Native](https://reactnative.dev/), [React](https://reactjs.org/), [Redux-Toolkit](https://redux-toolkit.js.org
