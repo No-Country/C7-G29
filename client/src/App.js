@@ -9,7 +9,8 @@ import { useDispatch } from "react-redux";
 import { localStorageCart } from "./redux/slices/cartSlice";
 import LogIn from "./pages/LogIn/LogIn";
 import Users from "./pages/Users/Users";
-
+import Details from "./pages/Details/Details";
+import Profile from "./pages/Profile/Profile";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,6 +26,8 @@ function App() {
         <Route path="/login" element={<LogIn />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/users" element={<Users />}></Route>
+        <Route path="/details/:id" element={<Details />}></Route>
+        <Route path="/profile/:id" element={<Profile />}></Route>
       </Routes>
     </div>
   );
