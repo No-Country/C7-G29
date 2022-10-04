@@ -63,7 +63,8 @@ export const loginAction = (data) => async () => {
   console.log({data})
   return fetch(`http://localhost:9000/api/auth/singUp`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json"},
+    credentials: "include",
     body: JSON.stringify({
       email: data.email,
       password: data.password
