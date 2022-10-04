@@ -2,6 +2,7 @@ const userSchema = require('../models/users')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+
 // ------ register ------
 const singIn = async (req, res) => {
 	try {
@@ -20,13 +21,9 @@ const singIn = async (req, res) => {
 			})      
 			await newUser.save()
 
-			const token = jwt.sign({id: newUser._id}, process.env.SECRET_KEY , {
-				expiresIn: 86400
-			})
-
 			return res
 				.status(200)
-				.json(token)
+				.json(newUser)
 		}
 
 		return res
@@ -53,10 +50,23 @@ const singUp = async (req, res) => {
 		const user = await userSchema.findOne({email: email})
 		if(user) {
 			const matchPassword = await userSchema.comparePassword(password, user.password)
-			if(!matchPassword) return res .status(404).send('no funciono la contra')
-			return res
-					.status(200)
-					.send('funciono la contra')
+			if(matchPassword) {
+				const token = jwt.sign({id: user._id}, process.env.SECRET_KEY , {
+					expiresIn: 86400
+				})
+
+				const cookies = {
+					expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+					httpOnly: true
+				}
+
+				res.cookie('jwt', token, cookies)
+
+				return res
+				.status(200)
+				.json({user: user.email, loged: true})			
+			}
+			return res.status(404).json({user: user.email, loged: "falseeeeee"})	
 		}
 		return res
 			.status(404)
@@ -66,4 +76,5 @@ const singUp = async (req, res) => {
 	return res .status(404).send('no funciono')
 }
 
-module.exports = { singIn, singUp };
+
+module.exports = { singIn, singUp};

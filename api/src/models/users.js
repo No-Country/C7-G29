@@ -64,11 +64,6 @@ user.set('toJSON', {
   }
 })
 
-user.statics.encryptPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10)
-  return await bcrypt.hash(password, salt)
-}
-
 user.statics.comparePassword = async (password, recivePassword) => {
   return await bcrypt.compare(password, recivePassword)
 }
