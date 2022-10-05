@@ -5,11 +5,8 @@ import './Login.css';
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
-// import { jwt } from 'jsonwebtoken';
 
 export default function LogIn() {
-
-  const cookiejtw = document.cookie.replace('jwt=', '')
 
   const dispatch = useDispatch()
 
@@ -34,17 +31,16 @@ export default function LogIn() {
 
       dispatch(userCurrentAction())
 
-      
       setLoginForm({
         email: "",
         password: ""
       })
+
     } catch (error) {
       console.log(error)
     }
   }
 
-  
 
   return (
     <div className="login-total">
