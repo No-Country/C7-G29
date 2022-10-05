@@ -85,3 +85,32 @@ export const userCurrentAction= () => async (dispatch) => {
     .then((d) => dispatch(getUserLoged(d)))
     .catch((e) => e);
 };
+
+export const getDetails = (id) => async (dispatch) => {
+  return fetch(`http://localhost:9000/api/searchId/publicationForId/${id}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((d) => dispatch(insertDetails(d)))
+    .catch((e) => e);
+};
+
+export const getProfileDetails = (id) => async (dispatch) => {
+  return fetch(`http://localhost:9000/api/searchId/userForId/${id}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((d) => dispatch(fillProfileData(d)))
+    .catch((e) => e);
+};
+
+export const buyItems = async (data) => {
+  return fetch(`http://localhost:9000/api/mercadopago/buy`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => d)
+    .catch((e) => e);
+};
