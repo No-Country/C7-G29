@@ -3,7 +3,8 @@ const users = require("./users");
 const publication = require("./publication");
 const challenge = require("./challenges");
 const authUser = require("./authUser");
-const searchId = require('./searchId');
+const searchId = require("./searchId");
+const mercadoPago = require("./mercadopago");
 
 const router = express.Router();
 
@@ -12,5 +13,5 @@ router.use("/publication", publication);
 router.use("/challenge", challenge);
 router.use("/auth", authUser);
 router.use("/searchId", searchId);
-
+router.use("/mercadopago", mercadoPago);
 module.exports = router;
