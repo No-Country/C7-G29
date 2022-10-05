@@ -1,12 +1,5 @@
 import { insertDataAllPhotos, setFilter } from "../slices/photosSlice";
 import { getUserLoged } from "../slices/usersLogedSlice";
-import {
-  insertDataAllPhotos,
-  setFilter,
-  insertDetails,
-} from "../slices/photosSlice";
-import { fillProfileData } from "../slices/profileSlice";
-
 
 export const getAllPhotosData = () => async (dispatch) => {
   return await fetch(`http://localhost:9000/api/publication`, {
@@ -68,24 +61,15 @@ export const deletePhoto = (id) => async (dispatch) => {
 };
 
 export const loginAction = (data) => async () => {
-  console.log({ data });
+  console.log({data})
   return fetch(`http://localhost:9000/api/auth/singUp`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json"},
     credentials: "include",
     body: JSON.stringify({
       email: data.email,
-      password: data.password,
-    }),
-  })
-    .then((response) => response.json())
-    .then((d) => d)
-    .catch((e) => e);
-};
-
-export const getDetails = (id) => async (dispatch) => {
-  return fetch(`http://localhost:9000/api/searchId/publicationForId/${id}`, {
-    method: "GET",
+      password: data.password
+    })
   })
   .then(response => response.json())
   .then(d => d)
@@ -101,6 +85,11 @@ export const userCurrentAction= () => async (dispatch) => {
     .then((d) => dispatch(getUserLoged(d)))
     .catch((e) => e);
 };
+
+export const getDetails = (id) => async (dispatch) => {
+  return fetch(`http://localhost:9000/api/searchId/publicationForId/${id}`, {
+    method: "GET",
+  })
     .then((response) => response.json())
     .then((d) => dispatch(insertDetails(d)))
     .catch((e) => e);
