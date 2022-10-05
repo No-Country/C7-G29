@@ -3,7 +3,7 @@ const publication = require("../models/publication");
 
 const userForId = async(req, res)=>{
     try {
-        const userId = await user.findById(req.params.id)        
+        const userId = await user.findById(req.params.id).populate("publications");          
         if(!userId || userId.length === 0){
             return res
             .status(201)
