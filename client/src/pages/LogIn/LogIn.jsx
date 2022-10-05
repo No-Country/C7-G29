@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { loginAction } from '../../redux/actions/photosActions';
+import { loginAction, userCurrentAction} from '../../redux/actions/photosActions';
 import './Login.css';
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
+// import { jwt } from 'jsonwebtoken';
 
 export default function LogIn() {
+
+  const cookiejtw = document.cookie.replace('jwt=', '')
 
   const dispatch = useDispatch()
 
@@ -23,10 +26,15 @@ export default function LogIn() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     try {
-      dispatch(loginAction(loginForm))
+
+      await dispatch(loginAction(loginForm))
+
+      dispatch(userCurrentAction())
+
+      
       setLoginForm({
         email: "",
         password: ""
@@ -35,6 +43,8 @@ export default function LogIn() {
       console.log(error)
     }
   }
+
+  
 
   return (
     <div className="login-total">
