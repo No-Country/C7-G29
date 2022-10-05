@@ -48,8 +48,8 @@ export default function Profile() {
           Mi perfil
         </div>
 
-        <div>
-          <div>
+        <div style={{ alignSelf: "center" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <img
               alt="user"
               src={details.avatar}
@@ -391,7 +391,11 @@ export default function Profile() {
         <div style={{ borderRadius: "20px" }}>
           {details.publications ? (
             details.publications.length > 0 ? (
-              details.publications.map((x) => <HomeCards x={x} key={x._id} />)
+              <div className="galery-container">
+                {details.publications.map((x) => (
+                  <HomeCards x={x} key={x._id} />
+                ))}
+              </div>
             ) : (
               <img alt="nothing" src={nothing}></img>
             )
