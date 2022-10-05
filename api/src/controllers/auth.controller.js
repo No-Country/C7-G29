@@ -58,16 +58,15 @@ const singUp = async (req, res) => {
 				const cookies = {
 					expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
 					httpOnly: true,
-					secure: true,
-					sameSite: 'lax'
+					// secure: true,
+					// sameSite: 'lax'
 				}
 
 				res.cookie('jwt', token, cookies)
-				console.log("llegaaaaaaaa")
 
 				return res
 				.status(200)
-				.json({user: user.email, loged: true})			
+				.json({user: user.email, loged: "true"})			
 			}
 			return res.status(404).json({user: user.email, loged: "falseeeeee"})	
 		}
