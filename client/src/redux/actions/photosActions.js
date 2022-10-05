@@ -1,4 +1,5 @@
 import { insertDataAllPhotos, setFilter } from "../slices/photosSlice";
+import { getUserLoged } from "../slices/usersLogedSlice";
 
 export const getAllPhotosData = () => async (dispatch) => {
   return await fetch(`http://localhost:9000/api/publication`, {
@@ -74,3 +75,13 @@ export const loginAction = (data) => async () => {
   .then(d => d)
   .catch(e => e)
 }
+
+export const userCurrentAction= () => async (dispatch) => {
+  return await fetch(`http://localhost:9000/api/auth/loged`, {
+    method: "GET",
+    credentials: "include",
+  })
+    .then((response) => response.json())
+    .then((d) => dispatch(getUserLoged(d)))
+    .catch((e) => e);
+};
