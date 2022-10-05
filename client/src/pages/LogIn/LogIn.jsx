@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { loginAction } from '../../redux/actions/photosActions';
+import { loginAction, userCurrentAction} from '../../redux/actions/photosActions';
 import './Login.css';
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from '../../components/Footer/Footer';
@@ -23,18 +23,24 @@ export default function LogIn() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     try {
-      dispatch(loginAction(loginForm))
+
+      await dispatch(loginAction(loginForm))
+
+      dispatch(userCurrentAction())
+
       setLoginForm({
         email: "",
         password: ""
       })
+
     } catch (error) {
       console.log(error)
     }
   }
+
 
   return (
     <div className="login-total">

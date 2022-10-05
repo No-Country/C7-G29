@@ -51,23 +51,27 @@ const singUp = async (req, res) => {
           expiresIn: 86400,
         });
 
-        // const cookies = {
-        // 	expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-        // 	httpOnly: true
-        // }
+				const cookies = {
+					expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+					httpOnly: true,
+					// secure: true,
+					// sameSite: 'lax'
+				}
 
-        res.cookie("jwt", token);
-        console.log("llegaaaaaaaa");
+				res.cookie('jwt', token, cookies)
 
-        return res.status(200).json({ user: user.email, loged: true });
-      }
-      return res.status(404).json({ user: user.email, loged: "falseeeeee" });
-    }
-    return res
-      .status(404)
-      .send("Usuario no encontrado, revisar email escrito o registrate");
-  }
-  return res.status(404).send("no funciono");
-};
+				return res
+				.status(200)
+				.json({user: user.email, loged: "true"})			
+			}
+			return res.status(404).json({user: user.email, loged: "falseeeeee"})	
+		}
+		return res
+			.status(404)
+			.send('Usuario no encontrado, revisar email escrito o registrate')
+	}
+	return res.status(404).send('no funciono')
+}
+
 
 module.exports = { singIn, singUp };

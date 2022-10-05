@@ -1,9 +1,12 @@
+import { insertDataAllPhotos, setFilter } from "../slices/photosSlice";
+import { getUserLoged } from "../slices/usersLogedSlice";
 import {
   insertDataAllPhotos,
   setFilter,
   insertDetails,
 } from "../slices/photosSlice";
 import { fillProfileData } from "../slices/profileSlice";
+
 
 export const getAllPhotosData = () => async (dispatch) => {
   return await fetch(`http://localhost:9000/api/publication`, {
@@ -84,6 +87,20 @@ export const getDetails = (id) => async (dispatch) => {
   return fetch(`http://localhost:9000/api/searchId/publicationForId/${id}`, {
     method: "GET",
   })
+  .then(response => response.json())
+  .then(d => d)
+  .catch(e => e)
+}
+
+export const userCurrentAction= () => async (dispatch) => {
+  return await fetch(`http://localhost:9000/api/auth/loged`, {
+    method: "GET",
+    credentials: "include",
+  })
+    .then((response) => response.json())
+    .then((d) => dispatch(getUserLoged(d)))
+    .catch((e) => e);
+};
     .then((response) => response.json())
     .then((d) => dispatch(insertDetails(d)))
     .catch((e) => e);
