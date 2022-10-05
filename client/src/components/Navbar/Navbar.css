@@ -3,22 +3,25 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-right: 200px;
-    padding-left: 200px;
     justify-content: space-between;
-    padding-bottom: 50px;
+    padding: 30px;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 .navbar-container-img {
     margin: 5px;
 }
 
+.navbar-container-link {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+}
 
 .navbar-link {
     color: white;
     text-decoration: none;
-    margin-left: 15px;
-    margin-right: 15px;
 }
 
 .navbar-icon {
