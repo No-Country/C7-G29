@@ -11,8 +11,11 @@ import descargar from "./../../assets/descargar.png";
 import guardar from "./../../assets/guardar.png";
 import gris from "./../../assets/gris.jpg";
 
+import { addItemToCart } from "../../redux/slices/cartSlice";
+
 export default function Home({ x }) {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const download = (e) => {
     fetch(x.url, {
@@ -82,11 +85,11 @@ export default function Home({ x }) {
         ) : null}
       </div>
 
-      {/* {x.pay ? (
+      {x.pay ? (
         <button onClick={() => dispatch(addItemToCart(x))}>Add to Cart</button>
       ) : (
         <button onClick={() => download()}>Click to download</button>
-      )} */}
+      )}
     </div> //agrege div este
   );
 }
