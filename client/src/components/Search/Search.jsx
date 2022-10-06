@@ -19,7 +19,7 @@ export default function Search() {
       (
       <div className="search-container-input">
         <div className="search-general-back">
-          <input onClick={inputDeploy} type="text" className="search-input" />
+          <input onClick={inputDeploy} type="text" className="search-input"></input>
           <img src={Lupa} className="search-icon" />
           <button className="search-button">Buscar</button>
           <div className="search-container-p">

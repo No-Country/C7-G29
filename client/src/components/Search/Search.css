@@ -23,26 +23,19 @@
 }
 
 .search-input {
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 10px 0 0 10px;
     color: #D1D1D1;
     width: 632px;
     height: 40px;
     border: 0;
-    caret-color: #6C4494;
-    color: #6C4494;
-    padding-left: 10px;
-    text-transform: uppercase;
-    font-weight: bold;
 }
 
 .search-button {
     height: 39px;
-    width: 100px;
     border: none;
     color: white;
     background-color: rgba(53, 53, 53, 0.4);
     border: 1px solid white;
-    border-radius: 20px;
     font-size: 16px;
     margin-top: 0;
     margin-bottom: 0;
@@ -73,7 +66,7 @@
     background-color: #ffffff;
     position: absolute;
     top: 320px;
-    width: 620px;
+    width: 630px;
     height: 280px;
     border-radius: 0 0 10px  10px;
     border: none;

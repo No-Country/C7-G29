@@ -18,13 +18,9 @@
 
 .login-h1 {
     color: white;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
     font-size: 32px;
-    line-height: 38px;
-    text-align: center;
-    letter-spacing: 0.04em;
+    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
 }
 
 .login-background-functional {
@@ -233,15 +229,4 @@
     font-weight: 700;
     font-family: 'Roboto', sans-serif;
     margin-top: 110px;
-}
-
-.eyes-password {
-    color: black;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    top: -30px;
-    left: 280px;
-    padding: 0;
-    margin: 0;
 }

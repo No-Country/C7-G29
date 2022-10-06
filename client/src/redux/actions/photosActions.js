@@ -1,6 +1,9 @@
-import {   insertDataAllPhotos,   setFilter,   insertDetails} from "../slices/photosSlice";
+import {
+  insertDataAllPhotos,
+  setFilter,
+  insertDetails,
+} from "../slices/photosSlice";
 import { fillProfileData } from "../slices/profileSlice";
-import { getUserLoged } from "../slices/usersLogedSlice";
 
 export const getAllPhotosData = () => async (dispatch) => {
   return await fetch(`http://localhost:9000/api/publication`, {
@@ -24,7 +27,7 @@ export const uploadPhotoForm = (data) => async () => {
       description: data.description.value,
       url: data.image.value,
       price: data.price.price,
-      pay: data.price.pay,
+      pay: data.price.paga,
       photographer: "6337263cc2cbac1f2c2a09f5",
     }),
   })
@@ -62,28 +65,18 @@ export const deletePhoto = (id) => async (dispatch) => {
 };
 
 export const loginAction = (data) => async () => {
-  console.log({data})
+  console.log({ data });
   return fetch(`http://localhost:9000/api/auth/singUp`, {
     method: "POST",
-    headers: { "Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     credentials: "include",
     body: JSON.stringify({
       email: data.email,
-      password: data.password
-    })
-  })
-  .then(response => response.json())
-  .then(d => d)
-  .catch(e => e)
-}
-
-export const userCurrentAction= () => async (dispatch) => {
-  return await fetch(`http://localhost:9000/api/auth/loged`, {
-    method: "GET",
-    credentials: "include",
+      password: data.password,
+    }),
   })
     .then((response) => response.json())
-    .then((d) => dispatch(getUserLoged(d)))
+    .then((d) => d)
     .catch((e) => e);
 };
 
@@ -102,16 +95,5 @@ export const getProfileDetails = (id) => async (dispatch) => {
   })
     .then((response) => response.json())
     .then((d) => dispatch(fillProfileData(d)))
-    .catch((e) => e);
-};
-
-export const buyItems = async (data) => {
-  return fetch(`http://localhost:9000/api/mercadopago/buy`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((d) => d)
     .catch((e) => e);
 };
