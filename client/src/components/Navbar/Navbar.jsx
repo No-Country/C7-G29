@@ -1,29 +1,57 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import Group from './../../assets/Group.png';
 import './Navbar.css';
-import Notificaciones from './../../assets/Vector.png';
-import Subir from './../../assets/iTETAH.tif_1_.png';
-import Carrito from './../../assets/carrito.png';
-import { useAuth0 } from "@auth0/auth0-react";
+// import Notificaciones from './../../assets/Vector.png';
+// import Subir from './../../assets/iTETAH.tif_1_.png';
+// import Carrito from './../../assets/carrito.png';
+
 
 export default function Navbar() {
-    const { loginWithRedirect } = useAuth0();
-    
+
+
+    const currentUser = useSelector((state) => state.userLoged.currentUser)
+
+    const [modalOpen, setModalOpen] = useState(false)
+
+    const handleOpen = () => {
+        setModalOpen(!modalOpen)
+    }
+
+
     return (
-    <div>
-        <div className="navbar-general">
-            <div className="navbar-container-img">
-                <img className="navbar-img" src={Group} />
+        <div className='navbar_component'>
+            <div className="navbar-general">
+                <Link to="/" className="navbar-container-img">
+                    <img className="navbar-img" src={Group} />
+                </Link>
+                <div className="navbar-container-link">
+                    {/* <Link className="navbar-link">Categorias</Link> */}
+                    <Link className="navbar-link" to="/publish">Subir</Link>
+                    <Link className="navbar-link">Carrito</Link>
+                    {/* <Link className="navbar-link"><img src={Notificaciones}/></Link> */}
+                    {currentUser.length > 1
+                        ? 
+                        <Link className="navbar-link" to="/users">Iniciar sesión</Link>
+                        : 
+                        <div onClick={handleOpen} className='navbar_divAvatar'><img src={currentUser.avatar} alt="" /></div>
+                    }
+                </div>
             </div>
-            <div className="navbar-container-link">
-                <Link className="navbar-link">Categorias</Link>
-                <Link className="navbar-link" to="/publish"><img className="navbar-icon" src={Subir}/>&nbsp; Subir</Link>
-                <Link className="navbar-link"><img className="navbar-icon" src={Carrito}/>&nbsp; Carrito</Link>
-                <Link className="navbar-link"><img src={Notificaciones}/></Link>
-                <Link className="navbar-link" to="/users">Iniciar sesión</Link>
-            </div>
+            
+            {
+
+                modalOpen ? 
+                    <div className='navbar_menuModal'>
+                        <Link to={`/profile/${currentUser._id}`} className=''>ver perfil</Link>
+                        <span className=''>favoritos</span>
+                        <span className=''>cerrar sesion</span>
+                    </div>
+                    : null 
+
+            }
+
         </div>
-    </div>
   )
 }

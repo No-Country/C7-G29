@@ -1,12 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import { useDispatch } from 'react-redux';
-import { loginAction } from '../../redux/actions/photosActions';
+import { loginAction, userCurrentAction} from '../../redux/actions/photosActions';
 import './Login.css';
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
+import OjoAbierto from './../../assets/ojo-abierto.png';
+import OjoCerrado from './../../assets/visible.png';
 
 export default function LogIn() {
+
+  const [passwordYes, setPasswordYes] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -23,16 +27,31 @@ export default function LogIn() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     try {
-      dispatch(loginAction(loginForm))
+
+      await dispatch(loginAction(loginForm))
+
+      dispatch(userCurrentAction())
+
       setLoginForm({
         email: "",
         password: ""
       })
+
     } catch (error) {
       console.log(error)
+    }
+  }
+  const elementPassword = useRef(null)
+
+  const yesPassword = e => {
+    setPasswordYes(!passwordYes)
+    if(passwordYes === true) {
+      elementPassword.current.type = "password"
+    } else {
+      elementPassword.current.type = "text"
     }
   }
 
@@ -62,12 +81,18 @@ export default function LogIn() {
         <div className="div-password">
         <label className='label-password'>Contraseña</label>
           <input 
+            ref={elementPassword}
             className='login-password' 
             type="password" 
             onChange={handleChange}
             name="password"
             value={loginForm.password}
           />
+          {passwordYes === true ? 
+          (          <img onClick={yesPassword} src={OjoAbierto} className="eyes-password"></img>)
+          :
+          (          <img onClick={yesPassword} src={OjoCerrado} className="eyes-password"></img>)  
+          }
         <label className='label-check-password'>Mas de 6 caracteres</label>
         </div>
         <div className="div-check">
