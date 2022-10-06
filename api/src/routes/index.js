@@ -4,7 +4,6 @@ const publication = require("./publication");
 const challenge = require("./challenges");
 const authUser = require("./authUser");
 const {verifyToken} = require('../middlewares/auth.middleware')
-const searchId = require("./searchId");
 const mercadoPago = require("./mercadopago");
 
 const router = express.Router();

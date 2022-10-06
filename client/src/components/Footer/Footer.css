@@ -1,18 +1,21 @@
 .footer-back {
-	padding-left: 200px;
-	padding-right: 200px;
+	padding-left: 30px;
+	padding-right: 30px;
 	background-color: black;
 	padding-bottom: 30px;
 }
 
 .footer {
-	width: 100%;
+	max-width: 1440px;
 	height: auto;
 	color: white;
 	display: flex;
 	align-content: center;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
+
+
+    margin: 0 auto;
 }
 
 
@@ -35,10 +38,12 @@
 } 
 
 .footer-licency {
+	max-width: 1440px;
 	padding-top: 40px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	margin: 0 auto;
 }
 
 .footer-app-h1 {
