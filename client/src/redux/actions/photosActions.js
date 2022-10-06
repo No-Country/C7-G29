@@ -1,4 +1,8 @@
-import {   insertDataAllPhotos,   setFilter,   insertDetails} from "../slices/photosSlice";
+import {
+  insertDataAllPhotos,
+  setFilter,
+  insertDetails,
+} from "../slices/photosSlice";
 import { fillProfileData } from "../slices/profileSlice";
 import { getUserLoged } from "../slices/usersLogedSlice";
 
@@ -34,16 +38,22 @@ export const uploadPhotoForm = (data) => async () => {
 };
 
 export const uploadPhotoToCloudinary = (e) => async () => {
-  const imageData = new FormData();
-  imageData.append("file", e.target.files[0]);
-  imageData.append("upload_preset", "skaneetk");
+  var response = [];
 
-  return await fetch("https://api.cloudinary.com/v1_1/dhyz4afz7/image/upload", {
-    method: "POST",
-    body: imageData,
-  })
-    .then((response) => response.json())
-    .then((data) => data.secure_url);
+  for (let a = 0; a < e.target.files.length; a++) {
+    const imageData = new FormData();
+    imageData.append("file", e.target.files[a]);
+    imageData.append("upload_preset", "skaneetk");
+
+    await fetch("https://api.cloudinary.com/v1_1/dhyz4afz7/image/upload", {
+      method: "POST",
+      body: imageData,
+    })
+      .then((response) => response.json())
+      .then((data) => response.push(data.secure_url));
+  }
+
+  return response;
 };
 
 export const deletePhoto = (id) => async (dispatch) => {
@@ -62,22 +72,22 @@ export const deletePhoto = (id) => async (dispatch) => {
 };
 
 export const loginAction = (data) => async () => {
-  console.log({data})
+  console.log({ data });
   return fetch(`http://localhost:9000/api/auth/singUp`, {
     method: "POST",
-    headers: { "Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     credentials: "include",
     body: JSON.stringify({
       email: data.email,
-      password: data.password
-    })
+      password: data.password,
+    }),
   })
-  .then(response => response.json())
-  .then(d => d)
-  .catch(e => e)
-}
+    .then((response) => response.json())
+    .then((d) => d)
+    .catch((e) => e);
+};
 
-export const userCurrentAction= () => async (dispatch) => {
+export const userCurrentAction = () => async (dispatch) => {
   return await fetch(`http://localhost:9000/api/auth/loged`, {
     method: "GET",
     credentials: "include",

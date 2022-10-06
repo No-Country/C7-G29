@@ -1,6 +1,5 @@
-import { deletePhoto } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
-import Link from "react-router-dom";
+
 import React, { useState } from "react";
 import "./HomeCards.css";
 
@@ -9,7 +8,6 @@ import corazon from "./../../assets/corazon.png";
 //import comprar from './../../assets/comprar.png';
 import descargar from "./../../assets/descargar.png";
 import guardar from "./../../assets/guardar.png";
-import gris from "./../../assets/gris.jpg";
 
 import { addItemToCart } from "../../redux/slices/cartSlice";
 
@@ -60,31 +58,53 @@ export default function Home({ x }) {
 
         {visible === !false ? (
           <div className="card_divVisible">
-            <div className={ x.price ? "card_visibleTop active" : "card_visibleTop"}>
+            <div
+              className={x.price ? "card_visibleTop active" : "card_visibleTop"}
+            >
               <div className="card_divPrice">
                 {x.price ? <p className="card-price">{x.price} $</p> : null}
               </div>
               <div className="card_visibleTopRight">
                 <div className="card-divFavorites">
-                  <img className="card-favorite" src={corazon}></img>
+                  <img
+                    alt="relleno"
+                    className="card-favorite"
+                    src={corazon}
+                  ></img>
                 </div>
                 <div className="card-divFavorites">
-                  <img className="card-guardar" src={guardar}></img>
+                  <img
+                    alt="relleno"
+                    className="card-guardar"
+                    src={guardar}
+                  ></img>
                 </div>
               </div>
             </div>
-            <div  className="card_visibleBottom">
+            <div className="card_visibleBottom">
               <div className="card_visibleBottomProfile">
-                <img onClick={() => navigate("/profile/" + x.photographer._id)} src={x.photographer.avatar} className="card-users-img"/>
-                <h3 className="card-title" onClick={() => navigate("/profile/" + x.photographer._id)}>{`${x.photographer.name} ${x.photographer.lastName}`}</h3> 
+                <img
+                  alt="relleno"
+                  onClick={() => navigate("/profile/" + x.photographer._id)}
+                  src={x.photographer.avatar}
+                  className="card-users-img"
+                />
+                <h3
+                  className="card-title"
+                  onClick={() => navigate("/profile/" + x.photographer._id)}
+                >{`${x.photographer.name} ${x.photographer.lastName}`}</h3>
               </div>
-              {x.price ? <button onClick={() => dispatch(addItemToCart(x))}>Add to Cart</button>
-                : (
-                  <img
-                    className="card-download"
-                    onClick={() => download()}
-                    src={descargar}
-                  ></img>
+              {x.price ? (
+                <button onClick={() => dispatch(addItemToCart(x))}>
+                  Add to Cart
+                </button>
+              ) : (
+                <img
+                  alt="relleno"
+                  className="card-download"
+                  onClick={() => download()}
+                  src={descargar}
+                ></img>
               )}
               {/* <button className="card-delete" onClick={() => dispatch(deletePhoto(x._id))}>🗑️</button> */}
             </div>
@@ -94,10 +114,8 @@ export default function Home({ x }) {
 
       {x.pay ? (
         <button onClick={() => dispatch(addItemToCart(x))}>Add to Cart</button>
-      ) : (
-        // <button onClick={() => download()}>Click to download</button> 
-        null
-      )}
+      ) : // <button onClick={() => download()}>Click to download</button>
+      null}
     </div> //agrege div este
   );
 }
