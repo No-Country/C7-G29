@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "../Navbar/Navbar";
 import Search from "../Search/Search";
 import Toolbar from "../Toolbar/Toolbar";
 import Title from "../Title/Title";
 
 export default function Header() {
-  const { loginWithRedirect } = useAuth0();
-
-  const [headerUp, setheaderUp] = useState(
+  /*const [headerUp, setheaderUp] = useState(
     window.innerWidth < 800 ? false : true
   );
 
@@ -23,10 +20,10 @@ export default function Header() {
     window.addEventListener("resize", renderPoint);
     return () => window.removeEventListener("resize", renderPoint);
   }, []);
-
+*/
   return (
     <div className="general-header">
-      <Navbar /> 
+      <Navbar />
       <Title />
       <Search />
       <Toolbar />

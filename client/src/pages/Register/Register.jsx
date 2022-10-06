@@ -1,36 +1,35 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from "react";
 import "./Register.css";
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
-import OjoAbierto from './../../assets/ojo-abierto.png';
-import OjoCerrado from './../../assets/visible.png';
+import OjoAbierto from "./../../assets/ojo-abierto.png";
+import OjoCerrado from "./../../assets/visible.png";
 
 export default function Register() {
+  const [passwordYesRegister, setPasswordYesRegister] = useState(false);
+  const [passwordYesRegister2, setPasswordYesRegister2] = useState(false);
 
-  const [passwordYesRegister, setPasswordYesRegister] = useState(false)
-  const [passwordYesRegister2, setPasswordYesRegister2] = useState(false)
+  const elementPasswordRegister = useRef(null);
+  const elementPasswordRegister2 = useRef(null);
 
-  const elementPasswordRegister = useRef(null)
-  const elementPasswordRegister2 = useRef(null)
-
-  const yesRegister = e => {
-    setPasswordYesRegister(!passwordYesRegister)
-    if(passwordYesRegister === true) {
-      elementPasswordRegister.current.type = "password"
+  const yesRegister = (e) => {
+    setPasswordYesRegister(!passwordYesRegister);
+    if (passwordYesRegister === true) {
+      elementPasswordRegister.current.type = "password";
     } else {
-      elementPasswordRegister.current.type = "text"
+      elementPasswordRegister.current.type = "text";
     }
-  }
+  };
 
-  const yesRegister2 = e => {
-    setPasswordYesRegister2(!passwordYesRegister2)
-    if(passwordYesRegister2 === true) {
-      elementPasswordRegister2.current.type = "password"
+  const yesRegister2 = (e) => {
+    setPasswordYesRegister2(!passwordYesRegister2);
+    if (passwordYesRegister2 === true) {
+      elementPasswordRegister2.current.type = "password";
     } else {
-      elementPasswordRegister2.current.type = "text"
+      elementPasswordRegister2.current.type = "text";
     }
-  }
+  };
 
   return (
     <div className="register-total">
@@ -44,7 +43,7 @@ export default function Register() {
         </div>
         <form className="register-background-functional">
           <div>
-            <img className="login-img" src={LogoLogIn} />
+            <img className="login-img" src={LogoLogIn} alt="logo" />
           </div>
           <div className="div-user-register">
             <label className="label-user-register">Usuario o email</label>
@@ -56,23 +55,51 @@ export default function Register() {
           </div>
           <div className="div-password-register">
             <label className="label-password-register">Contraseña</label>
-            <input className="login-password-register" type="password" ref={elementPasswordRegister} />
-            {passwordYesRegister === true ? 
-          (          <img onClick={yesRegister} src={OjoAbierto} className="eyes-password"></img>)
-          :
-          (          <img onClick={yesRegister} src={OjoCerrado} className="eyes-password"></img>)  
-          }
+            <input
+              className="login-password-register"
+              type="password"
+              ref={elementPasswordRegister}
+            />
+            {passwordYesRegister === true ? (
+              <img
+                alt="mostrar password"
+                onClick={yesRegister}
+                src={OjoAbierto}
+                className="eyes-password"
+              ></img>
+            ) : (
+              <img
+                alt="mostar password"
+                onClick={yesRegister}
+                src={OjoCerrado}
+                className="eyes-password"
+              ></img>
+            )}
           </div>
           <div className="div-password-register">
             <label className="label-password-register">
               Repetir contraseña
             </label>
-            <input className="login-password-register" type="password" ref={elementPasswordRegister2} />
-            {passwordYesRegister2 === true ? 
-          (          <img onClick={yesRegister2} src={OjoAbierto} className="eyes-password"></img>)
-          :
-          (          <img onClick={yesRegister2} src={OjoCerrado} className="eyes-password"></img>)  
-          }
+            <input
+              className="login-password-register"
+              type="password"
+              ref={elementPasswordRegister2}
+            />
+            {passwordYesRegister2 === true ? (
+              <img
+                alt="logo"
+                onClick={yesRegister2}
+                src={OjoAbierto}
+                className="eyes-password"
+              ></img>
+            ) : (
+              <img
+                alt="mostrar password"
+                onClick={yesRegister2}
+                src={OjoCerrado}
+                className="eyes-password"
+              ></img>
+            )}
             <label className="label-check-password-register">
               Mas de 6 caracteres
             </label>
