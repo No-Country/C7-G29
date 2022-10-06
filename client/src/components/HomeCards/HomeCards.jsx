@@ -59,28 +59,35 @@ export default function Home({ x }) {
         />
 
         {visible === !false ? (
-          <div>
-            {/* <button className="card-delete" onClick={() => dispatch(deletePhoto(x._id))}>🗑️</button>*/}
-            <img
-              className="card-guardar"
-              /*onClick={() => download()}*/
-              src={guardar}
-            ></img>
-            <img className="card-favorite" src={corazon}></img>
-            <img
-              src={gris}
-              className="card-users-img"
-              onClick={() => navigate("/profile/" + x.photographer._id)}
-            />
-            <h3 className="card-title">{x.title}</h3>
-            {x.pay ? <p className="card-price">{x.price} $</p> : null}
-            {x.pay ? null : (
-              <img
-                className="card-download"
-                onClick={() => download()}
-                src={descargar}
-              ></img>
-            )}
+          <div className="card_divVisible">
+            <div className={ x.price ? "card_visibleTop active" : "card_visibleTop"}>
+              <div className="card_divPrice">
+                {x.price ? <p className="card-price">{x.price} $</p> : null}
+              </div>
+              <div className="card_visibleTopRight">
+                <div className="card-divFavorites">
+                  <img className="card-favorite" src={corazon}></img>
+                </div>
+                <div className="card-divFavorites">
+                  <img className="card-guardar" src={guardar}></img>
+                </div>
+              </div>
+            </div>
+            <div className="card_visibleBottom">
+              <div className="card_visibleBottomProfile">
+                <img onClick={() => navigate("/profile/" + x.photographer._id)} src={x.photographer.avatar} className="card-users-img"/>
+                <h3 className="card-title" onClick={() => navigate("/profile/" + x.photographer._id)}>{`${x.photographer.name} ${x.photographer.lastName}`}</h3> 
+              </div>
+              {x.price ? <button onClick={() => dispatch(addItemToCart(x))}>Add to Cart</button>
+                : (
+                  <img
+                    className="card-download"
+                    onClick={() => download()}
+                    src={descargar}
+                  ></img>
+              )}
+              {/* <button className="card-delete" onClick={() => dispatch(deletePhoto(x._id))}>🗑️</button> */}
+            </div>
           </div>
         ) : null}
       </div>
