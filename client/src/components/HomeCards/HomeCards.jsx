@@ -73,7 +73,7 @@ export default function Home({ x }) {
                 </div>
               </div>
             </div>
-            <div className="card_visibleBottom">
+            <div  className="card_visibleBottom">
               <div className="card_visibleBottomProfile">
                 <img onClick={() => navigate("/profile/" + x.photographer._id)} src={x.photographer.avatar} className="card-users-img"/>
                 <h3 className="card-title" onClick={() => navigate("/profile/" + x.photographer._id)}>{`${x.photographer.name} ${x.photographer.lastName}`}</h3> 
