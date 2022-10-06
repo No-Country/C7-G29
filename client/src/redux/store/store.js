@@ -11,7 +11,7 @@ export default configureStore({
     photos,
     cart,
     user,
-    userLoged
+    userLoged,
     profile,
   },
 });

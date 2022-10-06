@@ -1,4 +1,5 @@
-import { insertDataAllPhotos, setFilter } from "../slices/photosSlice";
+import {   insertDataAllPhotos,   setFilter,   insertDetails} from "../slices/photosSlice";
+import { fillProfileData } from "../slices/profileSlice";
 import { getUserLoged } from "../slices/usersLogedSlice";
 
 export const getAllPhotosData = () => async (dispatch) => {
