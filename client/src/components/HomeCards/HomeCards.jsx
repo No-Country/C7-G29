@@ -88,7 +88,8 @@ export default function Home({ x }) {
       {x.pay ? (
         <button onClick={() => dispatch(addItemToCart(x))}>Add to Cart</button>
       ) : (
-        <button onClick={() => download()}>Click to download</button>
+        // <button onClick={() => download()}>Click to download</button> 
+        null
       )}
     </div> //agrege div este
   );
