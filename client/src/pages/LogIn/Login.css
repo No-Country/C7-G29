@@ -18,9 +18,13 @@
 
 .login-h1 {
     color: white;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
     font-size: 32px;
-    font-weight: normal;
-    font-family: 'Roboto', sans-serif;
+    line-height: 38px;
+    text-align: center;
+    letter-spacing: 0.04em;
 }
 
 .login-background-functional {

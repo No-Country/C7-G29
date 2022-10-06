@@ -12,7 +12,7 @@ export default function Navbar() {
 
     const currentUser = useSelector((state) => state.userLoged.currentUser)
 
-    console.log({currentUser})
+    // console.log({currentUser})
 
     return (
         <div>
