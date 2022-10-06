@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import Group from './../../assets/Group.png';
@@ -10,12 +10,18 @@ import './Navbar.css';
 
 export default function Navbar() {
 
+
     const currentUser = useSelector((state) => state.userLoged.currentUser)
 
-    // console.log({currentUser})
+    const [modalOpen, setModalOpen] = useState(false)
+
+    const handleOpen = () => {
+        setModalOpen(!modalOpen)
+    }
+
 
     return (
-        <div>
+        <div className='navbar_component'>
             <div className="navbar-general">
                 <Link to="/" className="navbar-container-img">
                     <img className="navbar-img" src={Group} />
@@ -25,14 +31,27 @@ export default function Navbar() {
                     <Link className="navbar-link" to="/publish">Subir</Link>
                     <Link className="navbar-link">Carrito</Link>
                     {/* <Link className="navbar-link"><img src={Notificaciones}/></Link> */}
-                    {currentUser 
+                    {currentUser.length > 1
                         ? 
                         <Link className="navbar-link" to="/users">Iniciar sesión</Link>
                         : 
-                        <div className='navbar_divAvatar'><img src={currentUser.avatar} alt="" /></div>
+                        <div onClick={handleOpen} className='navbar_divAvatar'><img src={currentUser.avatar} alt="" /></div>
                     }
                 </div>
             </div>
+            
+            {
+
+                modalOpen ? 
+                    <div className='navbar_menuModal'>
+                        <Link to={`/profile/${currentUser._id}`} className=''>ver perfil</Link>
+                        <span className=''>favoritos</span>
+                        <span className=''>cerrar sesion</span>
+                    </div>
+                    : null 
+
+            }
+
         </div>
   )
 }
