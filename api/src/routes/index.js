@@ -3,11 +3,9 @@ const users = require("./users");
 const publication = require("./publication");
 const challenge = require("./challenges");
 const authUser = require("./authUser");
-const {verifyToken} = require('../middlewares/auth.middleware')
+const { verifyToken } = require("../middlewares/auth.middleware");
 const mercadoPago = require("./mercadopago");
-const searchId = require('./searchId');
-
-const searchId = require("./searchId")
+const searchId = require("./searchId");
 
 const router = express.Router();
 
