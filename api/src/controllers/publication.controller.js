@@ -7,6 +7,7 @@ const allPublications = async (req, res) => {
       _id: 1,
       name: 1,
       lastName: 1,
+      avatar: 1,
     });
     if (photo.length === 0) {
       return res.status(201).send({ message: "No hay publicaciones creadas" });
