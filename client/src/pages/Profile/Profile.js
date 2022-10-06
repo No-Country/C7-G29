@@ -48,7 +48,7 @@ export default function Profile() {
         >
           Mi perfil
         </div>
-
+ 
         <div style={{ alignSelf: "center"}}>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <img
