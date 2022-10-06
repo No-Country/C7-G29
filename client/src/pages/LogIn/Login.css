@@ -234,3 +234,14 @@
     font-family: 'Roboto', sans-serif;
     margin-top: 110px;
 }
+
+.eyes-password {
+    color: black;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: -30px;
+    left: 280px;
+    padding: 0;
+    margin: 0;
+}

@@ -5,7 +5,6 @@ const challenge = require("./challenges");
 const authUser = require("./authUser");
 const searchId = require('./searchId');
 const {verifyToken} = require('../middlewares/auth.middleware')
-const searchId = require("./searchId");
 const mercadoPago = require("./mercadopago");
 
 const router = express.Router();
