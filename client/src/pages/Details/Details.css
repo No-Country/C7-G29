@@ -1,0 +1,109 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.detail-navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+.left-group{
+    display: flex;
+    align-items: center;    
+
+
+}
+
+.right-group{
+    display: flex;
+    align-items: center;
+}
+
+.avatar-img{
+    width: 50px;
+}
+
+.name-ph{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.main-img{
+    display: block;
+    margin: 0 auto;
+}
+
+.detail-description{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.use{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+}
+
+.title-group{
+    width: 450px;
+    
+    
+}
+
+.img-title{
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+}
+
+.img-ubication,
+.tags{
+    font-weight: 500;
+    font-size: 14px;
+    
+}
+
+.tags-group{
+    display: flex;
+}
+
+.img-tag{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    border-radius: 8px;
+    margin: 5px 10px 5px 0;
+    padding: 2px 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-detail-navbar,
+.btn-share,
+.btn-buy{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid black;
+    height: 30px;
+    font-size: 15px;
+    color: black;
+    margin: 0 15px;
+}
+
+.btn-buy{
+    background-color: #6C4494;
+    color: white;
+    border: none;
+}
+
+.btn-detail-navbar:hover{
+    cursor: pointer;
+} */
