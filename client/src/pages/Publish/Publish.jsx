@@ -6,6 +6,7 @@ import Upload from "../../assets/upload.svg";
 import Logo from "../../assets/logo-login.png";
 import "./Publish.css";
 import { uploadPhotoForm, uploadPhotoToCloudinary } from "../../redux/actions/photosActions";
+import Navbar from "../../components/Navbar/Navbar";
 
 export default function Publish() {
 	const [formData, setFormData] = useState({
@@ -74,21 +75,11 @@ export default function Publish() {
 		setFormData({ ...formData, price: { ...formData.price, price: e.target.value } });
 	}
 	return (
-		<>
-			<div className="navbar-general  background-navbar">
-				<div className="navbar-container-img">
-					<Link to="/">
-						<img className="navbar-img" src={Group} />
-					</Link>
-				</div>
-				<div className="navbar-container-link">
-					<Link className="navbar-link">Categorias</Link>
-					<Link className="navbar-link">Términos</Link>
-					<Link className="navbar-link" to="/users">
-						Iniciar sesión
-					</Link>
-				</div>
+		<>	
+			<div className="login-total">
+				<Navbar />
 			</div>
+
 			{!inputImage && (
 				<>
 					<h2 className="title-page">Subir Archivos</h2>
