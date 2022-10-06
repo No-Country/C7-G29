@@ -1,7 +1,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Publish from "./pages/Publish";
+import Publish from "./pages/Publish/Publish"
 import Cart from "./pages/Cart";
 import Register from "./pages/Register/Register";
 import { useEffect } from "react";
