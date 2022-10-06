@@ -29,6 +29,7 @@ export default function Profile() {
       <Navbar />
 
       <div
+        className="profile-general"
         style={{
           backgroundColor: "white",
           display: "flex",
@@ -47,8 +48,8 @@ export default function Profile() {
         >
           Mi perfil
         </div>
-
-        <div style={{ alignSelf: "center" }}>
+ 
+        <div style={{ alignSelf: "center"}}>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <img
               alt="user"
@@ -57,6 +58,8 @@ export default function Profile() {
                 width: "240px",
                 height: "240px",
                 borderRadius: "100%",
+                marginLeft: "10px",
+                marginTop: "10px",
               }}
             ></img>
             <div
@@ -67,9 +70,11 @@ export default function Profile() {
                 alignItems: "center",
                 padding: "10px",
                 gap: "10px",
+                marginRight: "30px",
+                marginTop: "30px",
 
-                width: "158px",
-                height: "45px",
+                width: "190px",
+                height: "43px",
 
                 background: "#FFFFFF",
 
@@ -82,8 +87,6 @@ export default function Profile() {
               <img src={editIcon} alt="edit"></img>
               <div
                 style={{
-                  width: "103px",
-                  height: "23px",
 
                   fontFamily: "Roboto",
                   fontStyle: "normal",
@@ -96,9 +99,6 @@ export default function Profile() {
 
                   /* Inside auto layout */
 
-                  flex: "none",
-                  order: "1",
-                  flexGrow: "0",
                 }}
               >
                 Editar Perfil
@@ -122,6 +122,7 @@ export default function Profile() {
                   fontWeight: "500",
                   fontSize: "36px",
                   lineHeight: "42px",
+                  marginLeft: "30px",
 
                   /* 2Fondo */
 
@@ -138,14 +139,13 @@ export default function Profile() {
                   fontSize: "16px",
                   lineHeight: "19px",
                   textAlign: "center",
-
                   width: "240px",
                   color: "#686868",
                 }}
               >
                 {details.userType === "userPhotographer" ? "Fotógrafo" : null}
               </div>
-              <div>Argentina, Buenos Aires, CABA.</div>
+              <div style={{marginLeft: "30px"}}>Argentina, Buenos Aires, CABA.</div>
             </div>
             <div
               style={{
@@ -162,6 +162,7 @@ export default function Profile() {
                   flexDirection: "column",
                   justifyContent: "center",
                   textAlign: "center",
+                  marginLeft: "40px",
                 }}
               >
                 <div
@@ -360,8 +361,9 @@ export default function Profile() {
                   justifyContent: "center",
                   alignItems: "center",
                   padding: "10px 20px",
+                  marginRight: "30px",
                   gap: "10px",
-                  width: "162px",
+                  width: "190px",
                   height: "43px",
 
                   background: "#6C4494",
