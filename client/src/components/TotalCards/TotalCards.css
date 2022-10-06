@@ -2,7 +2,8 @@
     columns: 4 288px;
     margin-top: 40px;
     margin-bottom: 100px;
-    margin-left: 200px;
-    margin-right: 200px;
-    column-gap: 0.5em;
+    column-gap: 30px;
+    padding: 20px;
+    max-width: 1293px;
+    margin: 0 auto;
 } 
