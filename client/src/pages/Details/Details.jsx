@@ -22,7 +22,7 @@ export default function Details() {
   const details = useSelector((state) => state.photos.photoDetails);
   const photographer = useSelector((state) => state.profile.userData);
   
-  // console.log('details', details)
+  console.log('details', details)
   console.log('photographer', photographer)
 
   useEffect(() => {
