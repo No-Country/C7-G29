@@ -16,13 +16,13 @@ export default function Navbar() {
     setModalOpen(!modalOpen);
   };
 
-  window.addEventListener("scroll", function() {
+  window.addEventListener("scroll", function () {
     if (document.documentElement.scrollTop > 500) {
-      document.querySelector(".navbar_component")?.classList.add("active")
+      document.querySelector(".navbar_component")?.classList.add("active");
     } else {
-      document.querySelector(".navbar_component")?.classList.remove("active")
+      document.querySelector(".navbar_component")?.classList.remove("active");
     }
-  })
+  });
 
   return (
     <div className="navbar_component">
@@ -35,7 +35,9 @@ export default function Navbar() {
           <Link className="navbar-link" to="/publish">
             Subir
           </Link>
-          <Link className="navbar-link">Carrito</Link>
+          <Link className="navbar-link" to="/cart">
+            Carrito
+          </Link>
           {/* <Link className="navbar-link"><img src={Notificaciones}/></Link> */}
           {currentUser.length > 1 ? (
             <Link className="navbar-link" to="/users">
