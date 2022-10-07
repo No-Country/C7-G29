@@ -16,6 +16,10 @@
     margin-bottom: 20px;
 }
 
+.login_divNav {
+    height: 108px;
+}
+
 .login-h1 {
     color: white;
     font-family: 'Roboto';
