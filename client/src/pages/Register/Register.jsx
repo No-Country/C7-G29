@@ -33,7 +33,9 @@ export default function Register() {
 
   return (
     <div className="register-total">
-      <Navbar />
+      <div className="register_div">
+        <Navbar />
+      </div>
       <div className="register-background">
         <div className="register-general-text">
           <h1 className="register-h1">

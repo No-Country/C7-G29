@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { userCurrentAction, logoutAction } from "../../redux/actions/photosActions";
 import { Link } from "react-router-dom";
 import Group from "./../../assets/Group.png";
 import "./Navbar.css";
@@ -8,7 +9,17 @@ import "./Navbar.css";
 // import Carrito from './../../assets/carrito.png';
 
 export default function Navbar() {
+
+  const dispatch = useDispatch()
+
+  const isLogged = useSelector((state) => state.authSlice.isLogged)
+
+  useEffect(() => {
+      dispatch(userCurrentAction())
+  }, [])
+  
   const currentUser = useSelector((state) => state.userLoged.currentUser);
+
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -16,7 +27,13 @@ export default function Navbar() {
     setModalOpen(!modalOpen);
   };
 
-  window.addEventListener("scroll", function () {
+
+  const handleLogout = () => {
+    dispatch(logoutAction())
+  }
+
+  window.addEventListener("scroll", function() {
+
     if (document.documentElement.scrollTop > 500) {
       document.querySelector(".navbar_component")?.classList.add("active");
     } else {
@@ -30,36 +47,41 @@ export default function Navbar() {
         <Link to="/" className="navbar-container-img">
           <img className="navbar-img" src={Group} alt="sadasd" />
         </Link>
+
         <div className="navbar-container-link">
-          {/* <Link className="navbar-link">Categorias</Link> */}
+          <Link className="navbar-link">Categorias</Link>
           <Link className="navbar-link" to="/publish">
             Subir
           </Link>
-          <Link className="navbar-link" to="/cart">
-            Carrito
-          </Link>
-          {/* <Link className="navbar-link"><img src={Notificaciones}/></Link> */}
-          {currentUser.length > 1 ? (
+
+          <Link to="/cart" className="navbar-link">Carrito</Link>
+
+          {currentUser.message ? 
+
             <Link className="navbar-link" to="/users">
               Iniciar sesión
             </Link>
-          ) : (
+           : 
             <div onClick={handleOpen} className="navbar_divAvatar">
               <img src={currentUser.avatar} alt="" />
             </div>
-          )}
-        </div>
-      </div>
+          }
 
-      {modalOpen ? (
-        <div className="navbar_menuModal">
-          <Link to={`/profile/${currentUser._id}`} className="">
-            ver perfil
-          </Link>
-          <span className="">favoritos</span>
-          <span className="">cerrar sesion</span>
+
         </div>
-      ) : null}
+
+          {modalOpen ? (
+            <div className="navbar_menuModal">
+              <Link to={`/profile/${currentUser._id}`} className="">
+                ver perfil
+              </Link>
+              <span className="navbar_logOut" onClick={handleLogout}>
+                cerrar sesion
+              </span>
+            </div>
+          ) : null}
+
+      </div>
     </div>
   );
 }

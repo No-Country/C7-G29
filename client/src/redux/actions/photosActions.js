@@ -72,8 +72,7 @@ export const deletePhoto = (id) => async (dispatch) => {
 };
 
 export const loginAction = (data) => async () => {
-  console.log({ data });
-  return fetch(`http://localhost:9000/api/auth/singUp`, {
+  return fetch(`http://localhost:9000/api/auth/singIn`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -85,6 +84,14 @@ export const loginAction = (data) => async () => {
     .then((response) => response.json())
     .then((d) => d)
     .catch((e) => e);
+};
+
+export const logoutAction = () => async () => {
+  return fetch(`http://localhost:9000/api/auth/logOut`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+  })
 };
 
 export const userCurrentAction = () => async (dispatch) => {
