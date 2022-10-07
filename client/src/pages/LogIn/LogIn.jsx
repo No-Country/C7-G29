@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import {
   loginAction,
-  // userCurrentAction,
 } from "../../redux/actions/photosActions";
 import "./Login.css";
 import LogoLogIn from "./../../assets/logo-login.png";
@@ -29,21 +28,22 @@ export default function LogIn() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
     try {
-      await dispatch(loginAction(loginForm));
-
-      // dispatch(userCurrentAction());
-
-      setLoginForm({
-        email: "",
-        password: "",
-      });
+      dispatch(loginAction(loginForm))
+        // .then(() => console.log("salio bien"))
     } catch (error) {
-      console.log(error);
+      console.log("error")
     }
+
+    setLoginForm({
+      email: "",
+      password: "",
+    });
   };
+
   const elementPassword = useRef(null);
 
   const yesPassword = (e) => {
@@ -57,7 +57,9 @@ export default function LogIn() {
 
   return (
     <div className="login-total">
-      <Navbar />
+      <div className="login_divNav">
+        <Navbar />
+      </div>
       <div className="login-background">
         <div className="login-general-text">
           <h1 className="login-h1">
