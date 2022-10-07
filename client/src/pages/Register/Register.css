@@ -7,6 +7,10 @@
     background-color: black;
 }
 
+.register_div {
+    height: 108px;
+}
+
 .register-general-text {
     display: flex;
     align-items: center;

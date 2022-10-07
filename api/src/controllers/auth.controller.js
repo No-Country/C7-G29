@@ -74,7 +74,12 @@ const singIn = async (req, res) => {
 }
 
 const logOut = async(req, res) => {
-  res.clearCookie('jwt')
+  const token = res.clearCookie('jwt')
+  if (!token) {
+    return res
+      .status(404)
+      .send("No hay token")
+  }
   return res
     .status(200)
     .send("adios")

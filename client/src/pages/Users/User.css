@@ -9,6 +9,11 @@
 .users-general {
     background-color: black;
 }
+
+.users_divNav {
+    height: 108px;
+}
+
 .users-h1 {
     color: white;
     font-size: 32px;

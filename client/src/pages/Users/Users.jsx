@@ -10,7 +10,9 @@ export default function Users() {
   return (
     <div>
       <div className="users-general">
-        <Navbar />
+        <div className="users_divNav">
+          <Navbar />
+        </div>
         <div className="users-general-text">
           <h1 className="users-h1">¿Qué quieres hacer hoy?</h1>
         </div>

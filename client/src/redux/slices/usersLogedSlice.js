@@ -9,7 +9,6 @@ const userLoged = createSlice({
   initialState,
   reducers: {
     getUserLoged: (state, {payload}) => {
-      console.log({payload})
       state.currentUser = payload;
     },
   }
