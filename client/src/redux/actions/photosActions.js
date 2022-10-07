@@ -125,3 +125,18 @@ export const buyItems = async (data) => {
     .then((d) => d)
     .catch((e) => e);
 };
+
+export const addFollowed = (idPh, _idCurrent) => async () => {  
+  console.log('idPh###', idPh)
+  console.log('_idCurrent###', _idCurrent)
+  return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      followed: idPh
+    }),
+  })
+    .then((response) => response.json())    
+    .then((d) => d)
+    .catch((e) => e);
+};

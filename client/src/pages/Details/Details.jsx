@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   getDetails,
   getProfileDetails,
+  userCurrentAction,
+  addFollowed
 } from "../../redux/actions/photosActions";
-import { cleanPhotos } from "../../redux/slices/photosSlice"; /*
-import Button from "@mui/material/Button";
-import Icon from "@mui/material/Icon";
-import { IconButton } from "@mui/material";*/
+import { cleanPhotos } from "../../redux/slices/photosSlice";
+//materialUI icons
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
@@ -16,36 +16,42 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 import "./Details.css";
 
 export default function Details() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  let navigate = useNavigate();
   const details = useSelector((state) => state.photos.photoDetails);
+  const imgRelated = useSelector((state) => state.photos.allPhotosData);
   const photographer = useSelector((state) => state.profile.userData);
+  const currentUser = useSelector((state) => state.userLoged.currentUser);
 
   // console.log('details', details)
-  console.log("photographer", photographer);
+  console.log("followed", currentUser.followed);
 
   useEffect(() => {
     dispatch(getDetails(id));
     dispatch(getProfileDetails(details.photographer));
+    dispatch(userCurrentAction())
     return () => dispatch(cleanPhotos());
   }, [dispatch, id, details.photographer]);
 
-  const handleFollow = () => {
-    console.log("ahora seguime estaaaa");
+  const handleFollow = () => {    
+    console.log('ADD FOLLOWED')
+    if(currentUser.followed.includes(details.photographer)){
+      alert('Ya estas siguiendo a este usuario')
+    }    
+    dispatch(addFollowed(details.photographer, currentUser._id))    
   };
-
-  const handleDonate = () => {
-    console.log("te dono USD 1.000.000");
-  };
-
+  
   const handleLike = () => {
     console.log("como te gusta el chori");
   };
-
+  
   const handleSave = () => {
     console.log("guardate estaaaaa");
   };
@@ -53,28 +59,38 @@ export default function Details() {
   const handleShare = () => {
     console.log("el q come y no convida tiene un sapo en la barriga");
   };
-
+  
   const handleBuy = () => {
     console.log("dame toda la $$$$ en fotos");
+  };
+  
+  const handlePrev = () => {
+    console.log("pa tras");
+  };
+
+  const handleNext = () => {
+    console.log("pa lante");
   };
 
   return (
     <div className="container-detail">
+      <p className="close-btn">X</p>
       <div className="detail-navbar">
         <div className="left-group">
           <img
             className="avatar-img"
             src={photographer.avatar}
             alt="avatar-profile"
+            onClick={() => navigate("/profile/" + details.photographer)}
           />
           <span className="name-ph">{`${photographer.name} ${photographer.lastName}`}</span>
           <button className="btn-detail-navbar" onClick={handleFollow}>
             <PersonAddAltOutlinedIcon fontSize="small" />
             Seguir
           </button>
-          <button className="btn-detail-navbar" onClick={handleDonate}>
+          {/* <button className="btn-detail-navbar" onClick={handleDonate}>
             Donar
-          </button>
+          </button> */}
         </div>
         <div className="right-group">
           <button className="btn-detail-navbar" onClick={handleLike}>
@@ -88,12 +104,27 @@ export default function Details() {
         </div>
       </div>
 
-      <img
-        className="main-img"
-        src={details.url}
-        alt="main-img"
-        width={"50%"}
-      />
+      <div className="central-group">
+        <ArrowBackIosNewIcon 
+          className="prev-next"
+          fontSize="large"
+          onClick={handlePrev}
+        />
+
+        <img
+          className="main-img"
+          src={details.url}
+          alt="main-img"
+          width={"50%"}
+        />
+
+        <ArrowForwardIosIcon 
+          className="prev-next"
+          fontSize="large"
+          onClick={handleNext}
+        />
+      </div>
+
 
       <div className="detail-description">
         <span className="use">Uso premium</span>
@@ -103,6 +134,7 @@ export default function Details() {
             <LocationOnOutlinedIcon fontSize="small" />
             Ubication: En el medio de la nada - Ningún lugar
           </p>
+
           <p className="tags">Etiquetas</p>
           <div className="tags-group">
             <p className="img-tag">
@@ -119,6 +151,7 @@ export default function Details() {
             </p>
           </div>
         </div>
+
         <button className="btn-share" onClick={handleShare}>
           <ReplyOutlinedIcon fontSize="small" />
           Compartir
@@ -128,6 +161,22 @@ export default function Details() {
           Comprar
         </button>
       </div>
+
+      <p className="title-related">Relacionado</p>
+      <div className="img-related-group">
+          {
+            imgRelated.map((el, i) =>(
+              <div key={i} className='img-related-container'>
+                <img 
+                  src={el.url} 
+                  alt="img-related" 
+                  className='img-related' 
+                  onClick={() => navigate("/details/" + el._id)}
+                />                
+              </div>
+            ))
+          }
+      </div>
     </div>
-  );
-}
+  )
+};
