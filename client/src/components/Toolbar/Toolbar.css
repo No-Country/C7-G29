@@ -1,7 +1,7 @@
 .toolbar-general {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     height: 43px;
     background-color: rgba(0, 0, 0, 0.55);
     margin-top: 160px;
@@ -14,4 +14,13 @@
     font-size: 20px;
     font-weight: normal;
     font-family: "Roboto";
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+@media (max-width: 1000px) {
+    .toolbar-link {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 }
