@@ -33,7 +33,9 @@ export default function Search() {
                 <div className="search-div-category">
                   <p className="search-div-category-p">Categorias</p>
                 </div>
-                <hr className="search-hr" />
+                <div className="search-hr-div">
+                  <hr className="search-hr"/>
+                </div>
                 <div className="search-card">
                   <div className="search-card-total">
                     <img
