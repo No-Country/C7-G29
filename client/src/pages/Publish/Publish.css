@@ -1,5 +1,8 @@
 .background-navbar {
-	background-color: black !important;
+	background-color: rgb(0, 0, 0) !important;
+}
+.login-total {
+	height: 108px;
 }
 .title-page {
 	background-color: rgba(0, 0, 0, 0.88);
