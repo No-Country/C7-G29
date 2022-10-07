@@ -27,17 +27,19 @@ export default function Navbar() {
     setModalOpen(!modalOpen);
   };
 
+
   const handleLogout = () => {
     dispatch(logoutAction())
   }
 
   window.addEventListener("scroll", function() {
+
     if (document.documentElement.scrollTop > 500) {
-      document.querySelector(".navbar_component")?.classList.add("active")
+      document.querySelector(".navbar_component")?.classList.add("active");
     } else {
-      document.querySelector(".navbar_component")?.classList.remove("active")
+      document.querySelector(".navbar_component")?.classList.remove("active");
     }
-  })
+  });
 
   return (
     <div className="navbar_component">
@@ -51,9 +53,11 @@ export default function Navbar() {
           <Link className="navbar-link" to="/publish">
             Subir
           </Link>
+
           <Link to="/cart" className="navbar-link">Carrito</Link>
 
           {currentUser.message ? 
+
             <Link className="navbar-link" to="/users">
               Iniciar sesión
             </Link>

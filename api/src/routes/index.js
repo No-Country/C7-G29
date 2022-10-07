@@ -9,7 +9,7 @@ const searchId = require("./searchId");
 
 const router = express.Router();
 
-router.use("/users" , users);
+router.use("/users", users);
 router.use("/publication", publication);
 router.use("/challenge", challenge);
 router.use("/auth", authUser);

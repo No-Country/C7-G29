@@ -1,7 +1,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Publish from "./pages/Publish/Publish"
+import Publish from "./pages/Publish/Publish";
 import Cart from "./pages/Cart";
 import Register from "./pages/Register/Register";
 import { useEffect } from "react";
@@ -11,6 +11,7 @@ import LogIn from "./pages/LogIn/LogIn";
 import Users from "./pages/Users/Users";
 import Details from "./pages/Details/Details";
 import Profile from "./pages/Profile/Profile";
+import PostBuy from "./pages/PostBuy/PostBuy";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/users" element={<Users />}></Route>
         <Route path="/details/:id" element={<Details />}></Route>
         <Route path="/profile/:id" element={<Profile />}></Route>
+        <Route path="/postBuy" element={<PostBuy />}></Route>
       </Routes>
     </div>
   );
