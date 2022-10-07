@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import {
   loginAction,
-  userCurrentAction,
+  // userCurrentAction,
 } from "../../redux/actions/photosActions";
 import "./Login.css";
 import LogoLogIn from "./../../assets/logo-login.png";
@@ -34,7 +34,7 @@ export default function LogIn() {
     try {
       await dispatch(loginAction(loginForm));
 
-      dispatch(userCurrentAction());
+      // dispatch(userCurrentAction());
 
       setLoginForm({
         email: "",
