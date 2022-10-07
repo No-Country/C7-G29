@@ -12,7 +12,7 @@
 
 .search-general-back {
     margin-top: 0;
-    padding-top: 0;
+    padding-top: 10px;
 }
 
 .search-container-input {
@@ -72,8 +72,9 @@
 .search-div {
     background-color: #ffffff;
     position: absolute;
-    top: 320px;
-    width: 620px;
+    margin-left: 9px;
+    top: 264px;
+    width: 610px;
     height: 280px;
     border-radius: 0 0 10px  10px;
     border: none;
@@ -96,6 +97,7 @@
 }
 
 .search-div-category-p {
+    padding-top: 10px;
     font-size: 16px;
     color: #6C4494;
     font-weight:  600;
@@ -104,7 +106,13 @@
 
 .search-hr {
     width: 90%;
+}
+
+.search-hr-div {
     margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .search-div-category {
@@ -121,6 +129,7 @@
 }
 
 .search-card-total {
+    padding-top: 30px;
     display: flex;
     flex-direction: row;
     background-color: transparent;
