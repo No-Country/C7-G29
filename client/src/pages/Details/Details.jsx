@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import {
   getDetails,
   getProfileDetails,
   userCurrentAction,
-  addFollowed
+  addFollowed,
+  addLiked,
+  addFavotites,
 } from "../../redux/actions/photosActions";
 import { cleanPhotos } from "../../redux/slices/photosSlice";
 //materialUI icons
@@ -24,57 +26,83 @@ import "./Details.css";
 export default function Details() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const location = useLocation();
   let navigate = useNavigate();
   const details = useSelector((state) => state.photos.photoDetails);
   const imgRelated = useSelector((state) => state.photos.allPhotosData);
   const photographer = useSelector((state) => state.profile.userData);
   const currentUser = useSelector((state) => state.userLoged.currentUser);
 
-  // console.log('details', details)
-  console.log("followed", currentUser.followed);
+// estados de cuenta usuario
+  const [liked, setLiked] = useState(false)
+  const [favorites, setFavorites] = useState(false)
+  const [followed, setFollowed] = useState(false)
+
+  const verifyState = () =>{
+    if(currentUser.liked?.includes(id)) setLiked(true)
+    if(currentUser.favorites?.includes(id)) setFavorites(true)
+    if(currentUser.followed?.includes(details.photographer)) setFollowed(true)
+  }
 
   useEffect(() => {
     dispatch(getDetails(id));
     dispatch(getProfileDetails(details.photographer));
     dispatch(userCurrentAction())
+    verifyState()
     return () => dispatch(cleanPhotos());
   }, [dispatch, id, details.photographer]);
+  
 
   const handleFollow = () => {    
     console.log('ADD FOLLOWED')
     if(currentUser.followed.includes(details.photographer)){
       alert('Ya estas siguiendo a este usuario')
-    }    
-    dispatch(addFollowed(details.photographer, currentUser._id))    
+      let aux = currentUser.followed.filter(el => el !== details.photographer)
+      return dispatch(addFollowed(aux, currentUser._id))          
+    }
+    dispatch(addFollowed([...currentUser.followed, ...[details.photographer]], currentUser._id))    
   };
   
   const handleLike = () => {
-    console.log("como te gusta el chori");
+    console.log('ADD LIKED')
+    if(currentUser.liked.includes(id)){      
+      let aux = currentUser.liked.filter(el => el !== id)      
+      return dispatch(addLiked(aux, currentUser._id))          
+    }
+    dispatch(addLiked([...currentUser.liked, ...[id]], currentUser._id)) 
   };
   
   const handleSave = () => {
-    console.log("guardate estaaaaa");
+    console.log('ADD Favorites')
+    if(currentUser.favorites.includes(id)){      
+      let aux = currentUser.favorites.filter(el => el !== id)
+      return dispatch(addFavotites(aux, currentUser._id))          
+    }
+    dispatch(addFavotites([...currentUser.favorites, ...[id]], currentUser._id))
   };
 
-  const handleShare = () => {
-    console.log("el q come y no convida tiene un sapo en la barriga");
+  const handleShare = () => {        
+    console.log(location.pathname)
+    alert(location.pathname)
   };
   
   const handleBuy = () => {
     console.log("dame toda la $$$$ en fotos");
   };
   
-  const handlePrev = () => {
-    console.log("pa tras");
+  const handlePrev = () => {    
+    const index = imgRelated.findIndex(el => el._id === id)
+    if(index > 0) navigate("/details/" + imgRelated[index-1]._id)
   };
 
   const handleNext = () => {
-    console.log("pa lante");
+    const index = imgRelated.findIndex(el => el._id === id)
+    if(index < imgRelated.length) navigate("/details/" + imgRelated[index+1]._id)
   };
 
   return (
     <div className="container-detail">
-      <p className="close-btn">X</p>
+      <p className="close-btn" onClick={()=>navigate('/')}>X</p>
       <div className="detail-navbar">
         <div className="left-group">
           <img
@@ -84,20 +112,26 @@ export default function Details() {
             onClick={() => navigate("/profile/" + details.photographer)}
           />
           <span className="name-ph">{`${photographer.name} ${photographer.lastName}`}</span>
-          <button className="btn-detail-navbar" onClick={handleFollow}>
+          <button 
+            className={followed !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} 
+            onClick={handleFollow}
+          >
             <PersonAddAltOutlinedIcon fontSize="small" />
             Seguir
           </button>
-          {/* <button className="btn-detail-navbar" onClick={handleDonate}>
-            Donar
-          </button> */}
         </div>
         <div className="right-group">
-          <button className="btn-detail-navbar" onClick={handleLike}>
+          <button 
+            className={liked !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} 
+            onClick={handleLike}
+          >
             <FavoriteBorderOutlinedIcon fontSize="small" />
             Me gusta
           </button>
-          <button className="btn-detail-navbar" onClick={handleSave}>
+          <button 
+            className={favorites !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} 
+            onClick={handleSave}
+          >
             <BookmarksOutlinedIcon fontSize="small" />
             Guardar
           </button>
@@ -114,8 +148,7 @@ export default function Details() {
         <img
           className="main-img"
           src={details.url}
-          alt="main-img"
-          width={"50%"}
+          alt="main-img"          
         />
 
         <ArrowForwardIosIcon 
