@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // ------ register ------
-const singIn = async (req, res) => {
+const singUp = async (req, res) => {
   try {
     const { avatar, name, lastName, email, password, userType } = req.body;
 
@@ -34,7 +34,7 @@ const singIn = async (req, res) => {
 };
 
 // ------ login ------
-const singUp = async (req, res) => {
+const singIn = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -73,5 +73,30 @@ const singUp = async (req, res) => {
 	return res.status(404).send('no funciono')
 }
 
+const logOut = async(req, res) => {
+  res.clearCookie('jwt')
+  return res
+    .status(200)
+    .send("adios")
+}
 
-module.exports = { singIn, singUp };
+const currentUser = async (req, res) => {
+  let token = req.cookies.jwt;
+
+  if (!token) return res.status(403).json({ message: "No se encontro un token en la cookie" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
+    const userLoged = await userSchema.findById(decoded.id);
+    if (userLoged) return res.status(200).json(userLoged);
+
+    if (!userLoged) return res.status(404).json({ message: "No se encontro al usuario" });
+
+  } catch (error) {
+    return res.status(401).json({ message: error });
+  }
+};
+
+
+module.exports = { singUp, singIn, logOut, currentUser };
