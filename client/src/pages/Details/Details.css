@@ -9,6 +9,14 @@
     position: absolute;
     top: 5px;
     left: 20px;
+    transition: .5s;
+}
+
+.close-btn:hover{
+    width: 20px;
+    cursor: pointer;
+    transform: scale(1.2);
+    color: blue;
 }
 
 .detail-navbar {
@@ -16,7 +24,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 25px 70px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 }
 
 .left-group {
@@ -48,6 +56,7 @@
 .main-img {
   display: block;
   margin: 0 auto;
+  max-height: 500px;
 }
 
 .central-group{
@@ -74,7 +83,7 @@
   justify-content: space-between;
   align-items: flex-start;
   margin: 25px 70px;
-  border: 1px solid violet;
+  /* border: 1px solid violet; */
 }
 
 .use {
@@ -87,7 +96,7 @@
 .title-group {
   width: 50%;
   
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
 
 .img-title {
@@ -130,7 +139,13 @@
   border-radius: 20px;
   font-size: 20px;  
   margin: 0 15px;
-  padding: 2px 10px;
+  padding: 2px 10px;  
+}
+
+.unfollowed{
+    background-color: green;
+    color: white;
+    border: 2px solid green;
 }
 
 .btn-buy {
@@ -149,8 +164,8 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-
-    border: 1px solid red;
+    margin: 0 10px;
+    /* border: 1px solid red; */
 }
 
 .title-related{
