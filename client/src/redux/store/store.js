@@ -4,6 +4,7 @@ import cart from "../slices/cartSlice";
 import user from "../slices/cartSlice";
 import userLoged from "../slices/usersLogedSlice";
 import profile from "../slices/profileSlice";
+import authSlice from "../slices/authSlice";
 
 
 export default configureStore({
@@ -11,6 +12,7 @@ export default configureStore({
     photos,
     cart,
     user,
+    authSlice,
     userLoged,
     profile,
   },
