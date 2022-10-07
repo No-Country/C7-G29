@@ -5,7 +5,7 @@ import "./HomeCards.css";
 
 import { useNavigate } from "react-router-dom";
 import corazon from "./../../assets/corazon.png";
-//import comprar from './../../assets/comprar.png';
+import comprar from './../../assets/comprar.png';
 import descargar from "./../../assets/descargar.png";
 import guardar from "./../../assets/guardar.png";
 
@@ -95,9 +95,9 @@ export default function Home({ x }) {
                 >{`${x.photographer.name} ${x.photographer.lastName}`}</h3>
               </div>
               {x.price ? (
-                <button onClick={() => dispatch(addItemToCart(x))}>
-                  Add to Cart
-                </button>
+                <div className="card_buttonCart" onClick={() => dispatch(addItemToCart(x))}>
+                  <img src={comprar} alt=""/>
+                </div>
               ) : (
                 <img
                   alt="relleno"
@@ -111,11 +111,6 @@ export default function Home({ x }) {
           </div>
         ) : null}
       </div>
-
-      {x.pay ? (
-        <button onClick={() => dispatch(addItemToCart(x))}>Add to Cart</button>
-      ) : // <button onClick={() => download()}>Click to download</button>
-      null}
     </div> //agrege div este
   );
 }

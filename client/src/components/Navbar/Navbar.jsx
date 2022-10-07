@@ -16,6 +16,14 @@ export default function Navbar() {
     setModalOpen(!modalOpen);
   };
 
+  window.addEventListener("scroll", function() {
+    if (document.documentElement.scrollTop > 500) {
+      document.querySelector(".navbar_component")?.classList.add("active")
+    } else {
+      document.querySelector(".navbar_component")?.classList.remove("active")
+    }
+  })
+
   return (
     <div className="navbar_component">
       <div className="navbar-general">
