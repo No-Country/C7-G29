@@ -5,18 +5,35 @@ import Publish from "./pages/Publish/Publish";
 import Cart from "./pages/Cart";
 import Register from "./pages/Register/Register";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { localStorageCart } from "./redux/slices/cartSlice";
 import LogIn from "./pages/LogIn/LogIn";
 import Users from "./pages/Users/Users";
 import Details from "./pages/Details/Details";
 import Profile from "./pages/Profile/Profile";
 import PostBuy from "./pages/PostBuy/PostBuy";
+import { userCurrentAction } from "./redux/actions/photosActions";
+import { logout, login } from "./redux/slices/authSlice";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(localStorageCart(JSON.parse(window.localStorage.getItem("cart"))));
   }, [dispatch]);
+
+  const isLogged = useSelector((state) => state.authSlice.isLogged);
+
+  useEffect(() => {
+    async function t() {
+      const a = await dispatch(userCurrentAction());
+      if (a.payload.message === "No token provided") {
+        dispatch(logout());
+      } else {
+        dispatch(login());
+      }
+    }
+    t();
+  }, [isLogged]);
 
   return (
     <div>

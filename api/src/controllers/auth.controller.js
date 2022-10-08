@@ -51,44 +51,43 @@ const singIn = async (req, res) => {
           expiresIn: 86400,
         });
 
-				const cookies = {
-					expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-					httpOnly: true,
-					// secure: true,
-					// sameSite: 'lax'
-				}
+        const cookies = {
+          expires: new Date(
+            Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+          ),
+          httpOnly: true,
+          // secure: true,
+          // sameSite: 'lax'
+        };
 
-				res.cookie('jwt', token, cookies)
+        res.cookie("jwt", token, cookies);
 
-				return res
-				.status(200)
-				.json({user: user.email, loged: "true"})			
-			}
-			return res.status(404).json({user: user.email, loged: "falseeeeee"})	
-		}
-		return res
-			.status(404)
-			.send('Usuario no encontrado, revisar email escrito o registrate')
-	}
-	return res.status(404).send('no funciono')
-}
-
-const logOut = async(req, res) => {
-  const token = res.clearCookie('jwt')
-  if (!token) {
+        return res.status(200).json({ user: user.email, loged: "true" });
+      }
+      return res.status(404).json({ user: user.email, loged: "falseeeeee" });
+    }
     return res
       .status(404)
-      .send("No hay token")
+      .send("Usuario no encontrado, revisar email escrito o registrate");
   }
-  return res
-    .status(200)
-    .send("adios")
-}
+  return res.status(404).send("no funciono");
+};
+
+const logOut = async (req, res) => {
+  const token = res.clearCookie("jwt");
+  if (!token) {
+    return res.status(404).send("No hay token");
+  }
+  return res.status(200).send("adios");
+};
 
 const currentUser = async (req, res) => {
   let token = req.cookies.jwt;
 
-  if (!token) return res.status(403).json({ message: "No se encontro un token en la cookie" });
+  if (!token)
+    return res
+      .status(403)
+      .json({ message: "No se encontro un token en la cookie" });
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
@@ -96,12 +95,11 @@ const currentUser = async (req, res) => {
     const userLoged = await userSchema.findById(decoded.id);
     if (userLoged) return res.status(200).json(userLoged);
 
-    if (!userLoged) return res.status(404).json({ message: "No se encontro al usuario" });
-
+    if (!userLoged)
+      return res.status(404).json({ message: "No se encontro al usuario" });
   } catch (error) {
     return res.status(401).json({ message: error });
   }
 };
-
 
 module.exports = { singUp, singIn, logOut, currentUser };

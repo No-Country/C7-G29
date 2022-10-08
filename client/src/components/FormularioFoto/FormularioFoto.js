@@ -10,12 +10,11 @@ export default function FormularioFoto({ x }) {
     description: { value: null },
     image: { value: null, loading: false },
     price: { pay: false, price: null },
-    ubication:{ value: null },
-    tags:{ value: null },
-    photographer:{ value: currentUser._id },
+    ubication: { value: null },
+    tags: { value: null },
+    photographer: { value: currentUser._id },
     error: null,
   });
-console.log('formData', currentUser)
   const [estado, setEstado] = useState({
     value: "not uploaded yet",
     status: false,
@@ -38,9 +37,9 @@ console.log('formData', currentUser)
         description: { value: null },
         image: { value: null, loading: false },
         price: { pay: false, price: null },
-        ubication:{ value: null },
-        tags:{ value: null },
-        photographer:{ value: null },
+        ubication: { value: null },
+        tags: { value: null },
+        photographer: { value: null },
       });
       setEstado({
         value: "Photo Uploaded Correctly",
@@ -83,17 +82,17 @@ console.log('formData', currentUser)
 
   const handleUbication = (e) => {
     setFormData({
-      ...formData,      
-      ubication: { value: e.target.value }
-    })
-  }
+      ...formData,
+      ubication: { value: e.target.value },
+    });
+  };
 
   const handleTags = (e) => {
     setFormData({
-      ...formData,      
-      tags: { value: e.target.value }
-    })
-  }
+      ...formData,
+      tags: { value: e.target.value },
+    });
+  };
 
   return estado.status ? (
     <div style={{ textAlign: "center", width: "100%" }}>{estado.value}</div>
@@ -108,7 +107,7 @@ console.log('formData', currentUser)
             id="formulario_title"
             placeholder="Nombre del archivo"
             onChange={(e) => handleTitle(e)}
-            name='title'
+            name="title"
             value={formData.title.value || ""}
           ></input>
 
@@ -118,7 +117,7 @@ console.log('formData', currentUser)
             id="formulario_ubication"
             placeholder="Ubicación: País - Provincia - Ciudad"
             onChange={(e) => handleUbication(e)}
-            name='ubication'
+            name="ubication"
             value={formData.ubication.value || ""}
           ></input>
 
@@ -128,7 +127,7 @@ console.log('formData', currentUser)
             className="input-tags"
             placeholder="Etiquetas: Playa / Bosque / Desierto / Noche / Día"
             value={formData.tags.value || ""}
-            name='tags'
+            name="tags"
             onChange={(e) => handleTags(e)}
           ></input>
 
@@ -138,7 +137,7 @@ console.log('formData', currentUser)
             className="input-description"
             placeholder="Descripcion"
             value={formData.description.value || ""}
-            name='description'
+            name="description"
             onChange={handleDescription}
           ></textarea>
 
