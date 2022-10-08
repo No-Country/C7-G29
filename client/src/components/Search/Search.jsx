@@ -1,22 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Search.css";
 import Lupa from "./../../assets/Lupa.png";
 import Gris from "./../../assets/gris.jpg";
 import Filter from "./../../assets/filter.png";
+import { getDataForFiltering } from "../../redux/actions/photosActions";
+import { useDispatch } from "react-redux";
 
 export default function Search() {
+  const dispatch = useDispatch();
   const [deploySearch, setDeploySearch] = useState(false);
 
   const inputDeploy = () => {
     setDeploySearch(!deploySearch);
   };
 
+  const [filter, setFilter] = useState({
+    priceRange: { min: null, max: null, pay: null },
+    ubication: null,
+    reto: null,
+    title: null,
+    caract: null,
+  });
+
+  function handleChange(e) {
+    setFilter({
+      ...filter,
+      title: e.target.value.length > 0 ? e.target.value : null,
+    });
+  }
+
+  useEffect(() => {
+    dispatch(getDataForFiltering(filter));
+  }, [filter, dispatch]);
+
   return (
     <div className="search-total">
       {deploySearch ? (
         <div className="search-container-input">
           <div className="search-general-back">
-            <input onClick={inputDeploy} type="text" className="search-input" />
+            <input
+              onClick={inputDeploy}
+              onChange={handleChange}
+              type="text"
+              className="search-input"
+            />
             <img src={Lupa} className="search-icon" alt="sadasd" />
             <button className="search-button">Buscar</button>
             <div className="search-container-p">
@@ -34,7 +61,7 @@ export default function Search() {
                   <p className="search-div-category-p">Categorias</p>
                 </div>
                 <div className="search-hr-div">
-                  <hr className="search-hr"/>
+                  <hr className="search-hr" />
                 </div>
                 <div className="search-card">
                   <div className="search-card-total">

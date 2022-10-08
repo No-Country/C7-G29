@@ -15,7 +15,7 @@ export default function Home() {
       setState(a);
     }
     t();
-  }, [cart]);
+  }, [cart, user._id]);
 
   const isLogged = useSelector((state) => state.authSlice.isLogged);
 
