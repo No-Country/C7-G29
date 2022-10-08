@@ -1,14 +1,13 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import {
-  loginAction,
-} from "../../redux/actions/photosActions";
+import { loginAction } from "../../redux/actions/photosActions";
 import "./Login.css";
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
+import { login } from "../../redux/slices/authSlice";
 
 export default function LogIn() {
   const [passwordYes, setPasswordYes] = useState(false);
@@ -28,14 +27,19 @@ export default function LogIn() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      dispatch(loginAction(loginForm))
-        // .then(() => console.log("salio bien"))
+      const a = await dispatch(loginAction(loginForm));
+      if (a.loged) {
+        dispatch(login());
+        console.log("logeado");
+      } else {
+        console.log("error");
+      }
     } catch (error) {
-      console.log("error")
+      console.log("error");
     }
 
     setLoginForm({

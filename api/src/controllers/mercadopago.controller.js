@@ -8,17 +8,23 @@ mercadopago.configure({
 const buy = async (req, res) => {
   const data = req.body;
   var buyMe = [];
-  data.forEach((element) => {
+  console.log(data.userId);
+  data.items.forEach((element) => {
     buyMe.push({
       title: element.title,
       unit_price: element.price,
       quantity: 1,
+      id: element._id,
     });
   });
-
   var preference = {
     items: buyMe,
     auto_return: "approved",
+    payer: {
+      name: data.userId,
+      surname: "Lopez",
+      email: "user@email.com",
+    },
     back_urls: {
       success: "http://localhost:3000/postBuy",
       pending: "http://localhost:3000/postBuy",
@@ -40,14 +46,9 @@ const buy = async (req, res) => {
 
 const checkPurchase = async (req, res) => {
   const { paymentid } = req.params;
-  console.log(
-    `https://api.mercadopago.com/v1/payments/${paymentid}/?access_token=${process.env.MP_ACCESS_TOKEN}`
-  );
   const a = await request(
     `https://api.mercadopago.com/v1/payments/${paymentid}/?access_token=${process.env.MP_ACCESS_TOKEN}`,
-    function (e, r, b) {
-      console.log(b);
-    }
+    function (e, r, b) {}
   );
 
   res.status(200).json("cambiame xD");
