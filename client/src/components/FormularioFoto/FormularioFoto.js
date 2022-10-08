@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { uploadPhotoForm } from "../../redux/actions/photosActions";
 import Upload from "../../assets/upload.svg";
 
 export default function FormularioFoto({ x }) {
+  const currentUser = useSelector((state) => state.userLoged.currentUser);
   const [formData, setFormData] = useState({
     title: { value: null },
     description: { value: null },
     image: { value: null, loading: false },
     price: { pay: false, price: null },
+    ubication:{ value: null },
+    tags:{ value: null },
+    photographer:{ value: currentUser._id },
     error: null,
   });
-
+console.log('formData', currentUser)
   const [estado, setEstado] = useState({
     value: "not uploaded yet",
     status: false,
@@ -33,6 +38,9 @@ export default function FormularioFoto({ x }) {
         description: { value: null },
         image: { value: null, loading: false },
         price: { pay: false, price: null },
+        ubication:{ value: null },
+        tags:{ value: null },
+        photographer:{ value: null },
       });
       setEstado({
         value: "Photo Uploaded Correctly",
@@ -73,6 +81,20 @@ export default function FormularioFoto({ x }) {
     });
   }
 
+  const handleUbication = (e) => {
+    setFormData({
+      ...formData,      
+      ubication: { value: e.target.value }
+    })
+  }
+
+  const handleTags = (e) => {
+    setFormData({
+      ...formData,      
+      tags: { value: e.target.value }
+    })
+  }
+
   return estado.status ? (
     <div style={{ textAlign: "center", width: "100%" }}>{estado.value}</div>
   ) : (
@@ -86,16 +108,40 @@ export default function FormularioFoto({ x }) {
             id="formulario_title"
             placeholder="Nombre del archivo"
             onChange={(e) => handleTitle(e)}
+            name='title'
             value={formData.title.value || ""}
           ></input>
+
+          <input
+            className="input-ubication"
+            required
+            id="formulario_ubication"
+            placeholder="Ubicación: País - Provincia - Ciudad"
+            onChange={(e) => handleUbication(e)}
+            name='ubication'
+            value={formData.ubication.value || ""}
+          ></input>
+
+          <input
+            id="formulario_tags"
+            required
+            className="input-tags"
+            placeholder="Etiquetas: Playa / Bosque / Desierto / Noche / Día"
+            value={formData.tags.value || ""}
+            name='tags'
+            onChange={(e) => handleTags(e)}
+          ></input>
+
           <textarea
             id="formulario_title"
             required
             className="input-description"
             placeholder="Descripcion"
             value={formData.description.value || ""}
+            name='description'
             onChange={handleDescription}
           ></textarea>
+
           <div className="prices-category">
             <label>
               <input
@@ -123,6 +169,7 @@ export default function FormularioFoto({ x }) {
             className="input-price"
             placeholder="Fijar precio"
             value={formData.price.price || ""}
+            name="price"
             onChange={(e) => handlePriceValue(e)}
           ></input>
           <button className="input-submit" type="submit">

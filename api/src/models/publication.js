@@ -4,6 +4,12 @@ const publicationSchema = mongoose.Schema({
     title: {
       type: String,
     },
+    ubication: {
+      type: String,
+    },
+    tags: {
+      type: String,
+    },
     description: {
       type: String,
     },
