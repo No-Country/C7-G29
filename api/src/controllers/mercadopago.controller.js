@@ -4,7 +4,6 @@ var request = require("request");
 mercadopago.configure({
   access_token: process.env.MP_ACCESS_TOKEN,
 });
-const shoppingSchema = require('../models/shopping')
 
 const buy = async (req, res) => {
   const data = req.body;
@@ -15,7 +14,6 @@ const buy = async (req, res) => {
       title: element.title,
       unit_price: element.price,
       quantity: 1,
-      picture_url: element.url,
       id: element._id,
     });
   });
@@ -50,25 +48,10 @@ const checkPurchase = async (req, res) => {
   const { paymentid } = req.params;
   const a = await request(
     `https://api.mercadopago.com/v1/payments/${paymentid}/?access_token=${process.env.MP_ACCESS_TOKEN}`,
-    async function (e, r, b) {
-      
-      const boleta = await shoppingSchema({
-        boleta: b,
-        // photo_id,
-        // photo_url,
-        // photo_price,
-        // buyer_id,
-        // payment_status,
-        // date_approved,
-        // payment_method
-      })
-      await boleta.save()
-    }
+    function (e, r, b) {}
   );
 
-  const comprobante = await shoppingSchema.find()
-
-  res.status(200).json(comprobante);
+  res.status(200).json("cambiame xD");
 };
 
 module.exports = {
