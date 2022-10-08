@@ -6,10 +6,12 @@ import {
   getProfileDetails,
   userCurrentAction,
   addFollowed,
+  addFollowers,
   addLiked,
   addFavotites,
 } from "../../redux/actions/photosActions";
 import { cleanPhotos } from "../../redux/slices/photosSlice";
+import { addItemToCart } from "../../redux/slices/cartSlice";
 //materialUI icons
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
@@ -57,10 +59,13 @@ export default function Details() {
     console.log('ADD FOLLOWED')
     if(currentUser.followed.includes(details.photographer)){
       alert('Ya estas siguiendo a este usuario')
-      let aux = currentUser.followed.filter(el => el !== details.photographer)
-      return dispatch(addFollowed(aux, currentUser._id))          
+      let unFollowed = currentUser.followed.filter(el => el !== details.photographer)
+      let unFollowers = photographer.followers.filter(el => el !== currentUser._id)
+      dispatch(addFollowed(unFollowed, currentUser._id))
+      return dispatch(addFollowers(unFollowers, photographer._id))    
     }
-    dispatch(addFollowed([...currentUser.followed, ...[details.photographer]], currentUser._id))    
+    dispatch(addFollowed([...currentUser.followed, ...[details.photographer]], currentUser._id))
+    dispatch(addFollowers([...photographer.followers, ...[currentUser._id]], details.photographer))
   };
   
   const handleLike = () => {
@@ -88,6 +93,7 @@ export default function Details() {
   
   const handleBuy = () => {
     console.log("dame toda la $$$$ en fotos");
+    dispatch(addItemToCart(details))
   };
   
   const handlePrev = () => {    
@@ -189,8 +195,12 @@ export default function Details() {
           <ReplyOutlinedIcon fontSize="small" />
           Compartir
         </button>
-        <button className="btn-buy" onClick={handleBuy}>
-          <ShoppingCartOutlinedIcon fontSize="small" />
+        <button 
+          className={details.price === undefined ? "btn-buy disable": "btn-buy"}          
+          disabled={details.price === undefined}
+          onClick={handleBuy}>
+          <ShoppingCartOutlinedIcon fontSize="small" 
+        />
           Comprar
         </button>
       </div>
