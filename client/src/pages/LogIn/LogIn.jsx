@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../redux/actions/photosActions";
 import "./Login.css";
@@ -8,11 +8,24 @@ import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
 import { login } from "../../redux/slices/authSlice";
+import FacebookLogin from "react-facebook-login";
+import { GoogleLogin } from "react-google-login";
+import { gapi } from "gapi-script";
 
 export default function LogIn() {
   const [passwordYes, setPasswordYes] = useState(false);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_GOOGLE_ID,
+        scope: "email",
+      });
+    };
+    gapi.load("client:auth2", initClient);
+  });
 
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -34,13 +47,10 @@ export default function LogIn() {
       const a = await dispatch(loginAction(loginForm));
       if (a.loged) {
         dispatch(login());
-        console.log("logeado");
       } else {
-        console.log("error");
+        //aca va el alert de que algun dato que pusiste esta mal
       }
-    } catch (error) {
-      console.log("error");
-    }
+    } catch (error) {}
 
     setLoginForm({
       email: "",
@@ -58,6 +68,15 @@ export default function LogIn() {
       elementPassword.current.type = "text";
     }
   };
+
+  function responseGoogle(a) {
+    console.log(a);
+  }
+  function responseFacebook(a) {
+    console.log(a);
+  }
+
+  function componentClicked() {}
 
   return (
     <div className="login-total">
@@ -120,8 +139,22 @@ export default function LogIn() {
           </div>
           <button className="login-login">Iniciar sessión</button>
           <p className="login-o">o</p>
-          <button className="login-google">Continuar con Google</button>
-          <button className="login-fb">Continuar con Facebook</button>
+          <div style={{ width: "300px", alignSelf: "center" }}>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_ID}
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
+          </div>
+          <FacebookLogin
+            appId={process.env.REACT_APP_FACEBOOK_ID}
+            autoLoad={false}
+            fields="name,email,picture"
+            onClick={componentClicked}
+            callback={responseFacebook}
+          />
           <p className="login-help-password">¿Te olvidaste la contraseña?</p>
           <p className="login-help">¿Necesitas ayuda?</p>
         </form>

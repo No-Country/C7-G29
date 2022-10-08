@@ -57,9 +57,7 @@ export default function FilterCards() {
 
   function handleUbication(e) {}
 
-  function handleReto(e) {
-    console.log(e.target.id);
-  }
+  function handleReto(e) {}
 
   function handleTitle(e) {
     setFilter({

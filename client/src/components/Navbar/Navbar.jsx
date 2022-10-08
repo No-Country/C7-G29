@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  userCurrentAction,
-  logoutAction,
-} from "../../redux/actions/photosActions";
+import { logoutAction } from "../../redux/actions/photosActions";
 import { Link } from "react-router-dom";
 import Group from "./../../assets/Group.png";
 import "./Navbar.css";
@@ -16,18 +13,6 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const isLogged = useSelector((state) => state.authSlice.isLogged);
-  console.log(isLogged);
-  useEffect(() => {
-    async function t() {
-      const a = await dispatch(userCurrentAction());
-      if (a.payload.message === "No token provided") {
-        dispatch(logout());
-      } else {
-        dispatch(login());
-      }
-    }
-    t();
-  }, [isLogged]);
 
   const currentUser = useSelector((state) => state.userLoged.currentUser);
   const [modalOpen, setModalOpen] = useState(false);
