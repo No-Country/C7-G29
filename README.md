@@ -55,7 +55,7 @@ $ npm start
 
 - [Emanuel Juri](https://www.linkedin.com/in/emanuel-juri/) : Back End 
 - [Joe Vega]() : Back End 
-- [Angel Villalba](https://www.linkedin.com/in/angelvillalba/) : Back End 
+- [Angel Villalba](https://www.linkedin.com/in/angelvillalba/) : Full Stack
 
 
 
