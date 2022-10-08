@@ -29,7 +29,9 @@ export const uploadPhotoForm = (data) => async () => {
       url: data.image.value,
       price: data.price.price,
       pay: data.price.pay,
-      photographer: "6337263cc2cbac1f2c2a09f5",
+      photographer: data.photographer.value,
+      ubication: data.ubication.value,
+      tags: data.tags.value,
     }),
   })
     .then((response) => response.json())

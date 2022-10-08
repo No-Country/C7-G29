@@ -34,7 +34,8 @@ export default function Details() {
   const imgRelated = useSelector((state) => state.photos.allPhotosData);
   const photographer = useSelector((state) => state.profile.userData);
   const currentUser = useSelector((state) => state.userLoged.currentUser);
-
+  const tags = useSelector((state) => state.photos.photoDetails.tags)?.split(',');
+  
 // estados de cuenta usuario
   const [liked, setLiked] = useState(false)
   const [favorites, setFavorites] = useState(false)
@@ -171,23 +172,37 @@ export default function Details() {
           <p className="img-title">{details.title}</p>
           <p className="img-ubication">
             <LocationOnOutlinedIcon fontSize="small" />
-            Ubication: En el medio de la nada - Ningún lugar
+            Ubication: {details.ubication || 'En el medio de la nada - Ningún lugar'}
           </p>
 
           <p className="tags">Etiquetas</p>
           <div className="tags-group">
-            <p className="img-tag">
-              <LocalOfferOutlinedIcon fontSize="small" />
-              Bosque
-            </p>
-            <p className="img-tag">
-              <LocalOfferOutlinedIcon fontSize="small" />
-              Playa
-            </p>
-            <p className="img-tag">
-              <LocalOfferOutlinedIcon fontSize="small" />
-              Montaña
-            </p>
+            {tags?
+              tags?.map((el, i) => (
+                <div key={i}>
+                  <p className="img-tag">
+                    <LocalOfferOutlinedIcon fontSize="small" />
+                    {el.trim()}
+                  </p>
+                </div>
+              ))
+              :
+               <>
+                  <p className="img-tag">
+                    <LocalOfferOutlinedIcon fontSize="small" />
+                    Bosque
+                  </p>
+                  <p className="img-tag">
+                    <LocalOfferOutlinedIcon fontSize="small" />
+                    Playa
+                  </p>
+                  <p className="img-tag">
+                    <LocalOfferOutlinedIcon fontSize="small" />
+                    Montaña
+                  </p>
+               </>
+            }
+            
           </div>
         </div>
 

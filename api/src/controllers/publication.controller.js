@@ -22,6 +22,8 @@ const newPublication = async (req, res) => {
   try {
     const {
       title,
+      ubication,
+      tags,
       description,
       url,
       likes,
@@ -36,6 +38,8 @@ const newPublication = async (req, res) => {
 
     const photo = await publication({
       title,
+      ubication,
+      tags,
       description,
       url,
       likes,
