@@ -2,21 +2,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { cleanCart, cleanItem } from "../redux/slices/cartSlice";
 import { buyItems } from "../redux/actions/photosActions";
 import { useEffect, useState } from "react";
+import NavBar from "../components/Navbar/Navbar";
 export default function Home() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cartItems);
+  const user = useSelector((state) => state.userLoged.currentUser);
   const [state, setState] = useState("");
   useEffect(() => {
     async function t() {
-      const a = await buyItems(cart);
+      const a = await buyItems({ items: cart, userId: user._id });
       setState(a);
     }
     t();
   }, [cart]);
-  console.log(state);
 
   return (
     <div>
+      <NavBar />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       {cart.length > 0
         ? cart.map((x) => (
             <div key={x._id}>

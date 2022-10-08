@@ -93,7 +93,7 @@ export const logoutAction = () => async () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
-  })
+  });
 };
 
 export const userCurrentAction = () => async (dispatch) => {
@@ -103,6 +103,7 @@ export const userCurrentAction = () => async (dispatch) => {
   })
     .then((response) => response.json())
     .then((d) => dispatch(getUserLoged(d)))
+    .then((d) => d)
     .catch((e) => e);
 };
 
@@ -135,56 +136,56 @@ export const buyItems = async (data) => {
     .catch((e) => e);
 };
 
-export const addFollowed = (idPh, _idCurrent) => async () => {  
+export const addFollowed = (idPh, _idCurrent) => async () => {
   return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      followed: idPh      
+      followed: idPh,
     }),
   })
-    .then((response) => response.json())    
+    .then((response) => response.json())
     .then((d) => d)
     .catch((e) => e);
 };
 
-export const addFollowers = (followers, idPh) => async () => {  
-  console.log('###ACTION-followers', followers)
-  console.log('###ACTION-idPh', idPh)
+export const addFollowers = (followers, idPh) => async () => {
+  console.log("###ACTION-followers", followers);
+  console.log("###ACTION-idPh", idPh);
   return fetch(`http://localhost:9000/api/users/${idPh}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      followers: followers      
+      followers: followers,
     }),
   })
-    .then((response) => response.json())    
+    .then((response) => response.json())
     .then((d) => d)
     .catch((e) => e);
 };
 
-export const addLiked = (id, _idCurrent) => async () => {  
+export const addLiked = (id, _idCurrent) => async () => {
   return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      liked: id      
+      liked: id,
     }),
   })
-    .then((response) => response.json())    
+    .then((response) => response.json())
     .then((d) => d)
     .catch((e) => e);
 };
 
-export const addFavotites = (id, _idCurrent) => async () => {  
+export const addFavotites = (id, _idCurrent) => async () => {
   return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      favorites: id      
+      favorites: id,
     }),
   })
-    .then((response) => response.json())    
+    .then((response) => response.json())
     .then((d) => d)
     .catch((e) => e);
 };
