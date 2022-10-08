@@ -50,22 +50,12 @@ export default function Navbar() {
           <Link to="/cart" className="navbar-link">
             Carrito
           </Link>
-
-          {/*currentUser.length > 0 ? (
-            <div onClick={handleOpen} className="navbar_divAvatar">
-              <img src={currentUser.avatar} alt="" />
-            </div>
-          ) : (
-            <Link className="navbar-link" to="/users">
-              Iniciar sesión
-            </Link>
-          )*/}
           {isLogged ? (
             <div onClick={handleOpen} className="navbar_divAvatar">
               <img src={currentUser.avatar} alt="" />
             </div>
           ) : (
-            <Link className="navbar-link" to="/users">
+            <Link className="navbar-link" to="/login">
               Iniciar sesión
             </Link>
           )}

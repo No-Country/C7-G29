@@ -35,18 +35,31 @@ function App() {
     t();
   }, [isLogged]);
 
+  {
+    console.log(isLogged);
+  }
+
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/publish" element={<Publish />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/login" element={<LogIn />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/users" element={<Users />}></Route>
         <Route path="/details/:id" element={<Details />}></Route>
         <Route path="/profile/:id" element={<Profile />}></Route>
-        <Route path="/postBuy" element={<PostBuy />}></Route>
+
+        {isLogged ? (
+          <>
+            <Route path="/publish" element={<Publish />}></Route>
+            <Route path="/postBuy" element={<PostBuy />}></Route>
+          </>
+        ) : (
+          <>
+            <Route path="/login" element={<LogIn />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+            <Route path="/publish" element={<LogIn />}></Route>
+          </>
+        )}
+        <Route path="*" element={<Home />}></Route>
       </Routes>
     </div>
   );
