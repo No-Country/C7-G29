@@ -1,5 +1,9 @@
 <h1 align="center">DarkRoom</h1>
 
+En el mundo de la fotografía, no es facil conseguir trabajo, ni mucho menos conseguir que valoren tu trabajo.
+Por eso nace Darkroom, la web que busca el crecimiento de emprendedores, fotógrafos, personas con proyectos personales o empresas que buscan imágenes inéditas y únicas.
+De forma legal, única y rápida. Podes comprar, vender, y descargar.
+
 ## Contenido
  - [Features](#features)
  - [Tecnologias](#tecnologias)
