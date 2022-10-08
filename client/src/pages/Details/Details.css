@@ -155,7 +155,13 @@
   padding: 3px 10px;
 }
 
-.btn-detail-navbar:hover {
+.btn-buy.disable{
+  background-color: rgba(108, 68, 148, 0.3);;
+}
+
+.btn-detail-navbar:hover,
+.btn-buy:hover,
+.btn-share:hover {
   cursor: pointer;
 }
 

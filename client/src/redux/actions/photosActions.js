@@ -146,6 +146,21 @@ export const addFollowed = (idPh, _idCurrent) => async () => {
     .catch((e) => e);
 };
 
+export const addFollowers = (followers, idPh) => async () => {  
+  console.log('###ACTION-followers', followers)
+  console.log('###ACTION-idPh', idPh)
+  return fetch(`http://localhost:9000/api/users/${idPh}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      followers: followers      
+    }),
+  })
+    .then((response) => response.json())    
+    .then((d) => d)
+    .catch((e) => e);
+};
+
 export const addLiked = (id, _idCurrent) => async () => {  
   return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
     method: "PUT",
