@@ -13,6 +13,7 @@ const photosSlice = createSlice({
   initialState,
   reducers: {
     insertDataAllPhotos: (state, { payload }) => {
+      payload.reverse();
       state.allPhotosData = payload;
       state.filterPhotosData = payload;
     },
@@ -32,8 +33,10 @@ const photosSlice = createSlice({
         );
 
       if (payload.title)
-        newArray = newArray.filter((x) =>
-          x.title.toLowerCase().includes(payload.title.toLowerCase())
+        newArray = newArray.filter(
+          (x) =>
+            x.title.toLowerCase().includes(payload.title.toLowerCase()) ||
+            x.tags.toLowerCase().includes(payload.title.toLowerCase())
         );
 
       state.filterPhotosData = newArray;

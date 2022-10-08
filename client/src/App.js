@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { localStorageCart } from "./redux/slices/cartSlice";
 import LogIn from "./pages/LogIn/LogIn";
-import Users from "./pages/Users/Users";
 import Details from "./pages/Details/Details";
 import Profile from "./pages/Profile/Profile";
 import PostBuy from "./pages/PostBuy/PostBuy";
@@ -33,11 +32,7 @@ function App() {
       }
     }
     t();
-  }, [isLogged]);
-
-  {
-    console.log(isLogged);
-  }
+  }, [isLogged, dispatch]);
 
   return (
     <div>
