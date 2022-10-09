@@ -403,7 +403,18 @@ export default function Profile() {
               details.publications.length > 0 ? (
                 <div className="galery-container">
                   {details.publications.map((x) => (
-                    <HomeCards x={x} key={x._id} />
+                    <HomeCards
+                      x={{
+                        ...x,
+                        photographer: {
+                          _id: details._id,
+                          avatar: details.avatar,
+                          name: details.name,
+                          lastName: details.lastName,
+                        },
+                      }}
+                      key={x._id}
+                    />
                   ))}
                 </div>
               ) : (
