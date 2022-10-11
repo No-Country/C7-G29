@@ -7,7 +7,7 @@ import { fillProfileData } from "../slices/profileSlice";
 import { getUserLoged } from "../slices/usersLogedSlice";
 
 export const getAllPhotosData = () => async (dispatch) => {
-  return await fetch(`http://localhost:9000/api/publication`, {
+  return await fetch(`http://192.168.1.67:9000/api/publication`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -20,7 +20,7 @@ export const getDataForFiltering = (filterData) => async (dispatch) => {
 };
 
 export const uploadPhotoForm = (data) => async () => {
-  return fetch(`http://localhost:9000/api/publication`, {
+  return fetch(`http://192.168.1.67:9000/api/publication`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -59,11 +59,11 @@ export const uploadPhotoToCloudinary = (e) => async () => {
 };
 
 export const deletePhoto = (id) => async (dispatch) => {
-  return await fetch(`http://localhost:9000/api/publication/${id}`, {
+  return await fetch(`http://192.168.1.67:9000/api/publication/${id}`, {
     method: "DELETE",
   })
     .then(async (d) => {
-      return await fetch(`http://localhost:9000/api/publication`, {
+      return await fetch(`http://192.168.1.67:9000/api/publication`, {
         method: "GET",
       })
         .then((responsea) => responsea.json())
@@ -74,7 +74,7 @@ export const deletePhoto = (id) => async (dispatch) => {
 };
 
 export const loginAction = (data) => async () => {
-  return fetch(`http://localhost:9000/api/auth/singIn`, {
+  return fetch(`http://192.168.1.67:9000/api/auth/singIn`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -89,7 +89,7 @@ export const loginAction = (data) => async () => {
 };
 
 export const logoutAction = () => async () => {
-  return fetch(`http://localhost:9000/api/auth/logOut`, {
+  return fetch(`http://192.168.1.67:9000/api/auth/logOut`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -97,7 +97,7 @@ export const logoutAction = () => async () => {
 };
 
 export const userCurrentAction = () => async (dispatch) => {
-  return await fetch(`http://localhost:9000/api/auth/loged`, {
+  return await fetch(`http://192.168.1.67:9000/api/auth/loged`, {
     method: "GET",
     credentials: "include",
   })
@@ -108,7 +108,7 @@ export const userCurrentAction = () => async (dispatch) => {
 };
 
 export const getDetails = (id) => async (dispatch) => {
-  return fetch(`http://localhost:9000/api/searchId/publicationForId/${id}`, {
+  return fetch(`http://192.168.1.67:9000/api/searchId/publicationForId/${id}`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -117,7 +117,7 @@ export const getDetails = (id) => async (dispatch) => {
 };
 
 export const getProfileDetails = (id) => async (dispatch) => {
-  return fetch(`http://localhost:9000/api/searchId/userForId/${id}`, {
+  return fetch(`http://192.168.1.67:9000/api/searchId/userForId/${id}`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -126,7 +126,7 @@ export const getProfileDetails = (id) => async (dispatch) => {
 };
 
 export const buyItems = async (data) => {
-  return fetch(`http://localhost:9000/api/mercadopago/buy`, {
+  return fetch(`http://192.168.1.67:9000/api/mercadopago/buy`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -137,7 +137,7 @@ export const buyItems = async (data) => {
 };
 
 export const addFollowed = (idPh, _idCurrent) => async () => {
-  return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
+  return fetch(`http://192.168.1.67:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -152,7 +152,7 @@ export const addFollowed = (idPh, _idCurrent) => async () => {
 export const addFollowers = (followers, idPh) => async () => {
   console.log("###ACTION-followers", followers);
   console.log("###ACTION-idPh", idPh);
-  return fetch(`http://localhost:9000/api/users/${idPh}`, {
+  return fetch(`http://192.168.1.67:9000/api/users/${idPh}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -165,7 +165,7 @@ export const addFollowers = (followers, idPh) => async () => {
 };
 
 export const addLiked = (id, _idCurrent) => async () => {
-  return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
+  return fetch(`http://192.168.1.67:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -178,7 +178,7 @@ export const addLiked = (id, _idCurrent) => async () => {
 };
 
 export const addFavotites = (id, _idCurrent) => async () => {
-  return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
+  return fetch(`http://192.168.1.67:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

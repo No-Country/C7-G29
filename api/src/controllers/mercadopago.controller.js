@@ -8,7 +8,7 @@ mercadopago.configure({
 const buy = async (req, res) => {
   const data = req.body;
   var buyMe = [];
-  console.log(data.userId);
+  console.log(data);
   data.items.forEach((element) => {
     buyMe.push({
       title: element.title,

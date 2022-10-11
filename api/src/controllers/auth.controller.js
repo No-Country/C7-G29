@@ -62,7 +62,9 @@ const singIn = async (req, res) => {
 
         res.cookie("jwt", token, cookies);
 
-        return res.status(200).json({ user: user.email, loged: "true" });
+        return res
+          .status(200)
+          .json({ user: user.email, loged: "true", jwt: token });
       }
       return res.status(404).json({ user: user.email, loged: "falseeeeee" });
     }
@@ -82,7 +84,7 @@ const logOut = async (req, res) => {
 };
 
 const currentUser = async (req, res) => {
-  let token = req.cookies.jwt;
+  let token = req.cookies.jwt || req.headers.authentication;
 
   if (!token)
     return res
