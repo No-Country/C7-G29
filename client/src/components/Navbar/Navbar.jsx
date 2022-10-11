@@ -50,6 +50,9 @@ export default function Navbar() {
           <Link to="/cart" className="navbar-link">
             Carrito
           </Link>
+
+
+
           {isLogged ? (
             <div onClick={handleOpen} className="navbar_divAvatar">
               <img src={currentUser.avatar} alt="" />
@@ -59,6 +62,8 @@ export default function Navbar() {
               Iniciar sesión
             </Link>
           )}
+
+          
         </div>
 
         {modalOpen ? (
