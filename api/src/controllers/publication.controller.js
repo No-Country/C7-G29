@@ -1,5 +1,5 @@
 const publication = require("../models/publication");
-const users = require("../models/users")
+const users = require("../models/users");
 
 const allPublications = async (req, res) => {
   try {
@@ -33,6 +33,8 @@ const newPublication = async (req, res) => {
       photographer,
       challenge,
     } = req.body;
+
+    console.log(tags);
 
     const userPhoto = await users.findById(photographer);
 

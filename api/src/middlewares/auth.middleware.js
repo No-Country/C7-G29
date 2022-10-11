@@ -2,7 +2,7 @@ const User = require("../models/users");
 const jwt = require("jsonwebtoken");
 
 const verifyToken = async (req, res, next) => {
-  let token = req.cookies.jwt;
+  let token = req.cookies.jwt || req.headers.authentication;
 
   if (!token) return res.status(403).json({ message: "No token provided" });
 
@@ -20,4 +20,4 @@ const verifyToken = async (req, res, next) => {
   }
 };
 
-module.exports = {verifyToken}
+module.exports = { verifyToken };
