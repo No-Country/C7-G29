@@ -1,9 +1,15 @@
-.background-navbar {
-	background-color: rgb(0, 0, 0) !important;
-}
 .login-total {
 	height: 108px;
 }
+
+.container-input-file {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #6c4494;
+	color: white;
+}
+
 .title-page {
 	background-color: rgba(0, 0, 0, 0.88);
 	text-align: center;
@@ -18,6 +24,7 @@
 	display: block;
 	height: 50px;
 }
+
 .upload-container {
 	display: flex;
 	flex-direction: column;
@@ -33,17 +40,17 @@
 .input-upload {
 	position: relative;
 	display: inline-block;
+	cursor:pointer;
 }
 .input-upload::before {
+	cursor:pointer;
 	background-color: #6c4494;
-	font-size: 400;
 	color: white;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 3px;
 	content: "Seleccionar"; /* testo por defecto */
-	/* padding:10px 50px; */
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -53,84 +60,81 @@
 
 .input-upload input[type="file"] {
 	opacity: 0;
-	width: 200px;
+	width: 170px;
+	cursor: pointer;
 	height: 32px;
 	display: inline-block;
 }
 .input-upload input[type="file"] {
 	opacity: 0;
-	width: 200px;
+	cursor: pointer;
+	width: 170px;
 	height: 32px;
 	display: inline-block;
 }
 #formulario_uploadPhoto::before {
 	content: "Desde el dispositivo";
-}
 
+}
 
 .data-image {
 	display: flex;
-	padding: 0 200px;
+	padding: 40px;
 	column-gap: 50px;
-	width: 100%;
+	width: 80%;
 	justify-content: center;
 	align-items: flex-start;
 	min-height: 500px;
 	margin-top: 40px;
 	margin-bottom: 40px;
+	border: none;
+	box-shadow: rgba(0, 0, 0, 0.02) 3px 3px 3px 3px,
+		rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+	margin: 40px auto;
 }
 .img-primary {
 	width: 50%;
 	max-width: 100%;
-	max-height: 400px;
+	max-height: 620px;
 	object-fit: contain;
 }
 .input-form {
 	width: 50%;
 	max-width: 100%;
-	height: 400px;
-	max-height: 400px;
 	display: flex;
 	flex-direction: column;
 	row-gap: 20px;
 }
-
-.input-title {
+.input-ubication,
+.input-tags,
+.input-title,
+.input-price,
+.input-description {
+	padding: 18px;
+	height: 51px;
 	width: 100%;
-	padding: 10px;
-	height: 61px;
 	line-height: 24px;
-	font-family: "Inter";
+	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 400;
 	font-size: 15px;
 	line-height: 24px;
 }
+
 .input-price {
-	height: 61px;
-	width: 50%;
-	padding: 10px;
+	width: 40%;
 	border: 2px solid #6c4494;
 	color: black;
-	font-family: "Inter";
-	font-style: normal;
-	font-weight: 400;
-	font-size: 15px;
-	line-height: 24px;
+	trasition: all 1s ease;
+}
+.disable-input-price {
+	background-color: rgba(0, 0, 0, 0.2);
+	border-color: rgba(27, 31, 35, 0.15);
 }
 .input-description {
-	width: 100%;
 	height: 150px;
 	outline: none;
 	resize: none;
-	font-family: Roboto;
-	padding: 10px;
-	line-height: 24.2px;
-	font-family: "Inter";
-	font-style: normal;
-	font-weight: 400;
-	font-size: 15px;
-	line-height: 24px;
 }
 .prices-category {
 	display: flex;
@@ -138,25 +142,42 @@
 	justify-content: center;
 	row-gap: 15px;
 }
-.input-submit{
-  background-color: #6c4494;
-  height: 61px;
+.input-submit,
+.btn-back {
+	background-color: #6c4494;
+	height: 61px;
 	width: 50%;
 	padding: 10px;
 	border: 2px solid #6c4494;
 	color: white;
-  border-radius:40px;
+	border-radius: 40px;
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 400;
 	font-size: 15px;
 	line-height: 24px;
-  display:flex;
-  justify-content:center;
-  column-gap:10px;
-  align-items:center;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	column-gap: 10px;
+	align-items: center;
 }
-.icon-submit{
-  height:25px;
-  width:25px;
+.input-submit {
+	width: 40%;
+}
+.btn-back {
+	margin: 30px auto;
+	width: auto;
+	padding: 10px 20px;
+}
+
+/* responpse */
+.response-upload {
+	background-color: rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Roboto";
+	font-size: 25px;
+	column-gap: 5px;
 }

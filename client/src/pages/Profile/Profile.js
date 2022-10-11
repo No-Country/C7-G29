@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getProfileDetails } from "../../redux/actions/photosActions";
 import { cleanProfileDetails } from "../../redux/slices/profileSlice";
 import Navbar from "../../components/Navbar/Navbar";
@@ -23,7 +23,12 @@ export default function Profile() {
   }, [dispatch, id]);
 
   useEffect(() => {});
-
+  const photographer={
+    _id:details._id,
+    name:details.name, 
+    lastName:details.lastName,
+    avatar:details.avatar
+  }
   return (
     <div style={{ backgroundColor: "black", height: "100vh"}}>
       <Navbar />
@@ -373,19 +378,30 @@ export default function Profile() {
                     cursor: "pointer",
                   }}
                 >
-                  <img alt="upload" src={uploadIcon}></img>{" "}
-                  <div
-                    style={{
-                      fontFamily: "Roboto",
-                      fontStyle: "normal",
-                      fontWeight: "500",
-                      fontSize: "20px",
-                      lineHeight: "23px",
-                      color: "#FFFFFF",
-                    }}
-                  >
-                    Subir Foto
-                  </div>
+                  <Link to="/publish">
+                    <div 
+                      style={{
+                        display:"flex", 
+                        columnGap:"10px", 
+                        alignItems:"center"
+                      }}
+                      
+                      >
+                      <img alt="upload" src={uploadIcon}></img>{" "}
+                      <div
+                        style={{
+                          fontFamily: "Roboto",
+                          fontStyle: "normal",
+                          fontWeight: "500",
+                          fontSize: "20px",
+                          lineHeight: "23px",
+                          color: "#FFFFFF",
+                        }}
+                        >
+                        Subir Foto
+                      </div>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -396,7 +412,7 @@ export default function Profile() {
               details.publications.length > 0 ? (
                 <div className="galery-container">
                   {details.publications.map((x) => (
-                    <HomeCards x={x} key={x._id} />
+                    <HomeCards x={{...x, photographer}} key={x._id} />
                   ))}
                 </div>
               ) : (
