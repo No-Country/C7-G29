@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cleanCart, cleanItem } from "../redux/slices/cartSlice";
 import { buyItems } from "../redux/actions/photosActions";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../components/Navbar/Navbar";
 export default function Home() {
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ export default function Home() {
       setState(a);
     }
     t();
-  }, [cart]);
+  }, [cart, user._id]);
+
+  const isLogged = useSelector((state) => state.authSlice.isLogged);
 
   return (
     <div>
@@ -36,8 +39,12 @@ export default function Home() {
             </div>
           ))
         : "Carro vacio"}
+      {isLogged ? (
+        <a href={state}>Comprar</a>
+      ) : (
+        <Link to="/login">Log In To Buy</Link>
+      )}
       <button onClick={() => dispatch(cleanCart())}>Borrar Carro</button>
-      <a href={state}>Comprar</a>
     </div>
   );
 }

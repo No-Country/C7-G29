@@ -1,10 +1,8 @@
 <h1 align="center">DarkRoom</h1>
 
-## Contenido
- - [Features](#features)
- - [Tecnologias](#tecnologias)
- - [Como usar](#como-usar)
- - [Equipo](#equipo)
+En el mundo de la fotografía, no es facil conseguir trabajo, ni mucho menos conseguir que valoren tu trabajo.
+Por eso nace Darkroom, la web que busca el crecimiento de emprendedores, fotógrafos, personas con proyectos personales o empresas que buscan imágenes inéditas y únicas.
+De forma legal, única y rápida. Podes comprar, vender, y descargar.
 
 <img src="https://github.com/No-Country/C7-G29/blob/dev/images/banner.png">
 
@@ -51,7 +49,7 @@ $ npm start
 
 - [Emanuel Juri](https://www.linkedin.com/in/emanuel-juri/) : Back End 
 - [Joe Vega]() : Back End 
-- [Angel Villalba](https://www.linkedin.com/in/angelvillalba/) : Back End 
+- [Angel Villalba](https://www.linkedin.com/in/angelvillalba/) : Full Stack
 
 
 

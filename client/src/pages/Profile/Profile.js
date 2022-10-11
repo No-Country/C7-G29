@@ -22,18 +22,18 @@ export default function Profile() {
     return () => dispatch(cleanProfileDetails());
   }, [dispatch, id]);
 
-  useEffect(() => {});
-  const photographer={
-    _id:details._id,
-    name:details.name, 
-    lastName:details.lastName,
-    avatar:details.avatar
-  }
-  return (
-    <div style={{ backgroundColor: "black", height: "100vh"}}>
-      <Navbar />
-      <div style={{backgroundColor: "black", height: "100vh", paddingTop: "108px"}}>
+  const you = useSelector((state) => state.userLoged.currentUser);
 
+  return (
+    <div style={{ backgroundColor: "black", height: "100vh" }}>
+      <Navbar />
+      <div
+        style={{
+          backgroundColor: "black",
+          height: "100vh",
+          paddingTop: "108px",
+        }}
+      >
         <div
           className="profile-general"
           style={{
@@ -44,18 +44,20 @@ export default function Profile() {
             width: "100vw",
           }}
         >
-          <div
-            style={{
-              textAlign: "center",
-              background: "rgb(31,31,31)",
-              color: "white",
-              fontSize: "32px",
-            }}
-          >
-            Mi perfil
-          </div>
-  
-          <div style={{ alignSelf: "center"}}>
+          {you._id === id ? (
+            <div
+              style={{
+                textAlign: "center",
+                background: "rgb(31,31,31)",
+                color: "white",
+                fontSize: "32px",
+              }}
+            >
+              Mi perfil
+            </div>
+          ) : null}
+
+          <div style={{ alignSelf: "center" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <img
                 alt="user"
@@ -93,7 +95,6 @@ export default function Profile() {
                 <img src={editIcon} alt="edit"></img>
                 <div
                   style={{
-
                     fontFamily: "Roboto",
                     fontStyle: "normal",
                     fontWeight: "500",
@@ -104,7 +105,6 @@ export default function Profile() {
                     color: "#6C4494",
 
                     /* Inside auto layout */
-
                   }}
                 >
                   Editar Perfil
@@ -151,7 +151,9 @@ export default function Profile() {
                 >
                   {details.userType === "userPhotographer" ? "Fotógrafo" : null}
                 </div>
-                <div style={{marginLeft: "30px"}}>Argentina, Buenos Aires, CABA.</div>
+                <div style={{ marginLeft: "30px" }}>
+                  Argentina, Buenos Aires, CABA.
+                </div>
               </div>
               <div
                 style={{
@@ -412,7 +414,18 @@ export default function Profile() {
               details.publications.length > 0 ? (
                 <div className="galery-container">
                   {details.publications.map((x) => (
-                    <HomeCards x={{...x, photographer}} key={x._id} />
+                    <HomeCards
+                      x={{
+                        ...x,
+                        photographer: {
+                          _id: details._id,
+                          avatar: details.avatar,
+                          name: details.name,
+                          lastName: details.lastName,
+                        },
+                      }}
+                      key={x._id}
+                    />
                   ))}
                 </div>
               ) : (
@@ -425,7 +438,6 @@ export default function Profile() {
         </div>
         <Footer />
       </div>
-
     </div>
   );
 }

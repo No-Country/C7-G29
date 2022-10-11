@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  userCurrentAction,
-  logoutAction,
-} from "../../redux/actions/photosActions";
+import { logoutAction } from "../../redux/actions/photosActions";
 import { Link } from "react-router-dom";
 import Group from "./../../assets/Group.png";
 import "./Navbar.css";
@@ -16,18 +13,6 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const isLogged = useSelector((state) => state.authSlice.isLogged);
-  console.log(isLogged);
-  useEffect(() => {
-    async function t() {
-      const a = await dispatch(userCurrentAction());
-      if (a.payload.message === "No token provided") {
-        dispatch(logout());
-      } else {
-        dispatch(login());
-      }
-    }
-    t();
-  }, [isLogged]);
 
   const currentUser = useSelector((state) => state.userLoged.currentUser);
   const [modalOpen, setModalOpen] = useState(false);
@@ -65,22 +50,12 @@ export default function Navbar() {
           <Link to="/cart" className="navbar-link">
             Carrito
           </Link>
-
-          {/*currentUser.length > 0 ? (
-            <div onClick={handleOpen} className="navbar_divAvatar">
-              <img src={currentUser.avatar} alt="" />
-            </div>
-          ) : (
-            <Link className="navbar-link" to="/users">
-              Iniciar sesión
-            </Link>
-          )*/}
           {isLogged ? (
             <div onClick={handleOpen} className="navbar_divAvatar">
               <img src={currentUser.avatar} alt="" />
             </div>
           ) : (
-            <Link className="navbar-link" to="/users">
+            <Link className="navbar-link" to="/login">
               Iniciar sesión
             </Link>
           )}
