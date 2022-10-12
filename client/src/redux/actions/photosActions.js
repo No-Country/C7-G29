@@ -108,6 +108,7 @@ export const userCurrentAction = () => async (dispatch) => {
 };
 
 export const getDetails = (id) => async (dispatch) => {
+  console.log(id);
   return fetch(`http://localhost:9000/api/searchId/publicationForId/${id}`, {
     method: "GET",
   })
@@ -117,6 +118,7 @@ export const getDetails = (id) => async (dispatch) => {
 };
 
 export const getProfileDetails = (id) => async (dispatch) => {
+  console.log(id);
   return fetch(`http://localhost:9000/api/searchId/userForId/${id}`, {
     method: "GET",
   })
@@ -184,6 +186,17 @@ export const addFavotites = (id, _idCurrent) => async () => {
     body: JSON.stringify({
       favorites: id,
     }),
+  })
+    .then((response) => response.json())
+    .then((d) => d)
+    .catch((e) => e);
+};
+
+export const registerUser = async (data) => {
+  return await fetch(`http://localhost:9000/api/auth/singUp`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
   })
     .then((response) => response.json())
     .then((d) => d)
