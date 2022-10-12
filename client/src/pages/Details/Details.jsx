@@ -37,7 +37,7 @@ export default function Details() {
   const tags = useSelector((state) => state.photos.photoDetails.tags)?.split(
     ","
   );
-
+  
   // estados de cuenta usuario
   const [liked, setLiked] = useState(false);
   const [favorites, setFavorites] = useState(false);
@@ -123,8 +123,9 @@ export default function Details() {
   };
 
   const handleNext = () => {
+    
     const index = imgRelated.findIndex((el) => el._id === id);
-    if (index < imgRelated.length)
+    if (index < imgRelated.length-1)
       navigate("/details/" + imgRelated[index + 1]._id);
   };
 
