@@ -13,8 +13,8 @@ const photosSlice = createSlice({
   initialState,
   reducers: {
     insertDataAllPhotos: (state, { payload }) => {
-      payload.reverse();
-      state.allPhotosData = payload;
+      // payload.reverse();
+      state.allPhotosData = payload.reverse();
       state.filterPhotosData = payload;
     },
     setFilter: (state, { payload }) => {
@@ -41,7 +41,7 @@ const photosSlice = createSlice({
 
       state.filterPhotosData = newArray;
     },
-    cleanPhotos: () => initialState,
+    cleanPhotos: (state) => {state.photoDetails= {}},
     insertDetails: (state, { payload }) => {
       state.photoDetails = payload;
     },
