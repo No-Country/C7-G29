@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const { verifyToken } = require("../middlewares/auth.middleware");
 
-const { allPublications, newPublication, updatePublicaiton, deletePublication } = require('../controllers/publication.controller')
-
+const {
+  allPublications,
+  newPublication,
+  updatePublicaiton,
+  deletePublication,
+} = require("../controllers/publication.controller");
 
 router.get("/", allPublications);
 

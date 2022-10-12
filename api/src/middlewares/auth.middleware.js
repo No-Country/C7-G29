@@ -16,6 +16,7 @@ const verifyToken = async (req, res, next) => {
 
     next();
   } catch (error) {
+    res.clearCookie("jwt");
     return res.status(401).json({ message: "Unauthorized!" });
   }
 };
