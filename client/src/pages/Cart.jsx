@@ -12,6 +12,7 @@ export default function Home() {
   useEffect(() => {
     async function t() {
       const a = await buyItems({ items: cart, userId: user._id });
+      console.log(a);
       setState(a);
     }
     t();
