@@ -41,9 +41,7 @@ const photosSlice = createSlice({
 
       state.filterPhotosData = newArray;
     },
-    cleanPhotos: (state, { payload }) => {
-      state = initialState;
-    },
+    cleanPhotos: () => initialState,
     insertDetails: (state, { payload }) => {
       state.photoDetails = payload;
     },
