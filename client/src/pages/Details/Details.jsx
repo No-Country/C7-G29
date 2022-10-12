@@ -57,7 +57,7 @@ export default function Details() {
   }, [dispatch, id]);
 
   useEffect(() => {
-    dispatch(getProfileDetails(details.photographer));
+     if(details.photographer !== undefined) dispatch(getProfileDetails(details.photographer));
   }, [details.photographer]);
 
   const handleFollow = () => {
