@@ -11,7 +11,9 @@ export default function PostBuy() {
         {
           method: "GET",
         }
-      ).then((a) => console.log(a));
+      )
+        .then((a) => a.json())
+        .then((a) => console.log(a));
     }
     t();
   }, [payment_id]);
