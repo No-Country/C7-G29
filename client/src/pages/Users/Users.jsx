@@ -28,7 +28,7 @@ export default function Users() {
                 (premium o gratuitas)
               </p>
               <div className="users-div-button">
-                <Link to="/register/userDefault" className="users-button">
+                <Link to="/register" className="users-button">
                   Descargar contenido
                 </Link>
               </div>
@@ -40,7 +40,7 @@ export default function Users() {
                 (como vendedor o de forma gratuita)
               </p>
               <div className="users-div-button">
-                <Link to="/register/userPhotographer" className="users-button">
+                <Link to="/register" className="users-button">
                   Subir contenido
                 </Link>
               </div>
