@@ -49,7 +49,7 @@ export default function Details() {
 
   useEffect(() => {
     dispatch(getDetails(id));
-    dispatch(getProfileDetails(details.photographer));
+    if(details.photographer !== undefined) dispatch(getProfileDetails(details.photographer));
     dispatch(userCurrentAction())
     verifyState()
     return () => dispatch(cleanPhotos());
