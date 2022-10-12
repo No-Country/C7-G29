@@ -12,7 +12,7 @@ import { logout, login } from "../../redux/slices/authSlice";
 export default function Navbar() {
   const dispatch = useDispatch();
 
-  // const isLogged = useSelector((state) => state.authSlice.isLogged);
+  const isLogged = useSelector((state) => state.authSlice.isLogged);
 
   const currentUser = useSelector((state) => state.userLoged.currentUser);
   const [modalOpen, setModalOpen] = useState(false);
@@ -51,7 +51,9 @@ export default function Navbar() {
             Carrito
           </Link>
 
-          {currentUser.email ? (
+
+
+          {isLogged ? (
             <div onClick={handleOpen} className="navbar_divAvatar">
               <img src={currentUser.avatar} alt="" />
             </div>
@@ -60,6 +62,8 @@ export default function Navbar() {
               Iniciar sesión
             </Link>
           )}
+
+          
         </div>
 
         {modalOpen ? (

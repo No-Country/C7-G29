@@ -22,7 +22,7 @@ const singUp = async (req, res) => {
       });
       await newUser.save();
 
-      return res.status(200).json({ newUser, creado: "true" });
+      return res.status(200).json(newUser);
     }
 
     return res
@@ -55,7 +55,7 @@ const singIn = async (req, res) => {
           expires: new Date(
             Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
           ),
-          //httpOnly: true,
+          httpOnly: true,
           // secure: true,
           // sameSite: 'lax'
         };
