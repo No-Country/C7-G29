@@ -108,6 +108,7 @@ export const userCurrentAction = () => async (dispatch) => {
 };
 
 export const getDetails = (id) => async (dispatch) => {
+  console.log(id);
   return fetch(`http://localhost:9000/api/searchId/publicationForId/${id}`, {
     method: "GET",
   })
@@ -117,6 +118,7 @@ export const getDetails = (id) => async (dispatch) => {
 };
 
 export const getProfileDetails = (id) => async (dispatch) => {
+  console.log(id);
   return fetch(`http://localhost:9000/api/searchId/userForId/${id}`, {
     method: "GET",
   })
