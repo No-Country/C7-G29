@@ -5,8 +5,16 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
+import { Link, useParams } from "react-router-dom";
+import { registerUser, loginAction } from "../../redux/actions/photosActions";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/slices/authSlice";
 
 export default function Register() {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const [email, setEmail] = useState({ value: "", error: true });
+  const [password, setPassword] = useState({ value: "", error: true });
   const [passwordYesRegister, setPasswordYesRegister] = useState(false);
   const [passwordYesRegister2, setPasswordYesRegister2] = useState(false);
 
@@ -31,6 +39,49 @@ export default function Register() {
     }
   };
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (email.error || password.error) {
+      console.log("algo pusiste mal");
+      console.log(email);
+      console.log(password);
+    } else {
+      const a = await registerUser({
+        email: email.value,
+        password: password.value,
+        userType: params.userType,
+      });
+      if (a) {
+        await dispatch(
+          loginAction({ email: email.value, password: password.value })
+        );
+        await dispatch(login());
+      }
+    }
+  }
+
+  function handleEmail(e) {
+    //eslint-disable-next-line
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value))
+      setEmail({ value: e.target.value, error: false });
+    else setEmail({ value: "", error: true });
+  }
+
+  function handlePassword(e) {
+    //eslint-disable-next-line
+    if (/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$/.test(e.target.value))
+      setPassword({ value: e.target.value, error: false });
+    else setPassword({ value: "", error: true });
+  }
+
+  function handlePasswordCheck(e) {
+    //eslint-disable-next-line
+    if (password.value === e.target.value)
+      setPassword({ value: e.target.value, error: false });
+    else setPassword({ value: password.value, error: true });
+  }
+
   return (
     <div className="register-total">
       <div className="register_div">
@@ -51,8 +102,9 @@ export default function Register() {
             <label className="label-user-register">Usuario o email</label>
             <input
               className="login-user-register"
-              type="text"
+              type="email"
               placeholder="Ej: ramiro_diaz@darkroon.com"
+              onChange={(e) => handleEmail(e)}
             />
           </div>
           <div className="div-password-register">
@@ -61,6 +113,7 @@ export default function Register() {
               className="login-password-register"
               type="password"
               ref={elementPasswordRegister}
+              onChange={(e) => handlePassword(e)}
             />
             {passwordYesRegister === true ? (
               <img
@@ -86,6 +139,7 @@ export default function Register() {
               className="login-password-register"
               type="password"
               ref={elementPasswordRegister2}
+              onChange={(e) => handlePasswordCheck(e)}
             />
             {passwordYesRegister2 === true ? (
               <img
@@ -110,10 +164,42 @@ export default function Register() {
             <input className="login-check-register" type="checkbox" />
             <label className="label-check-register">Recordar Contraseña</label>
           </div>
-          <button className="register-register">Iniciar sessión</button>
+          <button
+            className="register-register"
+            style={{ borderRadius: "20px" }}
+            onClick={(e) => handleSubmit(e)}
+          >
+            Registrarse
+          </button>
           <p className="register-o">o</p>
-          <button className="register-google">Continuar con Google</button>
-          <button className="register-fb">Continuar con Facebook</button>
+          <Link
+            className="register-google"
+            style={{
+              borderRadius: "20px",
+              textDecoration: "none",
+              display: "flex",
+              alignContent: "center",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            to="/login"
+          >
+            Continuar con Google
+          </Link>
+          <Link
+            className="register-fb"
+            to="/login"
+            style={{
+              borderRadius: "20px",
+              textDecoration: "none",
+              display: "flex",
+              alignContent: "center",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            Continuar con Facebook
+          </Link>
           <p className="register-help-password">¿Te olvidaste la contraseña?</p>
           <p className="register-help">¿Necesitas ayuda?</p>
         </form>

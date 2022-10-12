@@ -11,6 +11,7 @@ import { login } from "../../redux/slices/authSlice";
 import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
+import { Link } from "react-router-dom";
 
 export default function LogIn() {
   const [passwordYes, setPasswordYes] = useState(false);
@@ -155,6 +156,9 @@ export default function LogIn() {
             onClick={componentClicked}
             callback={responseFacebook}
           />
+          <Link className="login-help" to="/users">
+            Registrarse
+          </Link>
           <p className="login-help-password">¿Te olvidaste la contraseña?</p>
           <p className="login-help">¿Necesitas ayuda?</p>
         </form>

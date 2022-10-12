@@ -189,3 +189,14 @@ export const addFavotites = (id, _idCurrent) => async () => {
     .then((d) => d)
     .catch((e) => e);
 };
+
+export const registerUser = async (data) => {
+  return await fetch(`http://localhost:9000/api/auth/singUp`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => d)
+    .catch((e) => e);
+};
