@@ -99,9 +99,11 @@ export default function Register() {
             <img className="login-img" src={LogoLogIn} alt="logo" />
           </div>
           <div className="div-user-register">
-            <label className="label-user-register">Usuario o email</label>
+            <label className="label-user-register">Email</label>
             <input
-              className="login-user-register"
+              className={
+                email.error ? "login-user-register_red" : "login-user-register"
+              }
               type="email"
               placeholder="Ej: ramiro_diaz@darkroon.com"
               onChange={(e) => handleEmail(e)}
@@ -110,7 +112,11 @@ export default function Register() {
           <div className="div-password-register">
             <label className="label-password-register">Contraseña</label>
             <input
-              className="login-password-register"
+              className={
+                password.error
+                  ? "login-password-register_red"
+                  : "login-password-register"
+              }
               type="password"
               ref={elementPasswordRegister}
               onChange={(e) => handlePassword(e)}
@@ -136,7 +142,11 @@ export default function Register() {
               Repetir contraseña
             </label>
             <input
-              className="login-password-register"
+              className={
+                password.error
+                  ? "login-password-register_red"
+                  : "login-password-register"
+              }
               type="password"
               ref={elementPasswordRegister2}
               onChange={(e) => handlePasswordCheck(e)}
