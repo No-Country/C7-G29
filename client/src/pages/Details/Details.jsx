@@ -44,10 +44,6 @@ export default function Details() {
   const [followed, setFollowed] = useState(false);
   const [check, setCheck] = useState(false);
 
-  console.log("tu id es ", currentUser._id);
-
-  console.log(currentUser);
-
   useEffect(() => {
     if (currentUser.liked?.includes(id)) setLiked(true);
     else setLiked(false);
@@ -61,9 +57,11 @@ export default function Details() {
     dispatch(getDetails(id));
     dispatch(getAllPhotosData());
     dispatch(userCurrentAction());
-
-    return () => dispatch(cleanPhotos());
   }, [dispatch, id, check]);
+
+  useEffect(() => {
+    return () => dispatch(cleanPhotos());
+  }, [dispatch]);
 
   useEffect(() => {
     if (details.photographer !== undefined)

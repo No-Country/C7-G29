@@ -16,11 +16,10 @@ const userLoged = createSlice({
   reducers: {
     getUserLoged: (state, { payload }) => {
       state.currentUser =
-        payload.message === "no token provided"
+        payload.message === "No token provided"
           ? initialState.currentUser
-          : payload;
-
-      state.loged = payload.message === "no token provided" ? false : true;
+          : payload.userLoged;
+      state.loged = payload.message === "No token provided" ? false : true;
     },
     logOut: (state, { payload }) => {
       state.loged = false;

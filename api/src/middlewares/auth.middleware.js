@@ -13,9 +13,10 @@ const verifyToken = async (req, res, next) => {
 
     // if (user) return res.status(200).json(user);
     if (!user) return res.status(404).json({ message: "No user found" });
-
     next();
   } catch (error) {
+    console.log(token);
+    console.log(error);
     res.clearCookie("jwt");
     return res.status(401).json({ message: "Unauthorized!" });
   }

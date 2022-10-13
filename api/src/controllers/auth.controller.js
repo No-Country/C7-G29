@@ -120,7 +120,7 @@ const currentUser = async (req, res) => {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
     const userLoged = await userSchema.findById(decoded.id);
-    if (userLoged) return res.status(200).json(userLoged);
+    if (userLoged) return res.status(200).json({ userLoged, token });
 
     if (!userLoged)
       return res.status(404).json({ message: "No se encontro al usuario" });
