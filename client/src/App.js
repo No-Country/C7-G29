@@ -14,7 +14,7 @@ import Details from "./pages/Details/Details";
 import Profile from "./pages/Profile/Profile";
 import PostBuy from "./pages/PostBuy/PostBuy";
 import { userCurrentAction } from "./redux/actions/photosActions";
-import { logout, login } from "./redux/slices/authSlice";
+import { logOut } from "./redux//slices/usersLogedSlice";
 import LogInMobile from "./pages/LogInMobile/LogInMobile";
 import UserScreen from "./pages/UserScreen/UserScreen";
 
@@ -22,11 +22,11 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [checkCookie, setCheckCookie] = useState(false);
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.userLoged);
+
   useEffect(() => {
     dispatch(localStorageCart(JSON.parse(window.localStorage.getItem("cart"))));
   }, [dispatch]);
-
-  const isLogged = useSelector((state) => state.authSlice.isLogged);
 
   useEffect(() => {
     async function t() {
@@ -35,21 +35,20 @@ function App() {
         a.payload.message === "No token provided" ||
         a.payload.message === "Unauthorized!"
       ) {
-        dispatch(logout());
-      } else {
-        dispatch(login());
+        dispatch(logOut());
       }
     }
     t();
     setTimeout(() => setCheckCookie(!checkCookie), 20000);
-  }, [isLogged, dispatch, checkCookie]);
+  }, [checkCookie, dispatch]);
 
+  /*
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1500);
-  }, []);
+  }, []);*/
 
   return (
     <div>
@@ -64,7 +63,7 @@ function App() {
           <Route path="/details/:id" element={<Details />}></Route>
           <Route path="/profile/:id" element={<Profile />}></Route>
 
-          {isLogged ? (
+          {currentUser.loged ? (
             <>
               <Route path="/publish" element={<Publish />}></Route>
               <Route path="/postBuy" element={<PostBuy />}></Route>
@@ -75,6 +74,8 @@ function App() {
               <Route path="/users" element={<Users />}></Route>
               <Route path="/register/:userType" element={<Register />}></Route>
               <Route path="/logInScreen" element={<LogIn />}></Route>
+              <Route path="/publish" element={<LogIn />}></Route>
+              <Route path="/postBuy" element={<LogIn />}></Route>
             </>
           )}
           <Route path="/loginMobile" element={<LogInMobile />}></Route>

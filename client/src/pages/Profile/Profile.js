@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getProfileDetails } from "../../redux/actions/photosActions";
@@ -7,8 +7,11 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import editIcon from "../../assets/🦆 icon _edit 2 outline_.png";
 import galeryIcon from "../../assets/🦆 icon _image_.png";
+import galeryIconBlack from "../../assets/🦆 icon _image_Black.png";
 import gustanIcon from "../../assets/VectorHeart.png";
+import gustanIconWhite from "../../assets/VectorHearWhite.png";
 import bookmarkIcon from "../../assets/EOS_BOOKMARKS_FILLED.png";
+import bookmarkIconBlack from "../../assets/EOS_BOOKMARKS_FILLEDBLACK.png";
 import uploadIcon from "../../assets/iTETAH.tif_1_.png";
 import nothing from "../../assets/Group 18.png";
 import HomeCards from "../../components/HomeCards/HomeCards";
@@ -22,7 +25,11 @@ export default function Profile() {
     return () => dispatch(cleanProfileDetails());
   }, [dispatch, id]);
 
+  const [galery, setGalery] = useState("galeria");
+
   const you = useSelector((state) => state.userLoged.currentUser);
+
+  console.log(details);
 
   return (
     <div style={{ backgroundColor: "black", height: "100vh" }}>
@@ -70,46 +77,49 @@ export default function Profile() {
                   marginTop: "10px",
                 }}
               ></img>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "10px",
-                  gap: "10px",
-                  marginRight: "30px",
-                  marginTop: "30px",
-
-                  width: "190px",
-                  height: "43px",
-
-                  background: "#FFFFFF",
-
-                  border: "3px solid #6C4494",
-                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                  borderRadius: "20px",
-                  cursor: "pointer",
-                }}
-              >
-                <img src={editIcon} alt="edit"></img>
+              {you._id === id ? (
                 <div
                   style={{
-                    fontFamily: "Roboto",
-                    fontStyle: "normal",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    lineHeight: "23px",
-                    /* Acento */
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "10px",
+                    gap: "10px",
+                    marginRight: "30px",
+                    marginTop: "30px",
 
-                    color: "#6C4494",
+                    width: "190px",
+                    height: "43px",
 
-                    /* Inside auto layout */
+                    background: "#FFFFFF",
+
+                    border: "3px solid #6C4494",
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                    borderRadius: "20px",
+                    cursor: "pointer",
                   }}
                 >
-                  Editar Perfil
+                  <img src={editIcon} alt="edit"></img>
+
+                  <div
+                    style={{
+                      fontFamily: "Roboto",
+                      fontStyle: "normal",
+                      fontWeight: "500",
+                      fontSize: "20px",
+                      lineHeight: "23px",
+                      /* Acento */
+
+                      color: "#6C4494",
+
+                      /* Inside auto layout */
+                    }}
+                  >
+                    Editar Perfil
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
             <div
               style={{
@@ -149,7 +159,9 @@ export default function Profile() {
                     color: "#686868",
                   }}
                 >
-                  {details.userType === "userPhotographer" ? "Fotógrafo" : null}
+                  {details.userType === "userPhotographer"
+                    ? "Fotógrafo"
+                    : "Amante de las Fotos!"}
                 </div>
                 <div style={{ marginLeft: "30px" }}>
                   Argentina, Buenos Aires, CABA.
@@ -277,13 +289,17 @@ export default function Profile() {
                       gap: "10px",
                       width: "162px",
                       height: "43px",
-                      background: "#000000",
+                      background: galery === "galeria" ? "black" : "white",
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: "20px",
                       cursor: "pointer",
                     }}
+                    onClick={() => setGalery("galeria")}
                   >
-                    <img alt="galeria" src={galeryIcon}></img>{" "}
+                    <img
+                      alt="galeria"
+                      src={galery === "galeria" ? galeryIcon : galeryIconBlack}
+                    ></img>
                     <div
                       style={{
                         fontFamily: "Roboto",
@@ -291,7 +307,7 @@ export default function Profile() {
                         fontWeight: "500",
                         fontSize: "20px",
                         lineHeight: "23px",
-                        color: "#FFFFFF",
+                        color: galery === "galeria" ? "white" : "black",
                       }}
                     >
                       Galeria
@@ -308,14 +324,18 @@ export default function Profile() {
                       alignItems: "center",
                       padding: "10px 20px",
                       gap: "10px",
-                      background: "#FFFFFF",
+                      background: galery === "liked" ? "#000000" : "#FFFFFF",
                       border: "3px solid #000000",
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: "20px",
                       cursor: "pointer",
                     }}
+                    onClick={() => setGalery("liked")}
                   >
-                    <img alt="gustan" src={gustanIcon}></img>{" "}
+                    <img
+                      alt="gustan"
+                      src={galery === "liked" ? gustanIconWhite : gustanIcon}
+                    ></img>
                     <div
                       style={{
                         fontFamily: "Roboto",
@@ -323,7 +343,7 @@ export default function Profile() {
                         fontWeight: "500",
                         fontSize: "20px",
                         lineHeight: "23px",
-                        color: "#000000",
+                        color: galery !== "liked" ? "#000000" : "#FFFFFF",
                       }}
                     >
                       Me Gustan
@@ -345,9 +365,16 @@ export default function Profile() {
                       border: "3px solid #000000",
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: "20px",
+                      background: galery === "saved" ? "black" : "white",
                     }}
+                    onClick={() => setGalery("saved")}
                   >
-                    <img alt="bookmark" src={bookmarkIcon}></img>{" "}
+                    <img
+                      alt="bookmark"
+                      src={
+                        galery === "saved" ? bookmarkIcon : bookmarkIconBlack
+                      }
+                    ></img>{" "}
                     <div
                       style={{
                         fontFamily: "Roboto",
@@ -355,7 +382,7 @@ export default function Profile() {
                         fontWeight: "500",
                         fontSize: "20px",
                         lineHeight: "23px",
-                        color: "#000000",
+                        color: galery === "saved" ? "white" : "black",
                       }}
                     >
                       Guardados
@@ -381,14 +408,13 @@ export default function Profile() {
                   }}
                 >
                   <Link to="/publish">
-                    <div 
+                    <div
                       style={{
-                        display:"flex", 
-                        columnGap:"10px", 
-                        alignItems:"center"
+                        display: "flex",
+                        columnGap: "10px",
+                        alignItems: "center",
                       }}
-                      
-                      >
+                    >
                       <img alt="upload" src={uploadIcon}></img>{" "}
                       <div
                         style={{
@@ -399,7 +425,7 @@ export default function Profile() {
                           lineHeight: "23px",
                           color: "#FFFFFF",
                         }}
-                        >
+                      >
                         Subir Foto
                       </div>
                     </div>
@@ -410,10 +436,33 @@ export default function Profile() {
           </div>
 
           <div style={{ borderRadius: "20px" }}>
-            {details.publications ? (
-              details.publications.length > 0 ? (
-                <div className="galery-container">
-                  {details.publications.map((x) => (
+            <div className="galery-container">
+              {galery === "galeria" ? (
+                details.publications ? (
+                  details.publications.length > 0 ? (
+                    details.publications.map((x) => (
+                      <HomeCards
+                        x={{
+                          ...x,
+                          photographer: {
+                            _id: details._id,
+                            avatar: details.avatar,
+                            name: details.name,
+                            lastName: details.lastName,
+                          },
+                        }}
+                        key={x._id}
+                      />
+                    ))
+                  ) : (
+                    <img alt="nothing" src={nothing}></img>
+                  )
+                ) : (
+                  <img alt="nothing" src={nothing}></img>
+                )
+              ) : galery === "liked" ? (
+                details.liked.length > 0 ? (
+                  details.liked.map((x) => (
                     <HomeCards
                       x={{
                         ...x,
@@ -426,14 +475,29 @@ export default function Profile() {
                       }}
                       key={x._id}
                     />
-                  ))}
-                </div>
+                  ))
+                ) : (
+                  <img alt="nothing" src={nothing}></img>
+                )
+              ) : details.favorites.length > 0 ? (
+                details.favorites.map((x) => (
+                  <HomeCards
+                    x={{
+                      ...x,
+                      photographer: {
+                        _id: details._id,
+                        avatar: details.avatar,
+                        name: details.name,
+                        lastName: details.lastName,
+                      },
+                    }}
+                    key={x._id}
+                  />
+                ))
               ) : (
                 <img alt="nothing" src={nothing}></img>
-              )
-            ) : (
-              <img alt="nothing" src={nothing}></img>
-            )}
+              )}
+            </div>
           </div>
         </div>
         <Footer />

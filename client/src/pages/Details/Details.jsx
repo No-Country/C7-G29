@@ -9,6 +9,7 @@ import {
   addFollowers,
   addLiked,
   addFavotites,
+  getAllPhotosData,
 } from "../../redux/actions/photosActions";
 import { cleanPhotos } from "../../redux/slices/photosSlice";
 import { addItemToCart } from "../../redux/slices/cartSlice";
@@ -37,74 +38,90 @@ export default function Details() {
   const tags = useSelector((state) => state.photos.photoDetails.tags)?.split(
     ","
   );
-  
   // estados de cuenta usuario
   const [liked, setLiked] = useState(false);
   const [favorites, setFavorites] = useState(false);
   const [followed, setFollowed] = useState(false);
+  const [check, setCheck] = useState(false);
 
-  const verifyState = () => {
+  console.log("tu id es ", currentUser._id);
+
+  console.log(currentUser);
+
+  useEffect(() => {
     if (currentUser.liked?.includes(id)) setLiked(true);
+    else setLiked(false);
     if (currentUser.favorites?.includes(id)) setFavorites(true);
-    if (currentUser.followed?.includes(details.photographer)) setFollowed(true);
-  };
+    else setFavorites(false);
+    if (currentUser.followed?.includes(photographer._id)) setFollowed(true);
+    else setFollowed(false);
+  }, [currentUser, id, photographer._id, dispatch]);
 
   useEffect(() => {
     dispatch(getDetails(id));
+    dispatch(getAllPhotosData());
     dispatch(userCurrentAction());
-    verifyState();
+
     return () => dispatch(cleanPhotos());
-  }, [dispatch, id]);
+  }, [dispatch, id, check]);
 
   useEffect(() => {
-     if(details.photographer !== undefined) dispatch(getProfileDetails(details.photographer));
-  }, [details.photographer]);
+    if (details.photographer !== undefined)
+      dispatch(getProfileDetails(details.photographer));
+  }, [details.photographer, dispatch]);
 
-  const handleFollow = () => {
+  const handleFollow = async () => {
     console.log("ADD FOLLOWED");
     if (currentUser.followed.includes(details.photographer)) {
-      alert("Ya estas siguiendo a este usuario");
       let unFollowed = currentUser.followed.filter(
         (el) => el !== details.photographer
       );
       let unFollowers = photographer.followers.filter(
         (el) => el !== currentUser._id
       );
-      dispatch(addFollowed(unFollowed, currentUser._id));
-      return dispatch(addFollowers(unFollowers, photographer._id));
+
+      await dispatch(addFollowed(unFollowed, currentUser._id));
+      await dispatch(addFollowers(unFollowers, photographer._id));
+      setCheck(!check);
+    } else {
+      await dispatch(
+        addFollowed(
+          [...currentUser.followed, details.photographer],
+          currentUser._id
+        )
+      );
+      await dispatch(
+        addFollowers(
+          [...photographer.followers, currentUser._id],
+          details.photographer
+        )
+      );
+      setCheck(!check);
     }
-    dispatch(
-      addFollowed(
-        [...currentUser.followed, ...[details.photographer]],
-        currentUser._id
-      )
-    );
-    dispatch(
-      addFollowers(
-        [...photographer.followers, ...[currentUser._id]],
-        details.photographer
-      )
-    );
   };
 
-  const handleLike = () => {
+  const handleLike = async () => {
     console.log("ADD LIKED");
     if (currentUser.liked.includes(id)) {
       let aux = currentUser.liked.filter((el) => el !== id);
-      return dispatch(addLiked(aux, currentUser._id));
+      await dispatch(addLiked(aux, currentUser._id));
+      return setCheck(!check);
     }
-    dispatch(addLiked([...currentUser.liked, ...[id]], currentUser._id));
+    await dispatch(addLiked([...currentUser.liked, ...[id]], currentUser._id));
+    setCheck(!check);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log("ADD Favorites");
     if (currentUser.favorites.includes(id)) {
       let aux = currentUser.favorites.filter((el) => el !== id);
-      return dispatch(addFavotites(aux, currentUser._id));
+      await dispatch(addFavotites(aux, currentUser._id));
+      return setCheck(!check);
     }
-    dispatch(
+    await dispatch(
       addFavotites([...currentUser.favorites, ...[id]], currentUser._id)
     );
+    setCheck(!check);
   };
 
   const handleShare = () => {
@@ -123,9 +140,8 @@ export default function Details() {
   };
 
   const handleNext = () => {
-    
     const index = imgRelated.findIndex((el) => el._id === id);
-    if (index < imgRelated.length-1)
+    if (index < imgRelated.length - 1)
       navigate("/details/" + imgRelated[index + 1]._id);
   };
 

@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userData: {},
+  userData: {
+    favorites: [],
+    followed: [],
+    follwers: [],
+    publications: [],
+  },
 };
 
 const profileSLice = createSlice({

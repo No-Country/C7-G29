@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loginAction } from "../../redux/actions/photosActions";
+import {
+  loginAction,
+  userCurrentAction,
+} from "../../redux/actions/photosActions";
 import "./Login.css";
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
-import { login } from "../../redux/slices/authSlice";
 import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
@@ -31,6 +33,7 @@ export default function LogIn() {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
+    error: { location: "", value: "" },
   });
 
   const handleChange = (e) => {
@@ -47,16 +50,18 @@ export default function LogIn() {
     try {
       const a = await dispatch(loginAction(loginForm));
       if (a.loged) {
-        dispatch(login());
+        dispatch(userCurrentAction());
       } else {
-        //aca va el alert de que algun dato que pusiste esta mal
+        if (a)
+          setLoginForm({
+            ...loginForm,
+            error: {
+              location: a.e === "emptyEmail" ? "email" : "password",
+              value: "Por Favor Ingrese dato",
+            },
+          });
       }
     } catch (error) {}
-
-    setLoginForm({
-      email: "",
-      password: "",
-    });
   };
 
   const elementPassword = useRef(null);

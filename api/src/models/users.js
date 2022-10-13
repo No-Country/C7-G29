@@ -38,11 +38,13 @@ const user = mongoose.Schema(
     favorites: [
       {
         type: mongoose.Types.ObjectId,
+        ref: "publication",
       },
     ],
     liked: [
       {
         type: mongoose.Types.ObjectId,
+        ref: "publication",
       },
     ],
     publications: [
