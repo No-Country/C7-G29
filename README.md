@@ -43,9 +43,7 @@ $ npm start
 - [Melvin Taveras]() : Diseño ux/ui
 
 - [Franco Rodriguez](https://www.linkedin.com/in/juan-franco-rodriguez/) : Front End
-- [Isaac Urdaneta]() : Front End
 - [rodrigo zucchini]() : Front End
-- [Mateo Marquez]() : Front End
 
 - [Emanuel Juri](https://www.linkedin.com/in/emanuel-juri/) : Back End 
 - [Joe Vega]() : Back End 
