@@ -13,7 +13,7 @@ import LogIn from "./pages/LogIn/LogIn";
 import Details from "./pages/Details/Details";
 import Profile from "./pages/Profile/Profile";
 import PostBuy from "./pages/PostBuy/PostBuy";
-import { userCurrentAction } from "./redux/actions/photosActions";
+import { userCurrentAction, logoutAction } from "./redux/actions/photosActions";
 import { logOut } from "./redux//slices/usersLogedSlice";
 import LogInMobile from "./pages/LogInMobile/LogInMobile";
 import UserScreen from "./pages/UserScreen/UserScreen";
@@ -36,6 +36,7 @@ function App() {
         a.payload.message === "Unauthorized!"
       ) {
         dispatch(logOut());
+        dispatch(logoutAction());
       }
     }
     t();

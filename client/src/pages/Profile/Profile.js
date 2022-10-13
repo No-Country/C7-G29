@@ -29,8 +29,6 @@ export default function Profile() {
 
   const you = useSelector((state) => state.userLoged.currentUser);
 
-  console.log(details);
-
   return (
     <div style={{ backgroundColor: "black", height: "100vh" }}>
       <Navbar />
@@ -361,7 +359,6 @@ export default function Profile() {
                       alignItems: "center",
                       padding: "10px 20px",
                       gap: "10px",
-                      background: "#FFFFFF",
                       border: "3px solid #000000",
                       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                       borderRadius: "20px",
@@ -491,7 +488,7 @@ export default function Profile() {
                         lastName: details.lastName,
                       },
                     }}
-                    key={x._id}
+                    key={x._id + "saved"}
                   />
                 ))
               ) : (

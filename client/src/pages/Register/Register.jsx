@@ -46,9 +46,6 @@ export default function Register() {
     e.preventDefault();
 
     if (email.error || password.error) {
-      console.log("algo pusiste mal");
-      console.log(email);
-      console.log(password);
     } else {
       const a = await registerUser({
         email: email.value,

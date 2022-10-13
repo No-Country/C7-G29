@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutAction } from "../../redux/actions/photosActions";
 import { Link } from "react-router-dom";
@@ -13,11 +12,6 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.userLoged.currentUser);
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleOpen = () => {
-    setModalOpen(!modalOpen);
-  };
 
   const handleLogout = () => {
     dispatch(logoutAction());
@@ -50,8 +44,20 @@ export default function Navbar() {
           </Link>
 
           {currentUser.email ? (
-            <div onClick={handleOpen} className="navbar_divAvatar">
-              <img src={currentUser.avatar} alt="" />
+            <div className="navbar_drawer">
+              <div className="navbar_divAvatar">
+                <img src={currentUser.avatar} alt="" />
+              </div>
+              <div>
+                <div className="navbar_menuModal">
+                  <Link to={`/profile/${currentUser._id}`} className="">
+                    ver perfil
+                  </Link>
+                  <span className="navbar_logOut" onClick={handleLogout}>
+                    cerrar sesion
+                  </span>
+                </div>
+              </div>
             </div>
           ) : (
             <Link className="navbar-link" to="/login">
@@ -59,17 +65,6 @@ export default function Navbar() {
             </Link>
           )}
         </div>
-
-        {modalOpen ? (
-          <div className="navbar_menuModal">
-            <Link to={`/profile/${currentUser._id}`} className="">
-              ver perfil
-            </Link>
-            <span className="navbar_logOut" onClick={handleLogout}>
-              cerrar sesion
-            </span>
-          </div>
-        ) : null}
       </div>
     </div>
   );
