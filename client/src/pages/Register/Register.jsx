@@ -6,9 +6,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
 import { Link, useParams } from "react-router-dom";
-import { registerUser, loginAction } from "../../redux/actions/photosActions";
+import {
+  registerUser,
+  loginAction,
+  userCurrentAction,
+} from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/slices/authSlice";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -52,11 +55,11 @@ export default function Register() {
         password: password.value,
         userType: params.userType,
       });
-      if (a) {
+      if (a.creado) {
         await dispatch(
           loginAction({ email: email.value, password: password.value })
         );
-        await dispatch(login());
+        await dispatch(userCurrentAction());
       }
     }
   }

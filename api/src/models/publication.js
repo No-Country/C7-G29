@@ -1,6 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const publicationSchema = mongoose.Schema({
+const publicationSchema = mongoose.Schema(
+  {
     title: {
       type: String,
     },
@@ -15,28 +16,33 @@ const publicationSchema = mongoose.Schema({
     },
     url: {
       type: String,
-      require: true
+      require: true,
     },
     likes: {
-      type: mongoose.Types.ObjectId
+      type: mongoose.Types.ObjectId,
+      ref: "users",
     },
     downloads: {
-      type: Number
+      type: Number,
     },
     price: {
-      type: Number
+      type: Number,
     },
     pay: {
-      type: Boolean
+      type: Boolean,
     },
     photographer: {
       type: mongoose.Types.ObjectId,
-      ref: 'user'
+      ref: "user",
     },
-    challenge: [{
-      type: mongoose.Types.ObjectId,
-      ref:'challenges'
-    }],
-}, {timestamps: true, versionKey: false})
+    challenge: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "challenges",
+      },
+    ],
+  },
+  { timestamps: true, versionKey: false }
+);
 
-module.exports = mongoose.model('publication', publicationSchema)
+module.exports = mongoose.model("publication", publicationSchema);

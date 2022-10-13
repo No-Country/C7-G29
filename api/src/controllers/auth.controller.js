@@ -1,6 +1,7 @@
 const userSchema = require("../models/users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const CourierClient = require("@trycourier/courier").CourierClient;
 
 // ------ register ------
 const singUp = async (req, res) => {
@@ -22,6 +23,28 @@ const singUp = async (req, res) => {
       });
       await newUser.save();
 
+      const courier = CourierClient({
+        authorizationToken: process.env.COURIER_KEY,
+      });
+
+      const { requestId } = await courier.send({
+        message: {
+          to: {
+            data: {
+              name: "Bienvenido a  Dark-Room",
+            },
+            email,
+          },
+          template: "Y85GRZWC594QQNQ1W93ZDWDKDJZZ",
+          data: {
+            userType:
+              userType === "userPhotographer" ? "Fotografo" : "Comprador",
+            otherUserType:
+              userType === "userPhotographer" ? "Comprador" : "Fotografo",
+          },
+        },
+      });
+
       return res.status(200).json({ newUser, creado: "true" });
     }
 
@@ -37,8 +60,10 @@ const singUp = async (req, res) => {
 const singIn = async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(404).send("falta mail o password");
+  if (!email) {
+    return res.status(404).send({ e: "emptyEmail" });
+  } else if (!password) {
+    return res.status(404).send({ e: "emptyPassword" });
   } else if (email && password) {
     const user = await userSchema.findOne({ email: email });
     if (user) {

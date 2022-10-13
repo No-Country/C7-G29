@@ -4,15 +4,13 @@ import { logoutAction } from "../../redux/actions/photosActions";
 import { Link } from "react-router-dom";
 import Group from "./../../assets/Group.png";
 import "./Navbar.css";
-import { logout, login } from "../../redux/slices/authSlice";
+import { logOut } from "../../redux//slices/usersLogedSlice";
 // import Notificaciones from './../../assets/Vector.png';
 // import Subir from './../../assets/iTETAH.tif_1_.png';
 // import Carrito from './../../assets/carrito.png';
 
 export default function Navbar() {
   const dispatch = useDispatch();
-
-  // const isLogged = useSelector((state) => state.authSlice.isLogged);
 
   const currentUser = useSelector((state) => state.userLoged.currentUser);
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,7 +21,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     dispatch(logoutAction());
-    dispatch(logout());
+    dispatch(logOut());
   };
 
   window.addEventListener("scroll", function () {

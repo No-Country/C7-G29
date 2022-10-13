@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentUser: [],
+  currentUser: {
+    followed: [],
+    favorites: [],
+    followers: [],
+    liked: [],
+  },
   loged: false,
 };
 
@@ -14,9 +19,15 @@ const userLoged = createSlice({
         payload.message === "no token provided"
           ? initialState.currentUser
           : payload;
+
+      state.loged = payload.message === "no token provided" ? false : true;
+    },
+    logOut: (state, { payload }) => {
+      state.loged = false;
+      state.currentUser = initialState.currentUser;
     },
   },
 });
 
-export const { getUserLoged } = userLoged.actions;
+export const { getUserLoged, logOut } = userLoged.actions;
 export default userLoged.reducer;
