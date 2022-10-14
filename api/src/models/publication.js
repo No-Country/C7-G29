@@ -18,10 +18,12 @@ const publicationSchema = mongoose.Schema(
       type: String,
       require: true,
     },
-    likes: {
-      type: mongoose.Types.ObjectId,
-      ref: "users",
-    },
+    likes: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "users",
+      },
+    ],
     downloads: {
       type: Number,
     },

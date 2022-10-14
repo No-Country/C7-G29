@@ -10,6 +10,7 @@ import {
   addLiked,
   addFavotites,
   getAllPhotosData,
+  modifyLikesPublication,
 } from "../../redux/actions/photosActions";
 import { cleanPhotos } from "../../redux/slices/photosSlice";
 import { addItemToCart } from "../../redux/slices/cartSlice";
@@ -102,10 +103,20 @@ export default function Details() {
     console.log("ADD LIKED");
     if (currentUser.liked.includes(id)) {
       let aux = currentUser.liked.filter((el) => el !== id);
+      let arrayWhitoutLikeOfPublication = details.likes.filter(
+        (el) => el !== currentUser._id
+      );
       await dispatch(addLiked(aux, currentUser._id));
+      await dispatch(
+        modifyLikesPublication(arrayWhitoutLikeOfPublication, details._id)
+      );
       return setCheck(!check);
     }
     await dispatch(addLiked([...currentUser.liked, ...[id]], currentUser._id));
+
+    await dispatch(
+      modifyLikesPublication([...details.likes, currentUser._id], details._id)
+    );
     setCheck(!check);
   };
 
@@ -179,7 +190,7 @@ export default function Details() {
             onClick={handleLike}
           >
             <FavoriteBorderOutlinedIcon fontSize="small" />
-            Me gusta
+            Me gusta {details.likes?.length}
           </button>
           <button
             className={
@@ -255,11 +266,10 @@ export default function Details() {
           <ReplyOutlinedIcon fontSize="small" />
           Compartir
         </button>
+
         <button
-          className={
-            details.price === undefined ? "btn-buy disable" : "btn-buy"
-          }
-          disabled={details.price === undefined}
+          className={!details.pay ? "btn-buy disable" : "btn-buy"}
+          disabled={!details.pay}
           onClick={handleBuy}
         >
           <ShoppingCartOutlinedIcon fontSize="small" />

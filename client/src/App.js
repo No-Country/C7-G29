@@ -17,6 +17,8 @@ import { userCurrentAction, logoutAction } from "./redux/actions/photosActions";
 import { logOut } from "./redux//slices/usersLogedSlice";
 import LogInMobile from "./pages/LogInMobile/LogInMobile";
 import UserScreen from "./pages/UserScreen/UserScreen";
+import Retos from "./pages/Retos/Retos";
+import AddReto from "./components/AddReto/AddReto";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -80,6 +82,8 @@ function App() {
             </>
           )}
           <Route path="/loginMobile" element={<LogInMobile />}></Route>
+          <Route path="/retos" element={<Retos />}></Route>
+          <Route path="/addReto" element={<AddReto />}></Route>
           <Route path="*" element={<Home />}></Route>
         </Routes>
       )}

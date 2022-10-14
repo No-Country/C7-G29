@@ -18,6 +18,7 @@ export default function Register() {
   const params = useParams();
   const [email, setEmail] = useState({ value: "", error: true });
   const [password, setPassword] = useState({ value: "", error: true });
+  const [checkPassword, setCheckPassword] = useState();
   const [passwordYesRegister, setPasswordYesRegister] = useState(false);
   const [passwordYesRegister2, setPasswordYesRegister2] = useState(false);
 
@@ -70,9 +71,9 @@ export default function Register() {
 
   function handlePassword(e) {
     //eslint-disable-next-line
-    if (/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$/.test(e.target.value))
+    if (/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$/.test(e.target.value)) {
       setPassword({ value: e.target.value, error: false });
-    else setPassword({ value: "", error: true });
+    } else setPassword({ value: "", error: true });
   }
 
   function handlePasswordCheck(e) {
