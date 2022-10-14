@@ -33,10 +33,7 @@ function App() {
   useEffect(() => {
     async function t() {
       const a = await dispatch(userCurrentAction());
-      if (
-        a.payload.message === "No token provided" ||
-        a.payload.message === "Unauthorized!"
-      ) {
+      if (a.payload.message === "No token provided" || a.payload.message === "Unauthorized!") {
         dispatch(logOut());
         dispatch(logoutAction());
       }
@@ -63,7 +60,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/details/:id" element={<Details />}></Route>
           <Route path="/profile/:id" element={<Profile />}></Route>
 
           {currentUser.loged ? (

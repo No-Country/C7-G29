@@ -1,17 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
-import {
-  getDetails,
-  getProfileDetails,
-  userCurrentAction,
-  addFollowed,
-  addFollowers,
-  addLiked,
-  addFavotites,
-  getAllPhotosData,
-  modifyLikesPublication,
-} from "../../redux/actions/photosActions";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getDetails, getProfileDetails, userCurrentAction, addFollowed, addFollowers, addLiked, addFavotites, getAllPhotosData, modifyLikesPublication } from "../../redux/actions/photosActions";
 import { cleanPhotos } from "../../redux/slices/photosSlice";
 import { addItemToCart } from "../../redux/slices/cartSlice";
 //materialUI icons
@@ -27,8 +17,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 import "./Details.css";
 
-export default function Details() {
-  const { id } = useParams();
+export default function Details({ idFirstModal, setIsOpen }) {
   const dispatch = useDispatch();
   const location = useLocation();
   let navigate = useNavigate();
@@ -36,14 +25,13 @@ export default function Details() {
   const imgRelated = useSelector((state) => state.photos.allPhotosData);
   const photographer = useSelector((state) => state.profile.userData);
   const currentUser = useSelector((state) => state.userLoged.currentUser);
-  const tags = useSelector((state) => state.photos.photoDetails.tags)?.split(
-    ","
-  );
+  const tags = useSelector((state) => state.photos.photoDetails.tags)?.split(",");
   // estados de cuenta usuario
   const [liked, setLiked] = useState(false);
   const [favorites, setFavorites] = useState(false);
   const [followed, setFollowed] = useState(false);
   const [check, setCheck] = useState(false);
+  const [id, setid] = useState(idFirstModal);
 
   useEffect(() => {
     if (currentUser.liked?.includes(id)) setLiked(true);
@@ -65,36 +53,21 @@ export default function Details() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (details.photographer !== undefined)
-      dispatch(getProfileDetails(details.photographer));
+    if (details.photographer !== undefined) dispatch(getProfileDetails(details.photographer));
   }, [details.photographer, dispatch]);
 
   const handleFollow = async () => {
     console.log("ADD FOLLOWED");
     if (currentUser.followed.includes(details.photographer)) {
-      let unFollowed = currentUser.followed.filter(
-        (el) => el !== details.photographer
-      );
-      let unFollowers = photographer.followers.filter(
-        (el) => el !== currentUser._id
-      );
+      let unFollowed = currentUser.followed.filter((el) => el !== details.photographer);
+      let unFollowers = photographer.followers.filter((el) => el !== currentUser._id);
 
       await dispatch(addFollowed(unFollowed, currentUser._id));
       await dispatch(addFollowers(unFollowers, photographer._id));
       setCheck(!check);
     } else {
-      await dispatch(
-        addFollowed(
-          [...currentUser.followed, details.photographer],
-          currentUser._id
-        )
-      );
-      await dispatch(
-        addFollowers(
-          [...photographer.followers, currentUser._id],
-          details.photographer
-        )
-      );
+      await dispatch(addFollowed([...currentUser.followed, details.photographer], currentUser._id));
+      await dispatch(addFollowers([...photographer.followers, currentUser._id], details.photographer));
       setCheck(!check);
     }
   };
@@ -103,20 +76,14 @@ export default function Details() {
     console.log("ADD LIKED");
     if (currentUser.liked.includes(id)) {
       let aux = currentUser.liked.filter((el) => el !== id);
-      let arrayWhitoutLikeOfPublication = details.likes.filter(
-        (el) => el !== currentUser._id
-      );
+      let arrayWhitoutLikeOfPublication = details.likes.filter((el) => el !== currentUser._id);
       await dispatch(addLiked(aux, currentUser._id));
-      await dispatch(
-        modifyLikesPublication(arrayWhitoutLikeOfPublication, details._id)
-      );
+      await dispatch(modifyLikesPublication(arrayWhitoutLikeOfPublication, details._id));
       return setCheck(!check);
     }
     await dispatch(addLiked([...currentUser.liked, ...[id]], currentUser._id));
 
-    await dispatch(
-      modifyLikesPublication([...details.likes, currentUser._id], details._id)
-    );
+    await dispatch(modifyLikesPublication([...details.likes, currentUser._id], details._id));
     setCheck(!check);
   };
 
@@ -127,9 +94,7 @@ export default function Details() {
       await dispatch(addFavotites(aux, currentUser._id));
       return setCheck(!check);
     }
-    await dispatch(
-      addFavotites([...currentUser.favorites, ...[id]], currentUser._id)
-    );
+    await dispatch(addFavotites([...currentUser.favorites, ...[id]], currentUser._id));
     setCheck(!check);
   };
 
@@ -145,61 +110,34 @@ export default function Details() {
 
   const handlePrev = () => {
     const index = imgRelated.findIndex((el) => el._id === id);
-    if (index > 0) navigate("/details/" + imgRelated[index - 1]._id);
+    if (index > 0) setid(imgRelated[index - 1]._id);
   };
 
   const handleNext = () => {
     const index = imgRelated.findIndex((el) => el._id === id);
-    if (index < imgRelated.length - 1)
-      navigate("/details/" + imgRelated[index + 1]._id);
+    if (index < imgRelated.length - 1) setid(imgRelated[index + 1]._id);
   };
 
   return (
     <div className="container-detail">
-      <p className="close-btn" onClick={() => navigate("/")}>
+      <p className="close-btn" onClick={() => setIsOpen(false)}>
         X
       </p>
       <div className="detail-navbar">
         <div className="left-group">
-          <img
-            className="avatar-img"
-            src={photographer.avatar}
-            alt="avatar-profile"
-            onClick={() => navigate("/profile/" + details.photographer)}
-          />
+          <img className="avatar-img" src={photographer.avatar} alt="avatar-profile" onClick={() => navigate("/profile/" + details.photographer)} />
           <span className="name-ph">{`${photographer.name} ${photographer.lastName}`}</span>
-          <button
-            className={
-              followed !== true
-                ? "btn-detail-navbar"
-                : "btn-detail-navbar unfollowed"
-            }
-            onClick={handleFollow}
-          >
+          <button className={followed !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} onClick={handleFollow}>
             <PersonAddAltOutlinedIcon fontSize="small" />
             Seguir
           </button>
         </div>
         <div className="right-group">
-          <button
-            className={
-              liked !== true
-                ? "btn-detail-navbar"
-                : "btn-detail-navbar unfollowed"
-            }
-            onClick={handleLike}
-          >
+          <button className={liked !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} onClick={handleLike}>
             <FavoriteBorderOutlinedIcon fontSize="small" />
             Me gusta {details.likes?.length}
           </button>
-          <button
-            className={
-              favorites !== true
-                ? "btn-detail-navbar"
-                : "btn-detail-navbar unfollowed"
-            }
-            onClick={handleSave}
-          >
+          <button className={favorites !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} onClick={handleSave}>
             <BookmarksOutlinedIcon fontSize="small" />
             Guardar
           </button>
@@ -207,19 +145,11 @@ export default function Details() {
       </div>
 
       <div className="central-group">
-        <ArrowBackIosNewIcon
-          className="prev-next"
-          fontSize="large"
-          onClick={handlePrev}
-        />
+        <ArrowBackIosNewIcon className="prev-next" fontSize="large" onClick={handlePrev} />
 
         <img className="main-img" src={details.url} alt="main-img" />
 
-        <ArrowForwardIosIcon
-          className="prev-next"
-          fontSize="large"
-          onClick={handleNext}
-        />
+        <ArrowForwardIosIcon className="prev-next" fontSize="large" onClick={handleNext} />
       </div>
 
       <div className="detail-description">
@@ -228,8 +158,7 @@ export default function Details() {
           <p className="img-title">{details.title}</p>
           <p className="img-ubication">
             <LocationOnOutlinedIcon fontSize="small" />
-            Ubication:{" "}
-            {details.ubication || "En el medio de la nada - Ningún lugar"}
+            Ubication: {details.ubication || "En el medio de la nada - Ningún lugar"}
           </p>
 
           <p className="tags">Etiquetas</p>
@@ -267,11 +196,7 @@ export default function Details() {
           Compartir
         </button>
 
-        <button
-          className={!details.pay ? "btn-buy disable" : "btn-buy"}
-          disabled={!details.pay}
-          onClick={handleBuy}
-        >
+        <button className={!details.pay ? "btn-buy disable" : "btn-buy"} disabled={!details.pay} onClick={handleBuy}>
           <ShoppingCartOutlinedIcon fontSize="small" />
           Comprar
         </button>
@@ -281,12 +206,7 @@ export default function Details() {
       <div className="img-related-group">
         {imgRelated.map((el, i) => (
           <div key={i} className="img-related-container">
-            <img
-              src={el.url}
-              alt="img-related"
-              className="img-related"
-              onClick={() => navigate("/details/" + el._id)}
-            />
+            <img src={el.url} alt="img-related" className="img-related" onClick={() => setid(el._id)} />
           </div>
         ))}
       </div>

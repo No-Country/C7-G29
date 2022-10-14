@@ -18,10 +18,12 @@
 }
 
 .reto_winner_so_far {
+  margin-top: 1em;
   width: 461px;
   height: 285px;
   cursor: pointer;
   border-radius: 20px;
+  position: relative;
 }
 
 .almost_winners_reto {
@@ -98,4 +100,45 @@
   line-height: 23px;
 
   color: #000000;
+}
+
+.fechas_texto_reto_termino {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #ce3636;
+}
+
+.ganador_del_reto_likes {
+  position: absolute;
+  width: 131px;
+  height: 96px;
+  top: 0;
+
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+
+  color: #ffffff;
+}
+
+.ganador_del_reto {
+  float: left;
+  position: absolute;
+  bottom: 0;
+
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+
+  /* Fondo */
+
+  color: #ffffff;
 }
