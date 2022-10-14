@@ -36,6 +36,8 @@ export default function LogIn() {
     error: { location: "", value: "" },
   });
 
+  console.log(loginForm.error, "error");
+
   const handleChange = (e) => {
     const value = e.target.value;
     setLoginForm({
@@ -47,21 +49,24 @@ export default function LogIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const a = await dispatch(loginAction(loginForm));
-      if (a.loged) {
-        dispatch(userCurrentAction());
-      } else {
-        if (a)
-          setLoginForm({
-            ...loginForm,
-            error: {
-              location: a.e === "emptyEmail" ? "email" : "password",
-              value: "Por Favor Ingrese dato",
-            },
-          });
-      }
-    } catch (error) {}
+    const a = await dispatch(loginAction(loginForm));
+    if (a.loged) {
+      dispatch(userCurrentAction());
+    } else {
+      if (a.e === "emptyEmail" || a.e === "emptyPassword")
+        setLoginForm({
+          ...loginForm,
+          error: {
+            location: a.e === "emptyEmail" ? "email" : "password",
+            value: "Por Favor Ingrese dato",
+          },
+        });
+      else
+        setLoginForm({
+          ...loginForm,
+          error: { location: "both", value: "null" },
+        });
+    }
   };
 
   const elementPassword = useRef(null);
@@ -110,6 +115,13 @@ export default function LogIn() {
               onChange={handleChange}
               name="email"
               value={loginForm.email}
+              style={{
+                background:
+                  loginForm.error.location === "email" ||
+                  loginForm.error.location === "both"
+                    ? "red"
+                    : "white",
+              }}
             />
           </div>
           <div className="div-password">
@@ -121,6 +133,13 @@ export default function LogIn() {
               onChange={handleChange}
               name="password"
               value={loginForm.password}
+              style={{
+                background:
+                  loginForm.error.location === "password" ||
+                  loginForm.error.location === "both"
+                    ? "red"
+                    : "white",
+              }}
             />
             {passwordYes === true ? (
               <img

@@ -21,14 +21,6 @@ export default function Home() {
 
   return (
     <div>
-      <NavBar />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       {cart.length > 0
         ? cart.map((x) => (
             <div key={x._id}>

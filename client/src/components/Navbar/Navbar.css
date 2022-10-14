@@ -1,5 +1,5 @@
 .navbar_component {
-  position: absolute;
+  position: relative;
   width: 100%;
   z-index: 7;
 }

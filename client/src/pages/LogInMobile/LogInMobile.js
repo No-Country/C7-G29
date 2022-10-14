@@ -108,14 +108,17 @@ export default function LogInMobile() {
     dispatch(logoutAction());
   }
 
+  console.log(document.cookie);
+
   async function handleOkAuth() {
     const a = await dispatch(userCurrentAction());
-
-    window.location.href =
-      "https://auth.expo.io/@juanfranco/Dark-Room?type=success&state=" +
-      state +
-      "&jwt=" +
-      a.payload.token;
+    if (a.loged) {
+      window.location.href =
+        "https://auth.expo.io/@juanfranco/Dark-Room?type=success&state=" +
+        state +
+        "&jwt=" +
+        a.payload.token;
+    }
   }
 
   return (
@@ -221,21 +224,9 @@ export default function LogInMobile() {
             />
             <p className="login-help-password">¿Te olvidaste la contraseña?</p>
             <p className="login-help">¿Necesitas ayuda?</p>
+            <button className="login-register-after">Registrarme</button>
           </form>
         )}
-
-        {/* <div className="login-background-functional">
-        <button className='login-register-after'>Registrarme</button>
-        <button 
-          className='login-login' 
-          onClick={loginFunctional}>
-          Iniciar sessión
-        </button>
-        <p className='login-o'>o</p>
-        <button className='login-google'>Continuar con Google</button>
-        <button className='login-fb'>Continuar con Facebook</button>
-        <p className='login-help'>¿Necesitas ayuda?</p>
-      </div> */}
       </div>
       <Footer />
     </div>

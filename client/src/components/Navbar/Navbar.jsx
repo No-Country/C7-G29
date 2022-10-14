@@ -34,7 +34,9 @@ export default function Navbar() {
         </Link>
 
         <div className="navbar-container-link">
-          <Link className="navbar-link">Categorias</Link>
+          <Link className="navbar-link" to="/retos">
+            Retos
+          </Link>
           <Link className="navbar-link" to="/publish">
             Subir
           </Link>

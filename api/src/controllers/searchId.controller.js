@@ -23,6 +23,7 @@ const publicationForId = async (req, res) => {
     if (!publicationId || publicationId.length === 0) {
       return res.status(201).json({ message: "Publicación no encontrada" });
     }
+    console.log(publicationId);
     res.json(publicationId);
   } catch (error) {
     console.error(error);
