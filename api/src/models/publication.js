@@ -37,12 +37,16 @@ const publicationSchema = mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "user",
     },
-    challenge: [
+    challengeLikes: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "challenges",
+        ref: "users",
       },
     ],
+    challenge: {
+      type: mongoose.Types.ObjectId,
+      ref: "challenges",
+    },
   },
   { timestamps: true, versionKey: false }
 );

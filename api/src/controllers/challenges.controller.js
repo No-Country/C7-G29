@@ -10,7 +10,6 @@ const getAllChallenges = async (req, res) => {
 };
 
 const getChallengeById = async (req, res) => {
-  console.log(req.params);
   const { idChallenge } = req.params;
   try {
     const challenge = await challenges.findById(idChallenge);
@@ -37,7 +36,6 @@ const updateChallengeById = async (req, res) => {
   try {
     const { idChallenge } = req.params;
 
-    console.log(req.body);
     await challenges.findByIdAndUpdate({ _id: idChallenge }, req.body, {
       new: true,
     });

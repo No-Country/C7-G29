@@ -57,6 +57,15 @@ const newPublication = async (req, res) => {
 };
 
 const updatePublicaiton = async (req, res) => {
+  if (req.body.likes) {
+    const publicacion = await publication.findOne({ _id: req.params.id }).populate("challenge");
+    if (publicacion.challenge) {
+      if (new Date(publicacion.challenge.ends) > new Date(Date.now())) {
+        await publication.updateOne({ _id: req.params.id }, { challengeLikes: req.body.likes });
+      }
+    }
+  }
+
   await publication.updateOne({ _id: req.params.id }, req.body);
 
   res.send("datos actualizados correctamente");
