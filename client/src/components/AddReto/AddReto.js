@@ -30,7 +30,6 @@ export default function AddReto() {
     e.preventDefault();
     if (!formulario.title.error || !formulario.descripcion.error || !formulario.ends.error || !formulario.price.error) {
       const a = await crearReto(formulario);
-      console.log(a);
     }
   }
 

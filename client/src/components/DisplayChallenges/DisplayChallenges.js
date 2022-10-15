@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-login.png";
 import "./DisplayChallenges.css";
 import Modal from "react-modal";
@@ -6,7 +5,6 @@ import Details from "../../pages/Details/Details";
 import { useState } from "react";
 
 export default function DisplayChallenges({ x }) {
-  let navigate = useNavigate();
   function calculateWinner() {
     var array = [...x.participants];
     array = array.sort((a, b) => b.challengeLikes.length - a.challengeLikes.length);
@@ -42,6 +40,7 @@ export default function DisplayChallenges({ x }) {
         <div>
           {winnersSoFar.map((x, index) => {
             if (index !== 0 && index < 5) return <img src={x.url} key={x._id} alt="almost winners" className="almost_winners_reto" onClick={() => setIsOpen(true)}></img>;
+            return null;
           })}
         </div>
       </div>
