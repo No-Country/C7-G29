@@ -5,6 +5,7 @@ mercadopago.configure({
   access_token: process.env.MP_ACCESS_TOKEN,
 });
 const shoppingSchema = require("../models/shopping");
+const user = require("../models/users");
 
 const buy = async (req, res) => {
   const data = req.body;
@@ -44,15 +45,10 @@ const buy = async (req, res) => {
 
 const checkPurchase = async (req, res) => {
   const { paymentid } = req.params;
-  var userOwner = "";
-  var timeStamp = "";
-  var estado = "";
   const a = await request(`https://api.mercadopago.com/v1/payments/${paymentid}/?access_token=${process.env.MP_ACCESS_TOKEN}`, async function (e, r, b) {
     const a = JSON.parse(b);
-    userOwner = a.external_reference;
-    timeStamp = a.date_approved;
-    estado = a.status;
-    a.additional_info.items.forEach((x) => {
+    array = [];
+    await a.additional_info.items.forEach((x) => {
       const boleta = shoppingSchema({
         photo_id: x.id,
         photo_url: x.picture_url,
@@ -62,12 +58,14 @@ const checkPurchase = async (req, res) => {
         date_approved: a.date_approved,
         payment_method: a.payment_method_id,
       });
+      array.push(x.id);
       boleta.save();
     });
 
-    const comprobante = await shoppingSchema.find({ buyer_id: userOwner, date_approved: timeStamp });
+    await user.findByIdAndUpdate(a.external_reference, { $push: { bought: array } });
+    const comprobante = await shoppingSchema.find({ buyer_id: a.external_reference, date_approved: a.date_approved });
 
-    res.status(200).json({ comprobante, estado });
+    res.status(200).json({ comprobante, estado: a.status });
   });
 };
 

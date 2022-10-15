@@ -36,9 +36,7 @@ const updateChallengeById = async (req, res) => {
   try {
     const { idChallenge } = req.params;
 
-    await challenges.findByIdAndUpdate({ _id: idChallenge }, req.body, {
-      new: true,
-    });
+    await challenges.findByIdAndUpdate({ _id: idChallenge }, req.body);
     res.send("datos actualizados correctamente");
   } catch (error) {
     res.status(400).send({ message: error });

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getDetails, getProfileDetails, userCurrentAction, addFollowed, addFollowers, addLiked, addFavotites, getAllPhotosData, modifyLikesPublication } from "../../redux/actions/photosActions";
+import { getDetails, userCurrentAction, addFollowed, addFollowers, addLiked, addFavotites, getAllPhotosData, modifyLikesPublication } from "../../redux/actions/photosActions";
 import { cleanPhotos } from "../../redux/slices/photosSlice";
 import { addItemToCart } from "../../redux/slices/cartSlice";
 //materialUI icons
@@ -23,7 +23,6 @@ export default function Details({ idFirstModal, setIsOpen }) {
   let navigate = useNavigate();
   const details = useSelector((state) => state.photos.photoDetails);
   const imgRelated = useSelector((state) => state.photos.allPhotosData);
-  const photographer = useSelector((state) => state.profile.userData);
   const currentUser = useSelector((state) => state.userLoged.currentUser);
   const tags = useSelector((state) => state.photos.photoDetails.tags)?.split(",");
   // estados de cuenta usuario
@@ -38,9 +37,9 @@ export default function Details({ idFirstModal, setIsOpen }) {
     else setLiked(false);
     if (currentUser.favorites?.includes(id)) setFavorites(true);
     else setFavorites(false);
-    if (currentUser.followed?.includes(photographer._id)) setFollowed(true);
+    if (currentUser.followed?.includes(details.photographer._id)) setFollowed(true);
     else setFollowed(false);
-  }, [currentUser, id, photographer._id, dispatch]);
+  }, [currentUser, id, details.photographer._id, dispatch]);
 
   useEffect(() => {
     dispatch(getDetails(id));
@@ -52,22 +51,18 @@ export default function Details({ idFirstModal, setIsOpen }) {
     return () => dispatch(cleanPhotos());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (details.photographer !== undefined) dispatch(getProfileDetails(details.photographer));
-  }, [details.photographer, dispatch]);
-
   const handleFollow = async () => {
     console.log("ADD FOLLOWED");
-    if (currentUser.followed.includes(details.photographer)) {
-      let unFollowed = currentUser.followed.filter((el) => el !== details.photographer);
-      let unFollowers = photographer.followers.filter((el) => el !== currentUser._id);
+    if (currentUser.followed.includes(details.photographer._id)) {
+      let unFollowed = currentUser.followed.filter((el) => el !== details.photographer._id);
+      let unFollowers = details.photographer.followers.filter((el) => el !== currentUser._id);
 
       await dispatch(addFollowed(unFollowed, currentUser._id));
-      await dispatch(addFollowers(unFollowers, photographer._id));
+      await dispatch(addFollowers(unFollowers, details.photographer._id));
       setCheck(!check);
     } else {
-      await dispatch(addFollowed([...currentUser.followed, details.photographer], currentUser._id));
-      await dispatch(addFollowers([...photographer.followers, currentUser._id], details.photographer));
+      await dispatch(addFollowed([...currentUser.followed, details.photographer._id], currentUser._id));
+      await dispatch(addFollowers([...details.photographer.followers, currentUser._id], details.photographer._id));
       setCheck(!check);
     }
   };
@@ -118,6 +113,26 @@ export default function Details({ idFirstModal, setIsOpen }) {
     if (index < imgRelated.length - 1) setid(imgRelated[index + 1]._id);
   };
 
+  const download = (e) => {
+    fetch(details.url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => {
+        response.arrayBuffer().then(function (buffer) {
+          const url = window.URL.createObjectURL(new Blob([buffer]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "image.png"); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="container-detail">
       <p className="close-btn" onClick={() => setIsOpen(false)}>
@@ -125,8 +140,8 @@ export default function Details({ idFirstModal, setIsOpen }) {
       </p>
       <div className="detail-navbar">
         <div className="left-group">
-          <img className="avatar-img" src={photographer.avatar} alt="avatar-profile" onClick={() => navigate("/profile/" + details.photographer)} />
-          <span className="name-ph">{`${photographer.name} ${photographer.lastName}`}</span>
+          <img className="avatar-img" src={details.photographer.avatar} alt="avatar-profile" onClick={() => navigate("/profile/" + details.photographer._id)} />
+          <span className="name-ph">{`${details.photographer.name} ${details.photographer.lastName}`}</span>
           <button className={followed !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} onClick={handleFollow}>
             <PersonAddAltOutlinedIcon fontSize="small" />
             Seguir
@@ -195,11 +210,22 @@ export default function Details({ idFirstModal, setIsOpen }) {
           <ReplyOutlinedIcon fontSize="small" />
           Compartir
         </button>
-
-        <button className={!details.pay ? "btn-buy disable" : "btn-buy"} disabled={!details.pay} onClick={handleBuy}>
-          <ShoppingCartOutlinedIcon fontSize="small" />
-          Comprar
-        </button>
+        {details.pay ? (
+          currentUser.bought.includes(details._id) ? (
+            <button className="btn-buy" onClick={handleBuy}>
+              Descargar
+            </button>
+          ) : (
+            <button className="btn-buy" onClick={handleBuy}>
+              <ShoppingCartOutlinedIcon fontSize="small" />
+              Comprar
+            </button>
+          )
+        ) : (
+          <button className="btn-buy" onClick={download}>
+            Descargar
+          </button>
+        )}
       </div>
 
       <p className="title-related">Relacionado</p>
