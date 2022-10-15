@@ -52,7 +52,7 @@ export default function Navbar() {
               </div>
               <div>
                 <div className="navbar_menuModal">
-                  <Link to={`/profile/${currentUser._id}`} className="">
+                  <Link to={`/profile/${currentUser._id}`} className="navbar_perfil">
                     ver perfil
                   </Link>
                   <span className="navbar_logOut" onClick={handleLogout}>
