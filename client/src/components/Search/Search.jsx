@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Search.css";
 import Lupa from "./../../assets/Lupa.png";
-import Gris from "./../../assets/gris.jpg";
 import Colores from './../../assets/Frame24.png';
 import Texturas from './../../assets/Frame26.png';
 import Tecnologias from './../../assets/Frame27.png';
