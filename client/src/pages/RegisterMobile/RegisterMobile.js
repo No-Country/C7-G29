@@ -1,15 +1,13 @@
 import React, { useState, useRef } from "react";
-import "./Register.css";
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
-import { Link, useParams } from "react-router-dom";
-import { registerUser, loginAction, userCurrentAction } from "../../redux/actions/photosActions";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { registerUser, loginAction } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
 
-export default function Register() {
+export default function RegisterMobile({ x }) {
   const dispatch = useDispatch();
   const params = useParams();
   const [email, setEmail] = useState({ value: "", error: null });
@@ -18,6 +16,7 @@ export default function Register() {
   const [coinsidence, setCoinsidence] = useState(null);
   const [passwordYesRegister, setPasswordYesRegister] = useState(false);
   const [passwordYesRegister2, setPasswordYesRegister2] = useState(false);
+  const navigate = useNavigate();
 
   const elementPasswordRegister = useRef(null);
   const elementPasswordRegister2 = useRef(null);
@@ -52,7 +51,7 @@ export default function Register() {
       });
       if (a.creado) {
         await dispatch(loginAction({ email: email.value, password: password.value }));
-        await dispatch(userCurrentAction());
+        navigate(-1);
       }
     }
   }
@@ -81,9 +80,6 @@ export default function Register() {
 
   return (
     <div className="register-total">
-      <div className="register_div">
-        <Navbar />
-      </div>
       <div className="register-background">
         <div className="register-general-text">
           <h1 className="register-h1">
