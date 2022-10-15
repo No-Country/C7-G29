@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   allPhotosData: [],
   filterPhotosData: [],
-  photoDetails: {},
+  photoDetails: { photographer: {} },
 };
 
 //Este es el slice que uso para tener los datos de todas las fotos que se cargan en el home.
@@ -34,7 +34,7 @@ const photosSlice = createSlice({
       state.filterPhotosData = [...newArray];
     },
     cleanPhotos: (state) => {
-      state.photoDetails = {};
+      state.photoDetails = initialState.photoDetails;
     },
     insertDetails: (state, { payload }) => {
       state.photoDetails = payload;
