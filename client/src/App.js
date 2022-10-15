@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { localStorageCart } from "./redux/slices/cartSlice";
 import LogIn from "./pages/LogIn/LogIn";
-import Details from "./pages/Details/Details";
 import Profile from "./pages/Profile/Profile";
 import PostBuy from "./pages/PostBuy/PostBuy";
 import { userCurrentAction, logoutAction } from "./redux/actions/photosActions";
@@ -19,6 +18,7 @@ import LogInMobile from "./pages/LogInMobile/LogInMobile";
 import UserScreen from "./pages/UserScreen/UserScreen";
 import Retos from "./pages/Retos/Retos";
 import AddReto from "./components/AddReto/AddReto";
+import RegisterMobile from "./pages/RegisterMobile/RegisterMobile";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -78,6 +78,7 @@ function App() {
             </>
           )}
           <Route path="/loginMobile" element={<LogInMobile />}></Route>
+          <Route path="/registerMobile" element={<RegisterMobile />}></Route>
           <Route path="/retos" element={<Retos />}></Route>
           <Route path="/addReto" element={<AddReto />}></Route>
           <Route path="*" element={<Home />}></Route>

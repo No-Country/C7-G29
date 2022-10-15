@@ -44,29 +44,31 @@ const buy = async (req, res) => {
 
 const checkPurchase = async (req, res) => {
   const { paymentid } = req.params;
-  const a = await request(
-    `https://api.mercadopago.com/v1/payments/${paymentid}/?access_token=${process.env.MP_ACCESS_TOKEN}`,
-    async function (e, r, b) {
-      const a = JSON.parse(b);
-
-      a.additional_info.items.forEach((x) => {
-        const boleta = shoppingSchema({
-          photo_id: x.id,
-          photo_url: x.picture_url,
-          photo_price: x.unit_price,
-          buyer_id: a.external_reference,
-          payment_status: a.status,
-          date_approved: a.date_approved,
-          payment_method: a.payment_method_id,
-        });
-        boleta.save();
+  var userOwner = "";
+  var timeStamp = "";
+  var estado = "";
+  const a = await request(`https://api.mercadopago.com/v1/payments/${paymentid}/?access_token=${process.env.MP_ACCESS_TOKEN}`, async function (e, r, b) {
+    const a = JSON.parse(b);
+    userOwner = a.external_reference;
+    timeStamp = a.date_approved;
+    estado = a.status;
+    a.additional_info.items.forEach((x) => {
+      const boleta = shoppingSchema({
+        photo_id: x.id,
+        photo_url: x.picture_url,
+        photo_price: x.unit_price,
+        buyer_id: a.external_reference,
+        payment_status: a.status,
+        date_approved: a.date_approved,
+        payment_method: a.payment_method_id,
       });
-    }
-  );
+      boleta.save();
+    });
 
-  const comprobante = await shoppingSchema.find();
+    const comprobante = await shoppingSchema.find({ buyer_id: userOwner, date_approved: timeStamp });
 
-  res.status(200).json({ comprobante });
+    res.status(200).json({ comprobante, estado });
+  });
 };
 
 module.exports = {
