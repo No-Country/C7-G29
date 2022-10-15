@@ -6,6 +6,7 @@ const initialState = {
     favorites: [],
     followers: [],
     liked: [],
+    bought: [],
   },
   loged: false,
 };
