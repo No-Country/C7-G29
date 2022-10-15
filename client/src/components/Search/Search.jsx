@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./Search.css";
 import Lupa from "./../../assets/Lupa.png";
 import Gris from "./../../assets/gris.jpg";
+import Colores from './../../assets/Frame24.png';
+import Texturas from './../../assets/Frame26.png';
+import Tecnologias from './../../assets/Frame27.png';
+import Naturaleza from './../../assets/Frame28.png';
+import Dark from './../../assets/Frame29.png';
+import Autos from './../../assets/Frame32.png';
+import Arquitectura from './../../assets/Frame30.png';
+import Astronomia from './../../assets/Frame31.png';
 import Filter from "./../../assets/filter.png";
 import { getDataForFiltering } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
@@ -26,6 +34,62 @@ export default function Search() {
     setFilter({
       ...filter,
       title: e.target.value.length > 0 ? e.target.value : null,
+    });
+  }
+
+  function handleChangeColores() {
+    setFilter({
+      ...filter,
+      title: "colores",
+    });
+  }
+
+  function handleChangeTextura() {
+    setFilter({
+      ...filter,
+      title: "textura",
+    });
+  }
+
+  function handleChangeTecnologia() {
+    setFilter({
+      ...filter,
+      title: "tecnologia",
+    });
+  }
+
+  function handleChangeNaturaleza() {
+    setFilter({
+      ...filter,
+      title: "naturaleza",
+    });
+  }
+
+  function handleChangeDark() {
+    setFilter({
+      ...filter,
+      title: "dark",
+    });
+  }
+
+  function handleChangeArquitectura() {
+    setFilter({
+      ...filter,
+      title: "arquitectura",
+    });
+  }
+
+  function handleChangeAutos() {
+    setFilter({
+      ...filter,
+      title: "autos",
+    });
+  }
+
+  function handleChangeAstronomia() {
+    setFilter({
+      ...filter,
+      title: "astronomia",
     });
   }
 
@@ -54,7 +118,7 @@ export default function Search() {
             <div className="search-div">
               <div className="search-div-filter">
                 <button className="search-div-button">
-                  <img src={Filter} alt="sadasd" />
+                  <img src={Filter} alt="filtro" />
                   &nbsp;Filtro
                 </button>
                 <div className="search-div-category">
@@ -64,71 +128,72 @@ export default function Search() {
                   <hr className="search-hr" />
                 </div>
                 <div className="search-card">
-                  <div className="search-card-total">
+                  <div className="search-card-total" onClick={handleChangeColores}
+                  >
                     <img
                       alt="sadasd"
-                      src={Gris}
+                      src={Colores}
                       className="search-card-total-img"
                     />
                     <p className="search-card-total-p">&nbsp;Colores</p>
                   </div>
-                  <div className="search-card-total">
+                  <div className="search-card-total" onClick={handleChangeTextura}>
                     <img
                       alt="sadasd"
-                      src={Gris}
+                      src={Texturas}
                       className="search-card-total-img"
                     />
-                    <p className="search-card-total-p">&nbsp;Colores</p>
+                    <p className="search-card-total-p">&nbsp;Textura</p>
                   </div>
-                  <div className="search-card-total">
+                  <div className="search-card-total" onClick={handleChangeTecnologia}>
                     <img
                       alt="sadasd"
-                      src={Gris}
+                      src={Tecnologias}
                       className="search-card-total-img"
                     />
-                    <p className="search-card-total-p">&nbsp;Colores</p>
+                    <p className="search-card-total-p">&nbsp;Tecnologia</p>
                   </div>
-                  <div className="search-card-total">
+                  <div className="search-card-total" onClick={handleChangeNaturaleza}>
                     <img
                       alt="sadasd"
-                      src={Gris}
+                      src={Naturaleza}
                       className="search-card-total-img"
                     />
-                    <p className="search-card-total-p">&nbsp;Colores</p>
+                    <p className="search-card-total-p">&nbsp;Naturaleza</p>
                   </div>
                 </div>
                 <div className="search-card">
-                  <div className="search-card-total">
+                  <div className="search-card-total" onClick={handleChangeDark}>
                     <img
                       alt="sadasd"
-                      src={Gris}
+                      src={Dark}
                       className="search-card-total-img"
                     />
-                    <p className="search-card-total-p">&nbsp;Colores</p>
+                    <p className="search-card-total-p">&nbsp;Dark</p>
                   </div>
-                  <div className="search-card-total">
+                  <div className="search-card-total" onClick={handleChangeArquitectura}>
                     <img
                       alt="sadasd"
-                      src={Gris}
+                      src={Arquitectura}
                       className="search-card-total-img"
                     />
-                    <p className="search-card-total-p">&nbsp;Colores</p>
+                    <p className="search-card-total-p">&nbsp;Arquitectura</p>
                   </div>
-                  <div className="search-card-total">
+                  <div className="search-card-total" onClick={handleChangeAstronomia}>
                     <img
                       alt="sadasd"
-                      src={Gris}
+                      src={Astronomia}
                       className="search-card-total-img"
                     />
-                    <p className="search-card-total-p">&nbsp;Colores</p>
+                    <p className="search-card-total-p">&nbsp;Astronomia</p>
                   </div>
-                  <div className="search-card-total">
+                  <div className="search-card-total" onClick={handleChangeAutos}>
                     <img
                       alt="sadasd"
-                      src={Gris}
+                      src={Autos}
                       className="search-card-total-img"
                     />
-                    <p className="search-card-total-p">&nbsp;Colores</p>
+                    <p className="search-card-total-p">&nbsp;Autos</p>
                   </div>
                 </div>
               </div>
