@@ -15,6 +15,7 @@ const allPublications = async (req, res) => {
     }
     return res.status(201).json(photo);
   } catch (error) {
+    console.log(error);
     return res.status(400).send({ message: error });
   }
 };

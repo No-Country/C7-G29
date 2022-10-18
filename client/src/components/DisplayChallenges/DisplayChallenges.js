@@ -62,7 +62,13 @@ export default function DisplayChallenges({ x }) {
         </div>
       </div>
       <img src={logo} alt="logo" className="logo_retos_data"></img>
-      <Modal isOpen={modalIsOpen} onRequestClose={() => setIsOpen(false)}>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setIsOpen(false)}
+        style={{
+          overlay: { zIndex: 1000 },
+        }}
+      >
         <Details idFirstModal={IdForModal} setIsOpen={setIsOpen} />
       </Modal>
     </div>

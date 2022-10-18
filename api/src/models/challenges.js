@@ -20,6 +20,10 @@ const challengesSchema = mongoose.Schema(
         ref: "publication",
       },
     ],
+    cashed_out: {
+      type: Boolean,
+      default: false,
+    },
     participants: [
       {
         type: mongoose.Types.ObjectId,

@@ -18,16 +18,7 @@ export default function Retos() {
   return (
     <div>
       <div id="container_retos_navbar">
-        <div id="navbar_retos">
-          <NavBar />
-          <div id="buscador_retos">
-            <input id="input_retos_buscador"></input>
-            <div className="retos_buscar">Buscar</div>
-          </div>
-          <label htmlFor="input_retos_buscador" id="label_buscador_retos">
-            Descarga gratis, compra, vende, emprende
-          </label>
-        </div>
+        <NavBar />
       </div>
       <div id="label_retos_container">
         <div id="labels_retos">
