@@ -16,6 +16,7 @@ export default function PostBuy() {
         .then((a) => a);
       if (a.estado === "approved") {
         dispatch(cleanCart());
+        window.location.href = "https://frontendc7-darkroom.vercel.app";
       }
     }
 
