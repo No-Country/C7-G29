@@ -31,7 +31,7 @@ export default function Details({ idFirstModal, setIsOpen }) {
   const [followed, setFollowed] = useState(false);
   const [check, setCheck] = useState(false);
   const [id, setid] = useState(idFirstModal);
-
+console.log('currentUser', currentUser)
   useEffect(() => {
     if (currentUser.liked?.includes(id)) setLiked(true);
     else setLiked(false);
@@ -142,7 +142,11 @@ export default function Details({ idFirstModal, setIsOpen }) {
         <div className="left-group">
           <img className="avatar-img" src={details.photographer.avatar} alt="avatar-profile" onClick={() => navigate("/profile/" + details.photographer._id)} />
           <span className="name-ph">{`${details.photographer.name} ${details.photographer.lastName}`}</span>
-          <button className={followed !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} onClick={handleFollow}>
+          <button 
+            className={followed !== true ? "btn-detail-navbar" : "btn-detail-navbar unfollowed"} 
+            onClick={handleFollow}
+            disabled={details.photographer._id === currentUser._id}
+          >
             <PersonAddAltOutlinedIcon fontSize="small" />
             Seguir
           </button>
@@ -168,7 +172,12 @@ export default function Details({ idFirstModal, setIsOpen }) {
       </div>
 
       <div className="detail-description">
-        <span className="use">Uso premium</span>
+        {
+          details.pay === true ?
+          <span className="use">Uso premium</span>
+          :
+          <span className="use">Uso público</span>
+        }
         <div className="title-group">
           <p className="img-title">{details.title}</p>
           <p className="img-ubication">
@@ -206,10 +215,10 @@ export default function Details({ idFirstModal, setIsOpen }) {
           </div>
         </div>
 
-        <button className="btn-share" onClick={handleShare}>
+        {/* <button className="btn-share" onClick={handleShare}>
           <ReplyOutlinedIcon fontSize="small" />
           Compartir
-        </button>
+        </button> */}
         {details.pay ? (
           currentUser.bought.includes(details._id) ? (
             <button className="btn-buy" onClick={handleBuy}>
