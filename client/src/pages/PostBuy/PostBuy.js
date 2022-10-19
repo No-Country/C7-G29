@@ -14,13 +14,13 @@ export default function PostBuy() {
       })
         .then((a) => a.json())
         .then((a) => a);
-
       if (a.estado === "approved") {
         dispatch(cleanCart());
       }
     }
+
     t();
-  }, [payment_id]);
+  }, []);
 
   return <div></div>;
 }

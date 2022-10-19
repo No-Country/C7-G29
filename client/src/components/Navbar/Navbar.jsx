@@ -53,10 +53,18 @@ export default function Navbar() {
               <div>
                 <div className="navbar_menuModal">
                   <Link to={`/profile/${currentUser._id}`} className="navbar_perfil">
-                    ver perfil
+                    Ver Perfil
+                  </Link>
+                  {currentUser.userType === "userPhotographer" ? (
+                    <Link to={`/solds`} className="navbar_perfil">
+                      Ventas
+                    </Link>
+                  ) : null}
+                  <Link to={`/profile/${currentUser._id}`} className="navbar_perfil">
+                    Compras
                   </Link>
                   <span className="navbar_logOut" onClick={handleLogout}>
-                    cerrar sesion
+                    Cerrar Sesion
                   </span>
                 </div>
               </div>

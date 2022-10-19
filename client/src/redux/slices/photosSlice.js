@@ -13,7 +13,6 @@ const photosSlice = createSlice({
   initialState,
   reducers: {
     insertDataAllPhotos: (state, { payload }) => {
-      // payload.reverse();
       state.allPhotosData = payload.reverse();
       state.filterPhotosData = payload;
     },

@@ -29,6 +29,7 @@ const publicationSchema = mongoose.Schema(
     },
     price: {
       type: Number,
+      default: 0,
     },
     pay: {
       type: Boolean,
@@ -37,6 +38,12 @@ const publicationSchema = mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "user",
     },
+    sales: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "shoppingSchema",
+      },
+    ],
     challengeLikes: [
       {
         type: mongoose.Types.ObjectId,

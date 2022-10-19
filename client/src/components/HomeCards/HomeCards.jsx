@@ -17,6 +17,7 @@ import Details from "../../pages/Details/Details";
 import { addItemToCart, cleanItem } from "../../redux/slices/cartSlice";
 
 import { addLiked, modifyLikesPublication, addFavotites, userCurrentAction } from "../../redux/actions/photosActions";
+import zIndex from "@mui/material/styles/zIndex";
 
 export default function Home({ x }) {
   let navigate = useNavigate();
@@ -132,7 +133,13 @@ export default function Home({ x }) {
           </div>
         ) : null}
       </div>
-      <Modal isOpen={modalIsOpen} onRequestClose={() => setIsOpen(false)}>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setIsOpen(false)}
+        style={{
+          overlay: { zIndex: 1000 },
+        }}
+      >
         <Details idFirstModal={x._id} setIsOpen={setIsOpen} />
       </Modal>
     </div> //agrege div este

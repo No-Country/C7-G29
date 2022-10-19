@@ -23,6 +23,7 @@
     "react-scripts": "5.0.1",
     "react-sdk-mercadopago": "^1.1.1",
     "react-spinners": "^0.13.6",
+    "victory-native": "^36.6.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

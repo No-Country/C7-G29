@@ -19,6 +19,7 @@ import UserScreen from "./pages/UserScreen/UserScreen";
 import Retos from "./pages/Retos/Retos";
 import AddReto from "./components/AddReto/AddReto";
 import RegisterMobile from "./pages/RegisterMobile/RegisterMobile";
+import Solds from "./pages/Solds/Solds";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -66,6 +67,7 @@ function App() {
             <>
               <Route path="/publish" element={<Publish />}></Route>
               <Route path="/postBuy" element={<PostBuy />}></Route>
+              {currentUser.currentUser.userType === "userPhotographer" ? <Route path="/solds" element={<Solds />}></Route> : null}
             </>
           ) : (
             <>
@@ -77,6 +79,7 @@ function App() {
               <Route path="/postBuy" element={<LogIn />}></Route>
             </>
           )}
+
           <Route path="/loginMobile" element={<LogInMobile />}></Route>
           <Route path="/registerMobile" element={<RegisterMobile />}></Route>
           <Route path="/retos" element={<Retos />}></Route>
