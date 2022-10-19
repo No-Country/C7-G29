@@ -3,7 +3,7 @@ import CircleLoader from "react-spinners/CircleLoader";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Publish from "./pages/Publish/Publish";
-import Cart from "./pages/Cart";
+import Cart from "./pages/Cart/Cart";
 import Register from "./pages/Register/Register";
 import Users from "./pages/Users/Users";
 import { useEffect, useState } from "react";
