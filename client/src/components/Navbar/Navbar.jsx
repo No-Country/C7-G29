@@ -55,7 +55,7 @@ export default function Navbar() {
                   <Link to={`/profile/${currentUser._id}`} className="navbar_perfil">
                     Ver Perfil
                   </Link>
-                  {currentUser.userType === "userPhotographer" ? (
+                  {currentUser.userType === "userPhotographer" || currentUser.userType === "owner" || currentUser.userType === "admin" ? (
                     <Link to={`/solds`} className="navbar_perfil">
                       Ventas
                     </Link>
@@ -63,6 +63,11 @@ export default function Navbar() {
                   <Link to={`/profile/${currentUser._id}`} className="navbar_perfil">
                     Compras
                   </Link>
+                  {currentUser.userType === "owner" || currentUser.userType === "admin" ? (
+                    <Link to={"/admin"} className="navbar_perfil">
+                      Panel de Admin
+                    </Link>
+                  ) : null}
                   <span className="navbar_logOut" onClick={handleLogout}>
                     Cerrar Sesion
                   </span>

@@ -20,6 +20,7 @@ import Retos from "./pages/Retos/Retos";
 import AddReto from "./components/AddReto/AddReto";
 import RegisterMobile from "./pages/RegisterMobile/RegisterMobile";
 import Solds from "./pages/Solds/Solds";
+import Admin from "./pages/Admin/Admin";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -67,7 +68,12 @@ function App() {
             <>
               <Route path="/publish" element={<Publish />}></Route>
               <Route path="/postBuy" element={<PostBuy />}></Route>
-              {currentUser.currentUser.userType === "userPhotographer" ? <Route path="/solds" element={<Solds />}></Route> : null}
+              {currentUser.currentUser.userType === "userPhotographer" || currentUser.currentUser.userType === "owner" || currentUser.currentUser.userType === "admin" ? (
+                <>
+                  <Route path="/solds" element={<Solds />}></Route>
+                  <Route path="/aceptarPago" element={<Solds />}></Route>
+                </>
+              ) : null}
             </>
           ) : (
             <>
@@ -79,6 +85,8 @@ function App() {
               <Route path="/postBuy" element={<LogIn />}></Route>
             </>
           )}
+
+          {currentUser.currentUser.userType === "admin" || currentUser.currentUser.userType === "owner" ? <Route path="/admin" element={<Admin />}></Route> : null}
 
           <Route path="/loginMobile" element={<LogInMobile />}></Route>
           <Route path="/registerMobile" element={<RegisterMobile />}></Route>
