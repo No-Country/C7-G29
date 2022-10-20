@@ -41,7 +41,6 @@ const singUp = async (req, res) => {
           },
         },
       });
-
       return res.status(200).json({ newUser, creado: "true" });
     }
 
@@ -115,5 +114,6 @@ const currentUser = async (req, res) => {
     return res.status(401).json({ message: error });
   }
 };
+
 
 module.exports = { singUp, singIn, logOut, currentUser };

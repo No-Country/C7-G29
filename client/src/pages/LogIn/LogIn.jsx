@@ -130,8 +130,7 @@ export default function LogIn() {
       <div className="login-background">
         <div className="login-general-text">
           <h1 className="login-h1">
-            Inicia Sessión con <br />
-            Darkroom
+            Inicia Sessión
           </h1>
         </div>
 
@@ -176,15 +175,18 @@ export default function LogIn() {
           <button className="login-login">Iniciar sessión</button>
           <p className="login-o">o</p>
           <div style={{ width: "300px", alignSelf: "center" }}>
-            <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Login" onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={"single_host_origin"} />
+            <GoogleLogin className="login_google" clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Login" onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={"single_host_origin"} />
           </div>
-          <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} />
+          <div style={{ width: "300px", alignSelf: "center", margin: "15px 0" }}>
+            <FacebookLogin className="login_facebook" appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} />
+          </div>
           <Link className="login-help" to="/users">
             Registrarse
           </Link>
           <p className="login-help-password">¿Te olvidaste la contraseña?</p>
         </form>
 
+        
         {/* <div className="login-background-functional">
         <button className='login-register-after'>Registrarme</button>
         <button 
