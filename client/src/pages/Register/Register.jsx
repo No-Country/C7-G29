@@ -131,7 +131,6 @@ export default function Register() {
             Registrarse
           </button>
           <p className="register-o">o</p>
-<<<<<<< HEAD
 
           <Link
             className="register-fb"
