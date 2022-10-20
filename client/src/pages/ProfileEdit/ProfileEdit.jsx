@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { getProfileDetails, uploadPhotoToCloudinary } from "../../redux/actions/photosActions";
+import { useParams, useNavigate } from "react-router-dom";
+import { getProfileDetails, uploadPhotoToCloudinary, uploadPerfilDates } from "../../redux/actions/photosActions";
 import { cleanProfileDetails } from "../../redux/slices/profileSlice";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -39,9 +39,11 @@ console.log('input', input)
 
     function handleSubmit(e){
         e.preventDefault()
-        // dispatch(postDog(input))
-        alert('Se actualizaron las datos!!!')
-
+        if(input.name === '') input.name = details.name
+        if(input.lastName === '') input.lastName = details.lastName
+        if(input.avatar === '') input.avatar = details.avatar
+        if(input.userType === '') input.userType = details.userType
+        dispatch(uploadPerfilDates(input, you._id))
         setInput({
             name: '',
             lastName: '',
@@ -51,14 +53,10 @@ console.log('input', input)
         navigate("/profile/" + you._id)
     }
 
-    // const [inputImage, setInputImage] = useState(null);
-
-	async function handleImage(e) {
-		console.log(e.target.files)
+	async function handleImage(e) {		
 		const response = uploadPhotoToCloudinary(e);
-		const avatarImg = await response();
-        console.log('avatarImg', avatarImg)
-		// setInputImage(avatarImg);        
+		const avatarImg = await response();        
+		setInput({...input, avatar: avatarImg[0]});        
 	}
 
   return (
@@ -78,14 +76,14 @@ console.log('input', input)
                 <div className="avatar-block">
                     <img
                         alt="user"
-                        src={details.avatar}
+                        src={input.avatar === '' ? details.avatar : input.avatar}
                         className="profile-edit-avatar"
                     ></img>
                     <div className="edit-icon">
                         {/* <img src={editIcon} alt="edit-img" onClick={() => console.log('editando')} className="edit-icon-img"/> */}
                         <div className="avatar-input-upload" id="avatar_uploadPhoto">
                             <input
-                                name="avatar_uploadPhoto"
+                                name="avatar_uploadPhoto"                                
                                 multiple="multiple"
                                 type="file"
                                 accept="image/png,image/jpeg"
@@ -146,6 +144,10 @@ console.log('input', input)
         <div className="profile-edit-submit">
             <button className="profile-edit-btn-submit" onClick={e=>handleSubmit(e)}>
                 Guardar Cambios    
+            </button>
+
+            <button className="profile-edit-btn-submit remove" onClick={()=>navigate("/profile/" + you._id)}>
+                Cancelar Cambios    
             </button>
         </div>
 
