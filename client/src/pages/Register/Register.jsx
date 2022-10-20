@@ -5,9 +5,8 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
-import { GoogleLogin } from "react-google-login";
-import { Link, useParams } from "react-router-dom";
-import { registerUser, loginAction, userCurrentAction, registerUserGoogle } from "../../redux/actions/photosActions";
+import { useParams } from "react-router-dom";
+import { registerUser, loginAction, userCurrentAction } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
 
 export default function Register() {
@@ -80,16 +79,6 @@ export default function Register() {
     else setCoinsidence(false);
   }
 
-  function handleGoogleRegister(e) {
-    dispatch(registerUserGoogle({
-      avatar: e.profileObj.imageUrl,
-      name: e.profileObj.givenName,
-      lastName: e.profileObj.familyName,
-      email : e.profileObj.email,
-      userType: params.userType,
-    }))
-  }
-
   return (
     <div className="register-total">
       <div className="register_div">
@@ -142,7 +131,7 @@ export default function Register() {
             Registrarse
           </button>
           <p className="register-o">o</p>
-          <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Login" onSuccess={handleGoogleRegister} onFailure={handleGoogleRegister} cookiePolicy={"single_host_origin"} />
+
           {/* <Link
             className="register-fb"
             to="/login"
