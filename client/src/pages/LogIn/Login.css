@@ -14,11 +14,13 @@
   text-align: center;
   background-color: #1f1f1f;
   margin-bottom: 20px;
+  padding: 5px;
 }
 
 .login_divNav {
   height: 108px;
 }
+
 
 .login-h1 {
   color: white;
@@ -27,8 +29,8 @@
   font-weight: 400;
   font-size: 32px;
   line-height: 38px;
-  text-align: center;
   letter-spacing: 0.04em;
+  text-align: center;
 }
 
 .login-background-functional {

@@ -96,8 +96,7 @@ export default function LogIn() {
       <div className="login-background">
         <div className="login-general-text">
           <h1 className="login-h1">
-            Inicia Sessión con <br />
-            Darkroom
+            Inicia Sessión
           </h1>
         </div>
 
