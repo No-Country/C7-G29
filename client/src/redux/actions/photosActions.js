@@ -3,6 +3,9 @@ import { fillProfileData } from "../slices/profileSlice";
 import { getUserLoged } from "../slices/usersLogedSlice";
 import { putAllChallenges } from "../slices/challengeSlice";
 
+const webLocal = 'http://localhost:9000/'
+const web = 'https://deploy-api-c7-dark-room.onrender.com/'
+
 export const getAllPhotosData = () => async (dispatch) => {
   return await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/publication`, {
     method: "GET",
@@ -150,8 +153,6 @@ export const addFollowed = (idPh, _idCurrent) => async () => {
 };
 
 export const addFollowers = (followers, idPh) => async () => {
-  console.log("###ACTION-followers", followers);
-  console.log("###ACTION-idPh", idPh);
   return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/users/${idPh}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -248,6 +249,22 @@ export const crearReto = async (data) => {
       description: data.descripcion.value,
       ends: data.ends.value,
       price: data.price.value,
+    }),
+  })
+    .then((response) => response.json())
+    .then((d) => d)
+    .catch((e) => e);
+};
+
+export const uploadPerfilDates = (data, id) => async () => {
+  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/users/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: data.name,
+      lastName: data.lastName,
+      avatar: data.avatar,
+      userType: data.userType,
     }),
   })
     .then((response) => response.json())
