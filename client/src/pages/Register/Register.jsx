@@ -170,9 +170,7 @@ export default function Register() {
           </button>
           <p className="register-o">o</p>
 
-          <div className="div_registerTer">
-            <GoogleLogin className="login_google" clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Countinua con Google" onSuccess={handleGoogleRegister} onFailure={handleGoogleRegister} cookiePolicy={"single_host_origin"} />
-          </div>
+
           <Link
             className="register-fb"
             to="/login"
