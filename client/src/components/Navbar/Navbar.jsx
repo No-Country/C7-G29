@@ -5,13 +5,14 @@ import Group from "./../../assets/Group.png";
 import "./Navbar.css";
 import { logOut } from "../../redux//slices/usersLogedSlice";
 // import Notificaciones from './../../assets/Vector.png';
- import Subir from './../../assets/iTETAH.tif_1_.png';
- import Carrito from './../../assets/carrito.png';
+import Subir from "./../../assets/iTETAH.tif_1_.png";
+import Carrito from "./../../assets/carrito.png";
 
 export default function Navbar() {
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.userLoged.currentUser);
+  console.log(currentUser);
 
   const handleLogout = () => {
     dispatch(logoutAction());
@@ -38,11 +39,13 @@ export default function Navbar() {
             Retos
           </Link>
           <Link className="navbar-link" to="/publish">
-          <img src={Subir} />&#160;&#160;Subir
+            <img src={Subir} />
+            &#160;&#160;Subir
           </Link>
 
           <Link to="/cart" className="navbar-link">
-            <img src={Carrito} />&#160;&#160;Carrito
+            <img src={Carrito} />
+            &#160;&#160;Carrito
           </Link>
 
           {currentUser.email ? (

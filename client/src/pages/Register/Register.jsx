@@ -6,9 +6,10 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
-import { GoogleLogin } from "react-google-login";
-import { Link, useParams } from "react-router-dom";
-import { registerUser, loginAction, userCurrentAction, registerUserGoogle } from "../../redux/actions/photosActions";
+
+import { useParams, Link } from "react-router-dom";
+import { registerUser, loginAction, userCurrentAction } from "../../redux/actions/photosActions";
+
 import { useDispatch } from "react-redux";
 import { gapi } from "gapi-script";
 
@@ -181,12 +182,12 @@ export default function Register() {
             Registrarse
           </button>
           <p className="register-o">o</p>
-          <div className="div_registerTer">
-            <GoogleLogin className="login_google" clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Countinua con Google" onSuccess={handleGoogleRegister} onFailure={handleGoogleRegister} cookiePolicy={"single_host_origin"} />
-          </div>
+
+
+
           <Link
             className="register-fb"
-            to="/login"
+            to="/loginScreen"
             style={{
               borderRadius: "20px",
               textDecoration: "none",
@@ -196,8 +197,11 @@ export default function Register() {
               alignItems: "center",
             }}
           >
-            Continuar con Facebook
+
+            Continuar con Facebook o Google
           </Link>
+
+
           <p className="register-help-password">¿Te olvidaste la contraseña?</p>
           <p className="register-help">¿Necesitas ayuda?</p>
         </form>

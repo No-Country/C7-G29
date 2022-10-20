@@ -7,6 +7,7 @@ const CourierClient = require("@trycourier/courier").CourierClient;
 const singUp = async (req, res) => {
   try {
     const { avatar, name, lastName, email, password, userType } = req.body;
+    console.log(req.body);
 
     if (!(await userSchema.findOne({ email: email }))) {
       const passwordHash = await bcrypt.hash(password, 10);
@@ -86,7 +87,11 @@ const singIn = async (req, res) => {
 };
 
 const logOut = async (req, res) => {
-  const token = res.clearCookie("jwt");
+  const token = res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+  });
   if (!token) {
     return res.status(404).send("No hay token");
   }
@@ -111,88 +116,4 @@ const currentUser = async (req, res) => {
 };
 
 
-
-// ------ google register ------
-const googleSingUp = async (req, res) => {
-  try {
-    const { avatar, name, lastName, email, userType } = req.body;
-
-    console.log(req.body)
-
-    const user = await userSchema.findOne({ email: email });
-
-    if (!user) {
-
-      const newUser = await userSchema({
-        avatar : avatar || "https://www.seekpng.com/png/full/847-8474751_download-empty-profile.png",
-        name,
-        lastName,
-        email,
-        userType,
-      });
-      await newUser.save();
-
-      const courier = CourierClient({
-        authorizationToken: process.env.COURIER_KEY,
-      });
-
-      const { requestId } = await courier.send({
-        message: {
-          to: {
-            data: {
-              name: "Bienvenido a  Dark-Room",
-            },
-            email,
-          },
-          template: "Y85GRZWC594QQNQ1W93ZDWDKDJZZ",
-          data: {
-            userType: userType === "userPhotographer" ? "Fotografo" : "Comprador",
-            otherUserType: userType === "userPhotographer" ? "Comprador" : "Fotografo",
-          },
-        },
-      });
-
-      //-----------------------------------------------------------
-      const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, {
-        expiresIn: 86400,
-      });
-
-      const cookies = {
-        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-        path: "/",
-        secure: true,
-        sameSite: "None",
-      };
-
-      res.cookie("jwt", token, cookies);
-
-      return res.status(200).json({ user: newUser.email, loged: "true", jwt: token, msg: "registrado y logeado con google" });
-    }
-
-    //google login 
-    else if (user) {;
-          const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
-            expiresIn: 86400,
-          });
-  
-          const cookies = {
-            expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-            httpOnly: true,
-            path: "/",
-            secure: true,
-            sameSite: "None",
-          };
-  
-          res.cookie("jwt", token, cookies);
-  
-          return res.status(200).json({ user: user.email, loged: "true", jwt: token });
-        }
-
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-
-module.exports = { singUp, singIn, logOut, currentUser, googleSingUp };
+module.exports = { singUp, singIn, logOut, currentUser };

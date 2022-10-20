@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loginAction, userCurrentAction, registerUserGoogle } from "../../redux/actions/photosActions";
+import { loginAction, userCurrentAction, registerUser } from "../../redux/actions/photosActions";
 import "./Login.css";
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from "../../components/Footer/Footer";
@@ -77,12 +77,47 @@ export default function LogIn() {
     }
   };
 
-  function responseGoogle(a) {
-    dispatch(registerUserGoogle({ ...a, con: "google" }));
+  async function responseGoogle(a) {
+    const feching = await dispatch(loginAction({ email: a.profileObj.email, password: "authUser" }));
+
+    if (feching.loged === "true") {
+      dispatch(userCurrentAction());
+    } else {
+      const t = await registerUser({
+        email: a.profileObj.email,
+        password: "authUser",
+        avatar: a.profileObj.imageUrl,
+        name: a.profileObj.givenName,
+        lastName: a.profileObj.familyName,
+        userType: "userPhotographer",
+      });
+      if (t.creado) {
+        await dispatch(loginAction({ email: a.profileObj.email, password: "authUser" }));
+        await dispatch(userCurrentAction());
+      }
+    }
   }
 
-  function responseFacebook(a) {
-    dispatch(registerUserGoogle({ ...a, con: "facebook" }));
+  async function responseFacebook(a) {
+    console.log("facebook");
+    const feching = await dispatch(loginAction({ email: a.email, password: "authUser" }));
+
+    if (feching.loged === "true") {
+      dispatch(userCurrentAction());
+    } else {
+      const t = await registerUser({
+        email: a.email,
+        password: "authUser",
+        avatar: a.picture.data.url,
+        name: a.name,
+        lastName: ".",
+        userType: "userPhotographer",
+      });
+      if (t.creado) {
+        await dispatch(loginAction({ email: a.profileObj.email, password: "authUser" }));
+        await dispatch(userCurrentAction());
+      }
+    }
   }
 
   function componentClicked() {}
