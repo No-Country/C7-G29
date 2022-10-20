@@ -16,7 +16,7 @@ import uploadIcon from "../../assets/iTETAH.tif_1_.png";
 import nothing from "../../assets/Group 18.png";
 import HomeCards from "../../components/HomeCards/HomeCards";
 
-import './Profije.css';
+import "./Profije.css";
 
 export default function Profile() {
   const { id } = useParams();
@@ -115,7 +115,7 @@ export default function Profile() {
                       color: "#6C4494",
 
                       /* Inside auto layout */
-                    }}                    
+                    }}
                     onClick={() => navigate("/profileEdit/" + you._id)}
                   >
                     Editar Perfil
@@ -160,19 +160,11 @@ export default function Profile() {
                     color: "#686868",
                   }}
                 >
-<<<<<<< HEAD
                   {details.userType === "userPhotographer" ? "Fotógrafo" : "Amante de las Fotos!"}
-                </div>
-                <div style={{ marginLeft: "30px" }}></div>
-=======
-                  {details.userType === "userPhotographer"
-                    ? "Fotógrafo"
-                    : "Amante de las Fotos!"}
                 </div>
                 {/* <div style={{ marginLeft: "30px" }}>
                   Argentina, Buenos Aires, CABA.
                 </div> */}
->>>>>>> 1f435740129c6c15488a015b25430b34eb42fbec
               </div>
               <div
                 style={{
@@ -402,9 +394,7 @@ export default function Profile() {
                     cursor: "pointer",
                   }}
                 >
-                
                   <Link to="/publish" className="profile-btn-upload-img">
-
                     <div
                       style={{
                         display: "flex",

@@ -9,7 +9,7 @@ export default function PostBuy() {
   const dispatch = useDispatch();
   useEffect(() => {
     async function t() {
-      const a = await fetch(`http://localhost:9000/api/mercadopago/checkPurchase/${payment_id}`, {
+      const a = await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/mercadopago/checkPurchase/${payment_id}`, {
         method: "GET",
       })
         .then((a) => a.json())
