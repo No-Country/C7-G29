@@ -116,6 +116,10 @@ const currentUser = async (req, res) => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 89ab5a5bbca234c6ccea506099b6790c5ae0dba4
 module.exports = { singUp, singIn, logOut, currentUser };
 =======
 

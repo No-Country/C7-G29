@@ -1,27 +1,17 @@
-
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./Register.css";
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
-<<<<<<< HEAD
 import { useParams, Link } from "react-router-dom";
 import { registerUser, loginAction, userCurrentAction } from "../../redux/actions/photosActions";
-=======
-import { GoogleLogin } from "react-google-login";
-import { Link, useParams } from "react-router-dom";
-import { registerUser, loginAction, userCurrentAction, registerUserGoogle } from "../../redux/actions/photosActions";
->>>>>>> b35d6a35899fc3c53efba7020c8296483c7b639c
 import { useDispatch } from "react-redux";
-import { gapi } from "gapi-script";
 
 export default function Register() {
   const dispatch = useDispatch();
   const params = useParams();
-  const [name, setName] = useState({ value: "", error: null });
-  const [lastName, setLastName] = useState({ value: "", error: null });
   const [email, setEmail] = useState({ value: "", error: null });
   const [password, setPassword] = useState({ value: "", error: null });
   const [checkPassword, setCheckPassword] = useState("");
@@ -50,24 +40,12 @@ export default function Register() {
     }
   };
 
-  useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: process.env.REACT_APP_GOOGLE_ID,
-        scope: "email",
-      });
-    };
-    gapi.load("client:auth2", initClient);
-  });
-
   async function handleSubmit(e) {
     e.preventDefault();
 
     if (email.error || password.error || coinsidence) {
     } else {
       const a = await registerUser({
-        name: name.value,
-        lastName: lastName.value           ,
         email: email.value,
         password: password.value,
         userType: params.userType,
@@ -77,18 +55,6 @@ export default function Register() {
         await dispatch(userCurrentAction());
       }
     }
-  }
-
-  function handleName(e) {
-    //eslint-disable-next-line
-    /* if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value))  */setName({ value: e.target.value, error: false });
-    /* else setEmail({ value: "", error: true }); */
-  }
-
-  function handleLastName(e) {
-    //eslint-disable-next-line
-    /* if (/^\w+([\.-]?              )*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value))  */setLastName({ value: e.target.value, error: false });
-    /* else setEmail({ value: "", error: true }); */
   }
 
   function handleEmail(e) {
@@ -113,16 +79,6 @@ export default function Register() {
     else setCoinsidence(false);
   }
 
-  function handleGoogleRegister(e) {
-    dispatch(registerUserGoogle({
-      avatar: e.profileObj.imageUrl,
-      name: e.profileObj.givenName,
-      lastName: e.profileObj.familyName,
-      email : e.profileObj.email,
-      userType: params.userType,
-    }))
-  }
-
   return (
     <div className="register-total">
       <div className="register_div">
@@ -131,24 +87,13 @@ export default function Register() {
       <div className="register-background">
         <div className="register-general-text">
           <h1 className="register-h1">
-            Registrate
+            Registrate con <br />
+            Darkroom
           </h1>
         </div>
         <form className="register-background-functional">
           <div>
             <img className="login-img" src={LogoLogIn} alt="logo" />
-          </div>
-          <div className="div-name-register">
-            <label className={email.error === true ? "label-name-register_red" : name.error === false ? "label-name-register_green" : "label-name-register"}>
-              "Ingresar nombre"
-            </label >
-              <input className={email.error === false ? "login-user-register_green" : name.error === true ? "login-user-register_red" : "login-user-register"} type="text" onChange={handleName} />
-          </div>
-          <div className="div-lastName-register">
-            <label className={email.error === true ? "label-lastName-register_red" : lastName.error === false ? "label-lastName-register_green" : "label-lastName-register"}>
-              "Ingresar apellido"
-            </label>
-              <input className={email.error === false ? "login-user-register_green" : lastName.error === true ? "login-user-register_red" : "login-user-register"} type="text" onChange={handleLastName} />
           </div>
           <div className="div-password-register">
             <label className={email.error === true ? "label-password-register_red" : email.error === false ? "label-password-register_green" : "label-password-register"}>
@@ -188,11 +133,6 @@ export default function Register() {
           <p className="register-o">o</p>
 <<<<<<< HEAD
 
-=======
-          <div className="div_registerTer">
-            <GoogleLogin className="login_google" clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Countinua con Google" onSuccess={handleGoogleRegister} onFailure={handleGoogleRegister} cookiePolicy={"single_host_origin"} />
-          </div>
->>>>>>> b35d6a35899fc3c53efba7020c8296483c7b639c
           <Link
             className="register-fb"
             to="/loginScreen"
@@ -205,14 +145,9 @@ export default function Register() {
               alignItems: "center",
             }}
           >
-<<<<<<< HEAD
             Continuar con Facebook o Google
           </Link>
 
-=======
-            Continuar con Facebook
-          </Link>
->>>>>>> b35d6a35899fc3c53efba7020c8296483c7b639c
           <p className="register-help-password">¿Te olvidaste la contraseña?</p>
           <p className="register-help">¿Necesitas ayuda?</p>
         </form>
