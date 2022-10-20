@@ -124,14 +124,11 @@ const googleSingUp = async (req, res) => {
 
     if (!user) {
 
-      const passwordHash = await bcrypt.hash(process.env.LA_MAMA_DE_LA_MAMA, 10);
-
       const newUser = await userSchema({
         avatar: avatar || "https://www.seekpng.com/png/full/847-8474751_download-empty-profile.png",
         name,
         lastName,
         email,
-        password: passwordHash,
         userType: userType || "userPhotographer",
       });
       await newUser.save();
@@ -172,15 +169,10 @@ const googleSingUp = async (req, res) => {
       res.cookie("jwt", token, cookies);
 
       return res.status(200).json({ user: newUser.email, loged: "true", jwt: token, msg: "registrado y logeado con google" });
-
-      // return res.status(200).json({ newUser, creado: "true" });
     }
 
     //google login 
-
     else if (user) {;
-        // const matchPassword = await userSchema.comparePassword(password, user.password);
-        // if (matchPassword) {
           const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
             expiresIn: 86400,
           });
@@ -196,7 +188,7 @@ const googleSingUp = async (req, res) => {
           res.cookie("jwt", token, cookies);
   
           return res.status(200).json({ user: user.email, loged: "true", jwt: token });
-     } return res.status(404).send("Usuario no encontrado, revisar email escrito o registrate");
+        }
 
     } catch (error) {
         console.error(error);
