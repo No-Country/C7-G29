@@ -40,7 +40,6 @@ const singUp = async (req, res) => {
           },
         },
       });
-
       return res.status(200).json({ newUser, creado: "true" });
     }
 
@@ -125,11 +124,11 @@ const googleSingUp = async (req, res) => {
     if (!user) {
 
       const newUser = await userSchema({
-        avatar: avatar || "https://www.seekpng.com/png/full/847-8474751_download-empty-profile.png",
+        avatar : avatar || "https://www.seekpng.com/png/full/847-8474751_download-empty-profile.png",
         name,
         lastName,
         email,
-        userType: userType || "userPhotographer",
+        userType,
       });
       await newUser.save();
 
