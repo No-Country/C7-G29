@@ -92,11 +92,45 @@ export default function LogInMobile() {
     }
   };
 
-  function responseGoogle(a) {
-    console.log(a);
+  async function responseGoogle(a) {
+    const feching = await loginAction({ email: a.profileObj.email, password: "authUser" });
+
+    if (feching.loged === "true") {
+      dispatch(userCurrentAction());
+    } else {
+      const t = await registerUser({
+        email: a.profileObj.email,
+        password: "authUser",
+        avatar: a.profileObj.imageUrl,
+        name: a.profileObj.givenName,
+        lastName: a.profileObj.familyName,
+        userType: "userPhotographer",
+      });
+      if (t.creado) {
+        await loginAction({ email: a.profileObj.email, password: "authUser" });
+      }
+    }
   }
-  function responseFacebook(a) {
-    console.log(a);
+
+  async function responseFacebook(a) {
+    console.log("facebook");
+    const feching = await loginAction({ email: a.email, password: "authUser" });
+
+    if (feching.loged === "true") {
+      dispatch(userCurrentAction());
+    } else {
+      const t = await registerUser({
+        email: a.email,
+        password: "authUser",
+        avatar: a.picture.data.url,
+        name: a.name,
+        lastName: ".",
+        userType: "userPhotographer",
+      });
+      if (t.creado) {
+        await loginAction({ email: a.profileObj.email, password: "authUser" });
+      }
+    }
   }
 
   function componentClicked() {}
