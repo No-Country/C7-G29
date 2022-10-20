@@ -191,6 +191,7 @@ export const addFavotites = (id, _idCurrent) => async () => {
 };
 
 export const registerUser = async (data) => {
+  console.log(data)
   return await fetch(`http://localhost:9000/api/auth/singUp`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -200,6 +201,22 @@ export const registerUser = async (data) => {
     .then((d) => d)
     .catch((e) => e);
 };
+
+export const registerUserGoogle = async (data) => {
+  console.log(data)
+  return await fetch(`http://localhost:9000/api/auth/googleSingUp`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
+    SameSite: "None",
+    credentials: "include",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => d)
+    .catch((e) => e);
+};
+
 
 export const modifyLikesPublication = (array, _idCurrent) => async () => {
   return fetch(`http://localhost:9000/api/publication/${_idCurrent}`, {
