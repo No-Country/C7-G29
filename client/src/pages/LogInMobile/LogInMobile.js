@@ -60,7 +60,7 @@ export default function LogInMobile() {
     e.preventDefault();
 
     //this dispatch makes no sense, dispatchs are made to interact whit redux, this does not. I just used because it was like that in the login
-    const a = await dispatch(loginAction(loginForm));
+    const a = await loginAction(loginForm);
     if (a.loged === "true") {
       window.location.href = "https://auth.expo.io/@juanfranco/Dark-Room?type=success&state=" + state + "&jwt=" + a.jwt;
     } else {

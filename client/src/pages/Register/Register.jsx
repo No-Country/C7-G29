@@ -51,7 +51,7 @@ export default function Register() {
         userType: params.userType,
       });
       if (a.creado) {
-        await dispatch(loginAction({ email: email.value, password: password.value }));
+        await loginAction({ email: email.value, password: password.value });
         await dispatch(userCurrentAction());
       }
     }

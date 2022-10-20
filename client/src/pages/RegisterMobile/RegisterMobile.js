@@ -50,7 +50,7 @@ export default function RegisterMobile({ x }) {
         userType: params.userType,
       });
       if (a.creado) {
-        await dispatch(loginAction({ email: email.value, password: password.value }));
+        await loginAction({ email: email.value, password: password.value });
         navigate(-1);
       }
     }

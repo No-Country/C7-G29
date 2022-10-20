@@ -44,7 +44,7 @@ export default function LogIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const a = await dispatch(loginAction(loginForm));
+    const a = await loginAction(loginForm);
 
     if (a.loged === "true") {
       dispatch(userCurrentAction());
@@ -78,7 +78,7 @@ export default function LogIn() {
   };
 
   async function responseGoogle(a) {
-    const feching = await dispatch(loginAction({ email: a.profileObj.email, password: "authUser" }));
+    const feching = await loginAction({ email: a.profileObj.email, password: "authUser" });
 
     if (feching.loged === "true") {
       dispatch(userCurrentAction());
@@ -92,7 +92,7 @@ export default function LogIn() {
         userType: "userPhotographer",
       });
       if (t.creado) {
-        await dispatch(loginAction({ email: a.profileObj.email, password: "authUser" }));
+        await loginAction({ email: a.profileObj.email, password: "authUser" });
         await dispatch(userCurrentAction());
       }
     }
@@ -100,7 +100,7 @@ export default function LogIn() {
 
   async function responseFacebook(a) {
     console.log("facebook");
-    const feching = await dispatch(loginAction({ email: a.email, password: "authUser" }));
+    const feching = await loginAction({ email: a.email, password: "authUser" });
 
     if (feching.loged === "true") {
       dispatch(userCurrentAction());
@@ -114,7 +114,7 @@ export default function LogIn() {
         userType: "userPhotographer",
       });
       if (t.creado) {
-        await dispatch(loginAction({ email: a.profileObj.email, password: "authUser" }));
+        await loginAction({ email: a.profileObj.email, password: "authUser" });
         await dispatch(userCurrentAction());
       }
     }
@@ -129,9 +129,7 @@ export default function LogIn() {
       </div>
       <div className="login-background">
         <div className="login-general-text">
-          <h1 className="login-h1">
-            Inicia Sessión
-          </h1>
+          <h1 className="login-h1">Inicia Sessión</h1>
         </div>
 
         <form className="login-background-functional" onSubmit={handleSubmit}>
@@ -186,7 +184,6 @@ export default function LogIn() {
           <p className="login-help-password">¿Te olvidaste la contraseña?</p>
         </form>
 
-        
         {/* <div className="login-background-functional">
         <button className='login-register-after'>Registrarme</button>
         <button 
