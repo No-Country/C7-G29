@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loginAction, userCurrentAction, registerUserGoogle } from "../../redux/actions/photosActions";
+import { loginAction, userCurrentAction, registerUser } from "../../redux/actions/photosActions";
 import "./Login.css";
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from "../../components/Footer/Footer";
@@ -44,7 +44,7 @@ export default function LogIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const a = await dispatch(loginAction(loginForm));
+    const a = await loginAction(loginForm);
 
     if (a.loged === "true") {
       dispatch(userCurrentAction());
@@ -77,13 +77,47 @@ export default function LogIn() {
     }
   };
 
-  function responseGoogle(a) {
-    const value = { email: a.profileObj.email };
-    dispatch(registerUserGoogle(value));
+  async function responseGoogle(a) {
+    const feching = await loginAction({ email: a.profileObj.email, password: "authUser" });
+
+    if (feching.loged === "true") {
+      dispatch(userCurrentAction());
+    } else {
+      const t = await registerUser({
+        email: a.profileObj.email,
+        password: "authUser",
+        avatar: a.profileObj.imageUrl,
+        name: a.profileObj.givenName,
+        lastName: a.profileObj.familyName,
+        userType: "userPhotographer",
+      });
+      if (t.creado) {
+        await loginAction({ email: a.profileObj.email, password: "authUser" });
+        await dispatch(userCurrentAction());
+      }
+    }
   }
 
-  function responseFacebook(a) {
-    console.log(a);
+  async function responseFacebook(a) {
+    console.log("facebook");
+    const feching = await loginAction({ email: a.email, password: "authUser" });
+
+    if (feching.loged === "true") {
+      dispatch(userCurrentAction());
+    } else {
+      const t = await registerUser({
+        email: a.email,
+        password: "authUser",
+        avatar: a.picture.data.url,
+        name: a.name,
+        lastName: ".",
+        userType: "userPhotographer",
+      });
+      if (t.creado) {
+        await loginAction({ email: a.profileObj.email, password: "authUser" });
+        await dispatch(userCurrentAction());
+      }
+    }
   }
 
   function componentClicked() {}
@@ -95,10 +129,7 @@ export default function LogIn() {
       </div>
       <div className="login-background">
         <div className="login-general-text">
-          <h1 className="login-h1">
-            Inicia Sessión con <br />
-            Darkroom
-          </h1>
+          <h1 className="login-h1">Inicia Sessión</h1>
         </div>
 
         <form className="login-background-functional" onSubmit={handleSubmit}>
@@ -142,9 +173,11 @@ export default function LogIn() {
           <button className="login-login">Iniciar sessión</button>
           <p className="login-o">o</p>
           <div style={{ width: "300px", alignSelf: "center" }}>
-            <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Login" onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={"single_host_origin"} />
+            <GoogleLogin className="login_google" clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Login" onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={"single_host_origin"} />
           </div>
-          <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} />
+          <div style={{ width: "300px", alignSelf: "center", margin: "15px 0" }}>
+            <FacebookLogin className="login_facebook" appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} />
+          </div>
           <Link className="login-help" to="/users">
             Registrarse
           </Link>

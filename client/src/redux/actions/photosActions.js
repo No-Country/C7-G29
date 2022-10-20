@@ -74,7 +74,7 @@ export const deletePhoto = (id) => async (dispatch) => {
     .catch((e) => console.log(e));
 };
 
-export const loginAction = (data) => async () => {
+export const loginAction = async (data) => {
   return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/auth/singIn`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

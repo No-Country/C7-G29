@@ -5,9 +5,8 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
-import { GoogleLogin } from "react-google-login";
-import { Link, useParams } from "react-router-dom";
-import { registerUser, loginAction, userCurrentAction, registerUserGoogle } from "../../redux/actions/photosActions";
+import { useParams, Link } from "react-router-dom";
+import { registerUser, loginAction, userCurrentAction } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
 
 export default function Register() {
@@ -52,7 +51,7 @@ export default function Register() {
         userType: params.userType,
       });
       if (a.creado) {
-        await dispatch(loginAction({ email: email.value, password: password.value }));
+        await loginAction({ email: email.value, password: password.value });
         await dispatch(userCurrentAction());
       }
     }
@@ -78,16 +77,6 @@ export default function Register() {
     //eslint-disable-next-line
     if (password.value !== e.target.value) setCoinsidence(true);
     else setCoinsidence(false);
-  }
-
-  function handleGoogleRegister(e) {
-    dispatch(registerUserGoogle({
-      avatar: e.profileObj.imageUrl,
-      name: e.profileObj.givenName,
-      lastName: e.profileObj.familyName,
-      email : e.profileObj.email,
-      userType: params.userType,
-    }))
   }
 
   return (
@@ -142,10 +131,10 @@ export default function Register() {
             Registrarse
           </button>
           <p className="register-o">o</p>
-          <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Login" onSuccess={handleGoogleRegister} onFailure={handleGoogleRegister} cookiePolicy={"single_host_origin"} />
-          {/* <Link
+
+          <Link
             className="register-fb"
-            to="/login"
+            to="/loginScreen"
             style={{
               borderRadius: "20px",
               textDecoration: "none",
@@ -155,8 +144,9 @@ export default function Register() {
               alignItems: "center",
             }}
           >
-            Continuar con Facebook
-          </Link> */}
+            Continuar con Facebook o Google
+          </Link>
+
           <p className="register-help-password">¿Te olvidaste la contraseña?</p>
           <p className="register-help">¿Necesitas ayuda?</p>
         </form>
