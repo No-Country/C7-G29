@@ -78,8 +78,8 @@ export default function LogIn() {
   };
 
   function responseGoogle(a) {
-    const value = { email: a.profileObj.email }
-    dispatch(registerUserGoogle(value))
+    const value = { email: a.profileObj.email };
+    dispatch(registerUserGoogle(value));
   }
 
   function responseFacebook(a) {
@@ -144,7 +144,7 @@ export default function LogIn() {
           <div style={{ width: "300px", alignSelf: "center" }}>
             <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Login" onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={"single_host_origin"} />
           </div>
-          {/* <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} /> */}
+          <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} />
           <Link className="login-help" to="/users">
             Registrarse
           </Link>
