@@ -75,10 +75,10 @@
     margin-left: 9px;
     top: 383px;
     width: 610px;
-    height: 280px;
+    height: 250px;
     border-radius: 0 0 10px  10px;
     border: none;
-    z-index: 2;
+    z-index: 0;
 }
 
 .search-div-button {

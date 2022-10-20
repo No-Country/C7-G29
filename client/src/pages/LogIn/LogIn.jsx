@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loginAction, userCurrentAction } from "../../redux/actions/photosActions";
+import { loginAction, userCurrentAction, registerUserGoogle } from "../../redux/actions/photosActions";
 import "./Login.css";
 import LogoLogIn from "./../../assets/logo-login.png";
 import Footer from "../../components/Footer/Footer";
@@ -78,8 +78,10 @@ export default function LogIn() {
   };
 
   function responseGoogle(a) {
-    console.log(a);
+    const value = { email: a.profileObj.email }
+    dispatch(registerUserGoogle(value))
   }
+
   function responseFacebook(a) {
     console.log(a);
   }
@@ -142,7 +144,7 @@ export default function LogIn() {
           <div style={{ width: "300px", alignSelf: "center" }}>
             <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_ID} buttonText="Login" onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={"single_host_origin"} />
           </div>
-          <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} />
+          {/* <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} /> */}
           <Link className="login-help" to="/users">
             Registrarse
           </Link>

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { localStorageCart } from "./redux/slices/cartSlice";
 import LogIn from "./pages/LogIn/LogIn";
 import Profile from "./pages/Profile/Profile";
+import ProfileEdit from "./pages/ProfileEdit/ProfileEdit";
 import PostBuy from "./pages/PostBuy/PostBuy";
 import { userCurrentAction, logoutAction } from "./redux/actions/photosActions";
 import { logOut } from "./redux//slices/usersLogedSlice";
@@ -67,6 +68,7 @@ function App() {
             <>
               <Route path="/publish" element={<Publish />}></Route>
               <Route path="/postBuy" element={<PostBuy />}></Route>
+              <Route path="/profileEdit/:id" element={<ProfileEdit />}></Route>
               {currentUser.currentUser.userType === "userPhotographer" || currentUser.currentUser.userType === "owner" || currentUser.currentUser.userType === "admin" ? (
                 <>
                   <Route path="/solds" element={<Solds />}></Route>

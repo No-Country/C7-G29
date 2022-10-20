@@ -14,11 +14,12 @@ import { getDataForFiltering } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
 
 export default function Search() {
+
   const dispatch = useDispatch();
   const [deploySearch, setDeploySearch] = useState(false);
 
   const inputDeploy = () => {
-    setDeploySearch(!deploySearch);
+      setDeploySearch(!deploySearch);
   };
 
   const [filter, setFilter] = useState({
@@ -41,6 +42,7 @@ export default function Search() {
       ...filter,
       title: "colores",
     });
+    setDeploySearch(!deploySearch);
   }
 
   function handleChangeTextura() {
@@ -48,6 +50,7 @@ export default function Search() {
       ...filter,
       title: "textura",
     });
+    setDeploySearch(!deploySearch);
   }
 
   function handleChangeTecnologia() {
@@ -55,6 +58,7 @@ export default function Search() {
       ...filter,
       title: "tecnologia",
     });
+    setDeploySearch(!deploySearch);
   }
 
   function handleChangeNaturaleza() {
@@ -62,6 +66,7 @@ export default function Search() {
       ...filter,
       title: "naturaleza",
     });
+    setDeploySearch(!deploySearch);
   }
 
   function handleChangeDark() {
@@ -69,6 +74,7 @@ export default function Search() {
       ...filter,
       title: "dark",
     });
+    setDeploySearch(!deploySearch);
   }
 
   function handleChangeArquitectura() {
@@ -76,6 +82,7 @@ export default function Search() {
       ...filter,
       title: "arquitectura",
     });
+    setDeploySearch(!deploySearch);
   }
 
   function handleChangeAutos() {
@@ -83,6 +90,7 @@ export default function Search() {
       ...filter,
       title: "autos",
     });
+    setDeploySearch(!deploySearch);
   }
 
   function handleChangeAstronomia() {
@@ -90,6 +98,7 @@ export default function Search() {
       ...filter,
       title: "astronomia",
     });
+    setDeploySearch(!deploySearch);
   }
 
   useEffect(() => {
@@ -102,7 +111,7 @@ export default function Search() {
         <div className="search-container-input">
           <div className="search-general-back">
             <input
-              onClick={inputDeploy}
+              onBlur={inputDeploy}
               onChange={handleChange}
               type="text"
               className="search-input"
@@ -220,4 +229,6 @@ export default function Search() {
     </div>
   );
 }
+
+
 
