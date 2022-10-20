@@ -212,7 +212,7 @@ export default function Details({ idFirstModal, setIsOpen }) {
         </button>
         {details.pay ? (
           currentUser.bought.includes(details._id) ? (
-            <button className="btn-buy" onClick={handleBuy}>
+            <button className="btn-buy" onClick={download}>
               Descargar
             </button>
           ) : (

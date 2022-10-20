@@ -156,7 +156,6 @@ export default function RegisterMobile({ x }) {
             Continuar con Facebook
           </Link>
           <p className="register-help-password">¿Te olvidaste la contraseña?</p>
-          <p className="register-help">¿Necesitas ayuda?</p>
         </form>
       </div>
 

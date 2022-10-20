@@ -186,7 +186,7 @@ export default function LogInMobile() {
             </div>
             <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_ID} autoLoad={false} fields="name,email,picture" onClick={componentClicked} callback={responseFacebook} />
             <p className="login-help-password">¿Te olvidaste la contraseña?</p>
-            <p className="login-help">¿Necesitas ayuda?</p>
+
             <Link className="login-register-after" to="/registerMobile">
               Registrarme
             </Link>

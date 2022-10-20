@@ -147,7 +147,6 @@ export default function LogIn() {
             Registrarse
           </Link>
           <p className="login-help-password">¿Te olvidaste la contraseña?</p>
-          <p className="login-help">¿Necesitas ayuda?</p>
         </form>
 
         {/* <div className="login-background-functional">

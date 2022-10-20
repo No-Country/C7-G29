@@ -63,7 +63,6 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/profile/:id" element={<Profile />}></Route>
-
           {currentUser.loged ? (
             <>
               <Route path="/publish" element={<Publish />}></Route>
