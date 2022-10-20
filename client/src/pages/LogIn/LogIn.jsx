@@ -78,12 +78,11 @@ export default function LogIn() {
   };
 
   function responseGoogle(a) {
-    const value = { email: a.profileObj.email };
-    dispatch(registerUserGoogle(value));
+    dispatch(registerUserGoogle({ ...a, con: "google" }));
   }
 
   function responseFacebook(a) {
-    console.log(a);
+    dispatch(registerUserGoogle({ ...a, con: "facebook" }));
   }
 
   function componentClicked() {}
