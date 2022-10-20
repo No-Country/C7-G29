@@ -3,8 +3,8 @@ import { fillProfileData } from "../slices/profileSlice";
 import { getUserLoged } from "../slices/usersLogedSlice";
 import { putAllChallenges } from "../slices/challengeSlice";
 
-const webLocal = 'http://localhost:9000/'
-const web = 'https://deploy-api-c7-dark-room.onrender.com/'
+const webLocal = "https://deploy-api-c7-dark-room.onrender.com/";
+const web = "https://deploy-api-c7-dark-room.onrender.com/";
 
 export const getAllPhotosData = () => async (dispatch) => {
   return await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/publication`, {

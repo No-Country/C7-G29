@@ -11,7 +11,7 @@ import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 import { useSearchParams } from "react-router-dom";
 import { logOut } from "../../redux//slices/usersLogedSlice";
-import { userCurrentAction, logoutAction } from "../../redux/actions/photosActions";
+import { userCurrentAction, logoutAction, registerUser } from "../../redux/actions/photosActions";
 import { Link } from "react-router-dom";
 
 export default function LogInMobile() {
@@ -142,9 +142,7 @@ export default function LogInMobile() {
 
   async function handleOkAuth() {
     const a = await dispatch(userCurrentAction());
-    if (a.loged) {
-      window.location.href = "https://auth.expo.io/@juanfranco/Dark-Room?type=success&state=" + state + "&jwt=" + a.payload.token;
-    }
+    window.location.href = "https://auth.expo.io/@juanfranco/Dark-Room?type=success&state=" + state + "&jwt=" + a.payload.token;
   }
 
   return (
