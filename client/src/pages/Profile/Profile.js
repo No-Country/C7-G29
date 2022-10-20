@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { getProfileDetails } from "../../redux/actions/photosActions";
 import { cleanProfileDetails } from "../../redux/slices/profileSlice";
 import Navbar from "../../components/Navbar/Navbar";
@@ -16,9 +16,12 @@ import uploadIcon from "../../assets/iTETAH.tif_1_.png";
 import nothing from "../../assets/Group 18.png";
 import HomeCards from "../../components/HomeCards/HomeCards";
 
+import './Profije.css';
+
 export default function Profile() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  let navigate = useNavigate();
   const details = useSelector((state) => state.profile.userData);
   useEffect(() => {
     dispatch(getProfileDetails(id));
@@ -112,7 +115,8 @@ export default function Profile() {
                       color: "#6C4494",
 
                       /* Inside auto layout */
-                    }}
+                    }}                    
+                    onClick={() => navigate("/profileEdit/" + you._id)}
                   >
                     Editar Perfil
                   </div>
@@ -161,9 +165,9 @@ export default function Profile() {
                     ? "Fotógrafo"
                     : "Amante de las Fotos!"}
                 </div>
-                <div style={{ marginLeft: "30px" }}>
+                {/* <div style={{ marginLeft: "30px" }}>
                   Argentina, Buenos Aires, CABA.
-                </div>
+                </div> */}
               </div>
               <div
                 style={{
@@ -404,7 +408,7 @@ export default function Profile() {
                     cursor: "pointer",
                   }}
                 >
-                  <Link to="/publish">
+                  <Link to="/publish" className="profile-btn-upload-img">
                     <div
                       style={{
                         display: "flex",
