@@ -5,9 +5,8 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import OjoAbierto from "./../../assets/ojo-abierto.png";
 import OjoCerrado from "./../../assets/visible.png";
-import { GoogleLogin } from "react-google-login";
-import { Link, useParams } from "react-router-dom";
-import { registerUser, loginAction, userCurrentAction, registerUserGoogle } from "../../redux/actions/photosActions";
+import { useParams } from "react-router-dom";
+import { registerUser, loginAction, userCurrentAction } from "../../redux/actions/photosActions";
 import { useDispatch } from "react-redux";
 import { gapi } from "gapi-script";
 
@@ -105,16 +104,6 @@ export default function Register() {
     //eslint-disable-next-line
     if (password.value !== e.target.value) setCoinsidence(true);
     else setCoinsidence(false);
-  }
-
-  function handleGoogleRegister(e) {
-    dispatch(registerUserGoogle({
-      avatar: e.profileObj.imageUrl,
-      name: e.profileObj.givenName,
-      lastName: e.profileObj.familyName,
-      email : e.profileObj.email,
-      userType: params.userType,
-    }))
   }
 
   return (
