@@ -35,13 +35,7 @@ export default function Profile() {
   return (
     <div style={{ backgroundColor: "black", height: "100vh" }}>
       <Navbar />
-      <div
-        style={{
-          backgroundColor: "black",
-          height: "100vh",
-          paddingTop: "108px",
-        }}
-      >
+      <div className="ljkdas">
         <div
           className="profile-general"
           style={{
@@ -488,6 +482,9 @@ export default function Profile() {
           </div>
         </div>
         <Footer />
+      </div>
+      <div id="phoneversion">
+        Para ver el perfil de usuarios en mobile, le recomendamos usar nuestra APP:<a href="https://expo.dev/@juanfranco/Dark-Room?serviceType=classic&distribution=expo-go">Dark-Room Expo Mobile</a>{" "}
       </div>
     </div>
   );

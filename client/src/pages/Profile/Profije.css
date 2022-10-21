@@ -1,3 +1,28 @@
-.profile-btn-upload-img{
-    text-decoration: none;
+.profile-btn-upload-img {
+  text-decoration: none;
+}
+
+#phoneversion {
+  display: none;
+}
+
+.ljkdas {
+  background-color: "black";
+  height: "100vh";
+  padding-top: "108px";
+}
+
+@media (max-width: 1250px) {
+  .ljkdas {
+    background-color: "black";
+    height: "100vh";
+    padding-top: "108px";
+    display: none;
+  }
+
+  #phoneversion {
+    display: flex;
+    background-color: red;
+    flex-direction: column;
+  }
 }

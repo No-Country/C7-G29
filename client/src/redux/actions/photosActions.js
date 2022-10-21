@@ -3,11 +3,11 @@ import { fillProfileData } from "../slices/profileSlice";
 import { getUserLoged } from "../slices/usersLogedSlice";
 import { putAllChallenges } from "../slices/challengeSlice";
 
-const webLocal = "https://deploy-api-c7-dark-room.onrender.com/";
-const web = "https://deploy-api-c7-dark-room.onrender.com/";
+const webLocal = "http://localhost:9000/";
+const web = "http://localhost:9000/";
 
 export const getAllPhotosData = () => async (dispatch) => {
-  return await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/publication`, {
+  return await fetch(`http://localhost:9000/api/publication`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -20,7 +20,7 @@ export const getDataForFiltering = (filterData) => async (dispatch) => {
 };
 
 export const uploadPhotoForm = (data) => async () => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/publication`, {
+  return fetch(`http://localhost:9000/api/publication`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -60,11 +60,11 @@ export const uploadPhotoToCloudinary = (e) => async () => {
 };
 
 export const deletePhoto = (id) => async (dispatch) => {
-  return await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/publication/${id}`, {
+  return await fetch(`http://localhost:9000/api/publication/${id}`, {
     method: "DELETE",
   })
     .then(async (d) => {
-      return await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/publication`, {
+      return await fetch(`http://localhost:9000/api/publication`, {
         method: "GET",
       })
         .then((responsea) => responsea.json())
@@ -75,7 +75,7 @@ export const deletePhoto = (id) => async (dispatch) => {
 };
 
 export const loginAction = async (data) => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/auth/singIn`, {
+  return fetch(`http://localhost:9000/api/auth/singIn`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
@@ -92,7 +92,7 @@ export const loginAction = async (data) => {
 };
 
 export const logoutAction = () => async () => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/auth/logOut`, {
+  return fetch(`http://localhost:9000/api/auth/logOut`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -100,7 +100,7 @@ export const logoutAction = () => async () => {
 };
 
 export const userCurrentAction = () => async (dispatch) => {
-  return await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/auth/loged`, {
+  return await fetch(`http://localhost:9000/api/auth/loged`, {
     method: "GET",
     credentials: "include",
   })
@@ -111,7 +111,7 @@ export const userCurrentAction = () => async (dispatch) => {
 };
 
 export const getDetails = (id) => async (dispatch) => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/searchId/publicationForId/${id}`, {
+  return fetch(`http://localhost:9000/api/searchId/publicationForId/${id}`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -120,7 +120,7 @@ export const getDetails = (id) => async (dispatch) => {
 };
 
 export const getProfileDetails = (id) => async (dispatch) => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/searchId/userForId/${id}`, {
+  return fetch(`http://localhost:9000/api/searchId/userForId/${id}`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -129,7 +129,7 @@ export const getProfileDetails = (id) => async (dispatch) => {
 };
 
 export const buyItems = async (data) => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/mercadopago/buy`, {
+  return fetch(`http://localhost:9000/api/mercadopago/buy`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -140,7 +140,7 @@ export const buyItems = async (data) => {
 };
 
 export const addFollowed = (idPh, _idCurrent) => async () => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/users/${_idCurrent}`, {
+  return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -153,7 +153,7 @@ export const addFollowed = (idPh, _idCurrent) => async () => {
 };
 
 export const addFollowers = (followers, idPh) => async () => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/users/${idPh}`, {
+  return fetch(`http://localhost:9000/api/users/${idPh}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -166,7 +166,7 @@ export const addFollowers = (followers, idPh) => async () => {
 };
 
 export const addLiked = (id, _idCurrent) => async () => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/users/${_idCurrent}`, {
+  return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -179,7 +179,7 @@ export const addLiked = (id, _idCurrent) => async () => {
 };
 
 export const addFavotites = (id, _idCurrent) => async () => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/users/${_idCurrent}`, {
+  return fetch(`http://localhost:9000/api/users/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -193,7 +193,7 @@ export const addFavotites = (id, _idCurrent) => async () => {
 
 export const registerUser = async (data) => {
   console.log(data);
-  return await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/auth/singUp`, {
+  return await fetch(`http://localhost:9000/api/auth/singUp`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -205,7 +205,7 @@ export const registerUser = async (data) => {
 
 export const registerUserGoogle = async (data) => {
   console.log(data);
-  return await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/auth/googleSingUp`, {
+  return await fetch(`http://localhost:9000/api/auth/googleSingUp`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
@@ -219,7 +219,7 @@ export const registerUserGoogle = async (data) => {
 };
 
 export const modifyLikesPublication = (array, _idCurrent) => async () => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/publication/${_idCurrent}`, {
+  return fetch(`http://localhost:9000/api/publication/${_idCurrent}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -232,7 +232,7 @@ export const modifyLikesPublication = (array, _idCurrent) => async () => {
 };
 
 export const getAllChallenges = () => async (dispatch) => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/challenge`, {
+  return fetch(`http://localhost:9000/api/challenge`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -241,7 +241,7 @@ export const getAllChallenges = () => async (dispatch) => {
 };
 
 export const crearReto = async (data) => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/challenge`, {
+  return fetch(`http://localhost:9000/api/challenge`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -257,7 +257,7 @@ export const crearReto = async (data) => {
 };
 
 export const uploadPerfilDates = (data, id) => async () => {
-  return fetch(`https://deploy-api-c7-dark-room.onrender.com/api/users/${id}`, {
+  return fetch(`http://localhost:9000/api/users/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

@@ -8,7 +8,7 @@ export default function WithdrawalForm({ total, idUser, publicationsSales, retos
     e.preventDefault();
     if (datosBanco.cbu && datosBanco.alias && datosBanco.banco) {
       setDatosBanco({ ...datosBanco, loadin: true });
-      await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/mercadopago/whitdraw/${idUser}`, {
+      await fetch(`http://localhost:9000/api/mercadopago/whitdraw/${idUser}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ total, publicationsSales, retosSales, dataToPay: datosBanco }),
