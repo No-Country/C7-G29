@@ -37,8 +37,9 @@
 }
 
 .navbar-link {
+  display: flex;
   color: white;
-  text-decoration: none;
+  text-decoration: none;  
 }
 
 .navbar-icon {

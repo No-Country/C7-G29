@@ -5,7 +5,6 @@ import { getProfileDetails, uploadPhotoToCloudinary, uploadPerfilDates } from ".
 import { cleanProfileDetails } from "../../redux/slices/profileSlice";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import editIcon from "../../assets/🦆 icon _edit 2 outline_.png";
 
 import './ProfileEdit.css';
 
@@ -27,8 +26,6 @@ export default function ProfileEdit() {
         avatar: '',
         userType: ''
     })
-
-console.log('input', input)
 
     function handleChange(e){
         setInput({
@@ -61,17 +58,13 @@ console.log('input', input)
 
   return (
     <div className="profile-edit-container">
-
         <div className="profile-navbar">        
             <Navbar />
         </div>
-      
         <div className="profile-edit-title">
           <p>Editar Mi perfil</p>
         </div>
-
         <div className="profile-edit-block">
-
             <div className="profile-edit-card">
                 <div className="avatar-block">
                     <img
@@ -80,7 +73,6 @@ console.log('input', input)
                         className="profile-edit-avatar"
                     ></img>
                     <div className="edit-icon">
-                        {/* <img src={editIcon} alt="edit-img" onClick={() => console.log('editando')} className="edit-icon-img"/> */}
                         <div className="avatar-input-upload" id="avatar_uploadPhoto">
                             <input
                                 name="avatar_uploadPhoto"                                
@@ -92,7 +84,6 @@ console.log('input', input)
 					    </div>
                     </div>
                 </div>
-                
                 <div className="profile-edit-dates">
                     <form className="profile-edit-form" onSubmit={(e)=>handleSubmit(e)}>
 
@@ -107,7 +98,6 @@ console.log('input', input)
                                 onChange={(e) => handleChange(e)}
                             />
                         </div>
-
                         <div className='profile-edit-box'>
                             <label className='labels'>Apellido:</label>
                             <input
@@ -119,7 +109,6 @@ console.log('input', input)
                                 onChange={(e) => handleChange(e)}
                             />
                         </div>
-
                         <div className='profile-edit-box'>
                             <label className='labels'>Tipo de Usuario:</label>
                             <select 
@@ -129,28 +118,22 @@ console.log('input', input)
                                 name= 'userType'
                                 
                             >
-                                {/* <option value="default" disabled selected>Selecciona Tipo</option> */}
                                 <option value="userPhotographer">Fotógrafo</option>
                                 <option value="userDefault">Usuario</option>
                             </select>
                         </div>
-
                     </form>
                 </div>
-
             </div>
         </div>
-
         <div className="profile-edit-submit">
             <button className="profile-edit-btn-submit" onClick={e=>handleSubmit(e)}>
                 Guardar Cambios    
             </button>
-
             <button className="profile-edit-btn-submit remove" onClick={()=>navigate("/profile/" + you._id)}>
                 Cancelar Cambios    
             </button>
         </div>
-
         <Footer />
     </div>    
   );

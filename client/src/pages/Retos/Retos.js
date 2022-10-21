@@ -20,6 +20,9 @@ export default function Retos() {
       <div id="container_retos_navbar">
         <NavBar />
       </div>
+      <div className="profile-edit-title">
+          <p>Retos</p>
+        </div>
       <div id="label_retos_container">
         <div id="labels_retos">
           <div className="retos_boton_selected">Reto del mes</div>

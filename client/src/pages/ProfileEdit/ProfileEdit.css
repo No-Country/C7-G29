@@ -27,7 +27,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid violet; */
 }
 
 .profile-edit-card{
@@ -40,19 +39,16 @@
     box-shadow: 0px 4px 4px 8px rgba(0, 0, 0, 0.25);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border-radius: 20px;
-
 }
 
 .avatar-block{
     position: relative;
-    /* border: 1px solid green; */
 }
 
 .profile-edit-avatar{
     max-height: 60vh;
     max-width: 90%;
     margin: 0 30px;
-    /* border: 1px solid green; */
 }
 
 .edit-icon{
@@ -62,16 +58,11 @@
     position: absolute;
     cursor: pointer;
     top: 0px;
-    /* right: 0px; */
     left: 30px;
     width: 40px;
     width: 20%;
-    /* height: 40px; */
-    /* border: 2px solid #6c4494; */
-    /* border-radius: 50%; */    
 }
 
-/* ////////////////////////////////////// */
 .avatar-input-upload::before {
 	cursor:pointer;
 	background-color: #6c4494;
@@ -96,15 +87,9 @@
 	display: inline-block;
       border: 2px solid #6c4494;
 }
-/* #avatar_uploadPhoto::before {
-	content: "Editar";
-} */
-/* ////////////////////////////////////// */
 
 .profile-edit-dates{    
-    /* border: 1px solid blue; */
     margin: 0 25px;
-    /* margin-right: 25px; */
 }
 
 .profile-edit-box{
@@ -144,7 +129,6 @@
     display: flex;
     justify-content: center;
     margin: 10px 0 20px 0;    
-    /* border: 1px solid red; */
 }
 
 .profile-edit-btn-submit{
