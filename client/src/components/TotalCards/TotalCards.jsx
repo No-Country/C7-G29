@@ -7,6 +7,7 @@ import "./TotalCards.css";
 export default function TotalCards() {
   const dispatch = useDispatch();
   const photos = useSelector((state) => state.photos.filterPhotosData);
+  console.log(photos);
   useEffect(() => {
     dispatch(getAllPhotosData());
   }, [dispatch]);

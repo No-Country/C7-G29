@@ -24,7 +24,7 @@ const photosSlice = createSlice({
 
       if (payload.priceRange.max !== null) newArray = newArray.filter((x) => x.price < payload.priceRange.max || !x.pay);
 
-      if (payload.title) newArray = newArray.filter((x) => x.title.toLowerCase().includes(payload.title.toLowerCase()) || x.tags.toLowerCase().includes(payload.title.toLowerCase()));
+      if (payload.title) newArray = newArray.filter((x) => x.title?.toLowerCase().includes(payload.title.toLowerCase()) || x.tags?.toLowerCase().includes(payload.title.toLowerCase()));
 
       if (payload.cal) newArray = newArray.sort((a, b) => b.likes.length - a.likes.length);
 
