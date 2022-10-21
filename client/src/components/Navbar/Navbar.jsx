@@ -12,7 +12,6 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.userLoged.currentUser);
-  console.log(currentUser);
 
   const handleLogout = () => {
     dispatch(logoutAction());
@@ -39,12 +38,12 @@ export default function Navbar() {
             Retos
           </Link>
           <Link className="navbar-link" to="/publish">
-            <img src={Subir} />
+            <img src={Subir} alt='img-upload'/>
             &#160;&#160;Subir
           </Link>
 
           <Link to="/cart" className="navbar-link">
-            <img src={Carrito} />
+            <img src={Carrito} alt='img-cart'/>
             &#160;&#160;Carrito
           </Link>
 

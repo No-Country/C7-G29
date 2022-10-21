@@ -99,7 +99,7 @@ export default function LogIn() {
   }
 
   async function responseFacebook(a) {
-    console.log("facebook");
+    // console.log("facebook");
     const feching = await loginAction({ email: a.email, password: "authUser" });
 
     if (feching.loged === "true") {

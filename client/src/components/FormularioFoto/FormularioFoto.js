@@ -5,6 +5,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
+
 export default function FormularioFoto({ x }) {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.userLoged.currentUser);
@@ -60,7 +61,7 @@ export default function FormularioFoto({ x }) {
           value: "Imagen subida Exitosamente",
           icon: <CheckCircleIcon fontSize="large" />,
         });
-        console.log(formData);
+        // console.log(formData);
       } else {
         setFormData({
           ...formData,
@@ -132,10 +133,11 @@ export default function FormularioFoto({ x }) {
   };
 
   return !estado.status ? (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={(e) => handleSubmit(e)}>      
       <div className="data-image">
         <img className="img-primary" alt="estado" src={x} />
         <div className="input-form">
+          <label className='labels'>Título</label>
           <input
             className="input-title"
             required
@@ -143,15 +145,18 @@ export default function FormularioFoto({ x }) {
             title="Válido un titulo de hasta 20 caracteres"
             pattern="^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+$"
             id="formulario_title"
-            placeholder="Nombre del archivo"
+            placeholder="Título de la fotógrafia"
             onChange={(e) => handleTitle(e)}
             name="title"
             value={formData.title.value || ""}
           ></input>
+          <label className='labels'>Ubicación</label>
+          <input className="input-ubication" required id="formulario_ubication" placeholder="Ej: País, Provincia, Ciudad" onChange={(e) => handleUbication(e)} name="ubication" value={formData.ubication.value || ""}></input>
 
-          <input className="input-ubication" required id="formulario_ubication" placeholder="Ubicación: País - Provincia - Ciudad" onChange={(e) => handleUbication(e)} name="ubication" value={formData.ubication.value || ""}></input>
+          <label className='labels'>Etiquetas</label>
+          <input id="formulario_tags" required className="input-tags" placeholder="Ej: Playa, Bosque, Tecnología, Noche, Día" value={formData.tags.value || ""} name="tags" onChange={(e) => handleTags(e)}></input>
 
-          <input id="formulario_tags" required className="input-tags" placeholder="Etiquetas: Playa / Bosque / Desierto / Noche / Día" value={formData.tags.value || ""} name="tags" onChange={(e) => handleTags(e)}></input>
+          <label className='labels'>Reto</label>
           <select id="formulario_reto" required className="reto_select" value={formData.challenge.value} onChange={(e) => handleReto(e)}>
             <option value={false}>No Participo</option>
             {challenges.allChalenges?.map((x) => (
@@ -160,31 +165,42 @@ export default function FormularioFoto({ x }) {
               </option>
             ))}
           </select>
-          <textarea id="formulario_title" required className="input-description" placeholder="Descripcion" value={formData.description.value || ""} name="description" onChange={handleDescription}></textarea>
+          {/* <textarea id="formulario_title" required className="input-description" placeholder="Descripcion" value={formData.description.value || ""} name="description" onChange={handleDescription}></textarea> */}
 
-          <div className="prices-category">
+          {/* <div className="prices-category">
             <label>
               <input type="radio" name="color" value="gratis" defaultChecked onChange={(e) => handlePricePay(e)} /> Gratis
             </label>
             <label>
               <input type="radio" name="color" value="paga" onChange={(e) => handlePricePay(e)} /> De pago
             </label>
+          </div> */}
+          <label className='labels'>Tu foto será</label>
+          <select id="formulario_reto" required className="reto_select" onChange={(e) => handlePricePay(e)}>
+            <option value="gratis">Gratis</option>
+            <option value="paga">De pago</option>
+          </select>
+
+          <label className='labels'>Precio de la foto</label>
+          <div className="upload-btn-group">
+            <input
+              type="number"
+              disabled={!formData.price.pay}
+              className={`input-price ${!formData.price.pay && "disable-input-price"}`}
+              placeholder="Fijar precio"
+              value={formData.price.price || ""}
+              name="price"
+              required={formData.price.pay}
+              onChange={(e) => handlePriceValue(e)}
+            ></input>
+
+            <button className="input-submit" type="submit">
+              <FileUploadIcon fontSize="large" />
+              Subir
+            </button>
+
           </div>
 
-          <input
-            type="number"
-            disabled={!formData.price.pay}
-            className={`input-price ${!formData.price.pay && "disable-input-price"}`}
-            placeholder="Fijar precio"
-            value={formData.price.price || ""}
-            name="price"
-            required={formData.price.pay}
-            onChange={(e) => handlePriceValue(e)}
-          ></input>
-          <button className="input-submit" type="submit">
-            <FileUploadIcon fontSize="large" />
-            Subir
-          </button>
         </div>
       </div>
     </form>
