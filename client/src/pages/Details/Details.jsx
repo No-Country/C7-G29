@@ -31,7 +31,7 @@ export default function Details({ idFirstModal, setIsOpen }) {
   const [followed, setFollowed] = useState(false);
   const [check, setCheck] = useState(false);
   const [id, setid] = useState(idFirstModal);
-console.log('currentUser', currentUser)
+
   useEffect(() => {
     if (currentUser.liked?.includes(id)) setLiked(true);
     else setLiked(false);
@@ -52,7 +52,6 @@ console.log('currentUser', currentUser)
   }, [dispatch]);
 
   const handleFollow = async () => {
-    console.log("ADD FOLLOWED");
     if (currentUser.followed.includes(details.photographer._id)) {
       let unFollowed = currentUser.followed.filter((el) => el !== details.photographer._id);
       let unFollowers = details.photographer.followers.filter((el) => el !== currentUser._id);
@@ -68,7 +67,6 @@ console.log('currentUser', currentUser)
   };
 
   const handleLike = async () => {
-    console.log("ADD LIKED");
     if (currentUser.liked.includes(id)) {
       let aux = currentUser.liked.filter((el) => el !== id);
       let arrayWhitoutLikeOfPublication = details.likes.filter((el) => el !== currentUser._id);
@@ -83,7 +81,6 @@ console.log('currentUser', currentUser)
   };
 
   const handleSave = async () => {
-    console.log("ADD Favorites");
     if (currentUser.favorites.includes(id)) {
       let aux = currentUser.favorites.filter((el) => el !== id);
       await dispatch(addFavotites(aux, currentUser._id));
@@ -93,13 +90,12 @@ console.log('currentUser', currentUser)
     setCheck(!check);
   };
 
-  const handleShare = () => {
-    console.log(location.pathname);
-    alert(location.pathname);
-  };
+  // const handleShare = () => {
+  //   console.log(location.pathname);
+  //   alert(location.pathname);
+  // };
 
   const handleBuy = () => {
-    console.log("dame toda la $$$$ en fotos");
     dispatch(addItemToCart(details));
   };
 

@@ -35,6 +35,7 @@ export default function Profile() {
   return (
     <div style={{ backgroundColor: "black", height: "100vh" }}>
       <Navbar />
+
       <div className="ljkdas">
         <div
           className="profile-general"
@@ -47,15 +48,8 @@ export default function Profile() {
           }}
         >
           {you._id === id ? (
-            <div
-              style={{
-                textAlign: "center",
-                background: "rgb(31,31,31)",
-                color: "white",
-                fontSize: "32px",
-              }}
-            >
-              Mi perfil
+            <div className="profile-edit-title">
+              <p>Mi perfil</p>
             </div>
           ) : null}
 

@@ -1,6 +1,8 @@
 #container_retos_navbar {
-  padding-top: 2em;
+  /* padding-top: 2em; */
+  height: 108px;
   background: #212121;
+  background: #000000;
   display: flex;
   align-items: center;
   justify-content: center;

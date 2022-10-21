@@ -1,13 +1,16 @@
 import { useState } from "react";
-import Footer from "../../components/Footer/Footer";
-import Upload from "../../assets/upload.svg";
-import Logo from "../../assets/logo-login.png";
-import "./Publish.css";
 import { uploadPhotoToCloudinary } from "../../redux/actions/photosActions";
+import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import FormularioFoto from "../../components/FormularioFoto/FormularioFoto";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DevicesIcon from "@mui/icons-material/Devices";
+
+import Upload from "../../assets/upload.svg";
+import Logo from "../../assets/logo-login.png";
+import banner from '../../assets/banner-upload-img.png'
+
+import "./Publish.css";
 
 export default function Publish() {
 	const [inputImage, setInputImage] = useState(null);
@@ -25,16 +28,26 @@ export default function Publish() {
 				<Navbar />
 			</div>
 
-			{!inputImage && (
-				<>
-					<h2 className="title-page">Subir Archivos</h2>
-					<img src={Logo} alt="logo-app" className="logo-app" />
-				</>
-			)}
+			<h2 className="title-page">Carga tu foto</h2>
+
+			<button className="go-back-icon" onClick={() => setInputImage(null)}>
+				<ArrowBackIcon />
+			</button>
+
+			<div className="upload-box">
+				{
+					!inputImage && <img src={banner} alt="banner-img" className="logo-app" />				
+				}
+			</div>
 
 			{!inputImage && (
 				<div className="upload-container">
-					<img alt="Subir imagen" src={Upload} className="image-upload" />
+					
+					<div className="text-legacy-box">
+						<input type="checkbox" id="terms" name="" value=""/>
+						<label for="terms" className="text-legacy">Acepto los <span className="text-legacy-link">terminos y condiciones</span></label>
+					</div>
+					
 					<div className="input-upload" id="formulario_uploadPhoto">
 						<input
 							name="formulario_uploadPhoto"
@@ -48,7 +61,7 @@ export default function Publish() {
 			)}
 
 			{inputImage &&
-				inputImage.map((x, index) => <FormularioFoto x={x} key={x} />)}
+				inputImage.map((x) => <FormularioFoto x={x} key={x} />)}
 			{!!inputImage && (
 				<button className="btn-back" onClick={() => setInputImage(null)}>
 					<ArrowBackIcon /> Volver a cargar imágenes

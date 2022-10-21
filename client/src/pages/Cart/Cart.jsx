@@ -12,8 +12,8 @@ import cartImage from "../../assets/cart.png";
 import "./Cart.css";
 
 //materialUI icons
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -53,6 +53,9 @@ export default function Home() {
       <div className="cart-navbar">
         <NavBar />
       </div>
+      <div className="profile-edit-title">
+          <p>Carrito</p>
+        </div>
       {cart.length > 0 ? (
         <div className="cart-container">
           <div>
@@ -65,7 +68,7 @@ export default function Home() {
                     <p className="cart-panel-title">
                       Carrito{" "}
                       <span className="cart-panel-title-icon">
-                        <ShoppingCartIcon fontSize="medium" />
+                        <ShoppingCartOutlinedIcon fontSize="medium" />
                       </span>
                     </p>
                     <p className="cart-panel-number no-empty">{cart.length}</p>
@@ -74,7 +77,7 @@ export default function Home() {
                     <p className="cart-panel-title">
                       Guardados{" "}
                       <span className="cart-panel-title-icon">
-                        <BookmarksIcon fontSize="medium" />
+                        <BookmarksOutlinedIcon fontSize="medium" />
                       </span>
                     </p>
                     <p className="cart-panel-number no-empty">{details.favorites.length}</p>
