@@ -14,7 +14,7 @@ export default function Solds() {
   const [filteredStats, setFilteredStats] = useState({ masVendido: [], masProfit: [], toWhitdraw: 0, gananciasRetos: [], idsToWhidrawSales: [], idsToWhidrawRetos: [] });
   useEffect(() => {
     async function t(id) {
-      await fetch(`http://localhost:9000/api/mercadopago/soldStats/${id}`, {
+      await fetch(`https://deploy-api-c7-dark-room.onrender.com/api/mercadopago/soldStats/${id}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       })
